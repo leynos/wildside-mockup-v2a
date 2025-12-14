@@ -2,6 +2,37 @@ import { Window } from "happy-dom";
 
 import { setupI18nTestHarness } from "./support/i18n-test-runtime";
 
+const registerAssetImportStubs = (): void => {
+  const bunGlobal = globalThis as unknown as {
+    Bun?: {
+      plugin?: (plugin: {
+        name: string;
+        setup: (builder: {
+          onLoad: (
+            options: { filter: RegExp },
+            handler: (args: { path: string }) => { contents: string; loader: "js" },
+          ) => void;
+        }) => void;
+      }) => void;
+    };
+  };
+
+  bunGlobal.Bun?.plugin?.({
+    name: "wildside-test-assets",
+    setup(builder) {
+      builder.onLoad(
+        { filter: /\.(png|jpe?g|gif|webp|avif|svg|ico)$/i },
+        (args): { contents: string; loader: "js" } => ({
+          contents: `export default ${JSON.stringify(args.path)};`,
+          loader: "js",
+        }),
+      );
+    },
+  });
+};
+
+registerAssetImportStubs();
+
 const happyWindow = new Window();
 
 const extendedGlobal = globalThis as typeof globalThis & {

@@ -11,6 +11,9 @@ Locale bundles should keep only UI chrome and formatting scaffolding. This
 document audits current card usages and defines the schemas, localization
 rules, and migration steps to align the codebase.
 
+For a backend-compatible perspective (hexagonal domain boundaries, ports, and
+offline-first persistence), see `docs/wildside-mockup-data-model.md`.
+
 ## Principles to enforce
 
 - Entity models own their names, descriptions, badges, and imagery per locale.
@@ -53,7 +56,17 @@ rules, and migration steps to align the codebase.
 Use these primitives across entities:
 
 ```ts
-export type LocaleCode = "en-GB" | "en-US" | "fr" | "de" | "es" | "fi" | "da" | "el" | "cy" | "ar";
+export type LocaleCode =
+  | "en-GB"
+  | "en-US"
+  | "fr"
+  | "de"
+  | "es"
+  | "fi"
+  | "da"
+  | "el"
+  | "cy"
+  | "ar";
 
 export type LocalizedStringSet = {
   readonly name: string;
