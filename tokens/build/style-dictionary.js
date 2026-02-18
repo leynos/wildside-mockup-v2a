@@ -205,10 +205,12 @@ function deriveThemeArtifacts(meta, semantic, resolvedTokens) {
     semantic.brand?.hover ?? resolvedTokens.color?.primary?.["600"] ?? brandDefault;
   const brandContrast = semantic.brand?.contrast ?? neutral["0"] ?? "#ffffff";
 
+  const secondaryDefault =
+    semantic.secondary?.default ?? resolvedTokens.color?.secondary?.["500"] ?? brandDefault;
+  const secondaryContrast = semantic.secondary?.contrast ?? baseContent;
+
   const accentDefault =
     semantic.accent?.default ?? resolvedTokens.color?.secondary?.["500"] ?? brandDefault;
-  const accentHover =
-    semantic.accent?.hover ?? resolvedTokens.color?.secondary?.["600"] ?? accentDefault;
   const accentContrast = semantic.accent?.contrast ?? baseContent;
 
   const status = semantic.status ?? {};
@@ -239,9 +241,9 @@ function deriveThemeArtifacts(meta, semantic, resolvedTokens) {
     "--color-primary": brandDefault,
     "--color-primary-content": brandContrast,
     "--color-primary-hover": brandHover,
-    "--color-secondary": accentDefault,
-    "--color-secondary-content": accentContrast,
-    "--color-accent": accentHover,
+    "--color-secondary": secondaryDefault,
+    "--color-secondary-content": secondaryContrast,
+    "--color-accent": accentDefault,
     "--color-accent-content": accentContrast,
     "--color-neutral": baseOverlay,
     "--color-neutral-content": baseContent,
@@ -351,6 +353,16 @@ for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
 }
 
 let tokensCss = `${GENERATED_BANNER}${formatCssBlock(":root", rootDeclarations)}\n`;
+
+// Emit an unnamed @theme block so Tailwind v4 generates utility classes
+// (e.g. font-display, font-body, font-sans) from the base token variables.
+const themeDeclarations = {};
+for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
+  themeDeclarations[`--font-family-${key}`] = value;
+}
+if (Object.keys(themeDeclarations).length > 0) {
+  tokensCss += `${formatCssBlock("@theme", themeDeclarations)}\n`;
+}
 
 const daisyPluginThemes = themes.map((theme) => {
   const flags = [];

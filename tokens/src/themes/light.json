@@ -43,7 +43,7 @@
     "brand": {
       "default": {
         "value": "{color.primary.500}",
-        "description": "Primary brand colour (orange)"
+        "description": "Primary brand colour (cyber-yellow)"
       },
       "hover": {
         "value": "{color.primary.600}",
@@ -51,21 +51,31 @@
       },
       "contrast": {
         "value": "{color.neutral.900}",
-        "description": "Text on brand elements"
+        "description": "Dark text on brand elements"
+      }
+    },
+    "secondary": {
+      "default": {
+        "value": "{color.secondary.500}",
+        "description": "Secondary colour (teal)"
+      },
+      "contrast": {
+        "value": "{color.neutral.900}",
+        "description": "Text on secondary elements"
       }
     },
     "accent": {
       "default": {
-        "value": "{color.secondary.500}",
-        "description": "Accent colour (teal)"
+        "value": "{color.primary.500}",
+        "description": "Accent colour (cyber-yellow)"
       },
       "hover": {
-        "value": "{color.secondary.600}",
+        "value": "{color.primary.600}",
         "description": "Accent hover state"
       },
       "contrast": {
         "value": "{color.neutral.900}",
-        "description": "Text on accent elements"
+        "description": "Dark text on accent elements"
       }
     },
     "status": {

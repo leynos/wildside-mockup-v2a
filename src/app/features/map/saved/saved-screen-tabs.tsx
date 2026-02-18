@@ -62,7 +62,7 @@ export function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Elemen
 export function Metric({ label, value }: { label: string; value: string }): JSX.Element {
   return (
     <div className="text-center">
-      <p className="text-lg font-semibold text-base-content">{value}</p>
+      <p className="font-display text-lg font-bold text-base-content">{value}</p>
       <p className="text-xs text-base-content/60">{label}</p>
     </div>
   );
@@ -149,7 +149,7 @@ export function MapTabContent({
           </div>
 
           <div className="mt-auto saved-summary__panel">
-            <h1 className="text-2xl font-semibold">{routeCopy.name}</h1>
+            <h1 className="font-display text-2xl font-extrabold">{routeCopy.name}</h1>
             <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
               <RouteSummaryMeta iconToken="{icon.object.route}">
                 {t("saved-route-distance-value", {

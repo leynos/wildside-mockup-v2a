@@ -32,7 +32,7 @@ export function WalkCompletePrimaryStats({
               <Icon token={stat.iconToken} className="text-accent" aria-hidden />
               <span className="text-sm font-medium">{localized.name}</span>
             </div>
-            <p className="text-2xl font-semibold">{formatStatValue(stat.value)}</p>
+            <p className="font-display text-2xl font-extrabold">{formatStatValue(stat.value)}</p>
           </article>
         );
       })}
@@ -58,7 +58,9 @@ export function WalkCompleteSecondaryStats({
               className={`walk-complete__secondary-icon ${secondaryStatIconTone[stat.id] ?? "text-accent"}`}
               aria-hidden
             />
-            <p className="text-lg font-semibold text-base-content">{formatStatValue(stat.value)}</p>
+            <p className="font-display text-lg font-bold text-base-content">
+              {formatStatValue(stat.value)}
+            </p>
             <p className="text-xs text-base-content/70">{localized.name}</p>
           </article>
         );

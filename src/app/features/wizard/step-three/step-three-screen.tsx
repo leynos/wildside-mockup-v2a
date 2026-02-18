@@ -175,7 +175,7 @@ export function WizardStepThreeView({
         <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
           {routeStats.map((stat) => (
             <div key={stat.id}>
-              <p className="text-lg font-semibold text-accent">{stat.value}</p>
+              <p className="font-display text-lg font-bold text-accent">{stat.value}</p>
               <p>{stat.unitLabel}</p>
             </div>
           ))}

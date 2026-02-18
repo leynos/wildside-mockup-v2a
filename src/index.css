@@ -5,8 +5,8 @@
   :root {
     font-family: var(--font-family-sans);
     min-height: 100%;
-    /* DaisyUI encodes --color-accent with transparency, so expose a solid variant for UI affordances. */
-    --semantic-accent-solid: rgb(14 185 203);
+    /* Solid accent variant for UI affordances where DaisyUI may encode with transparency. */
+    --semantic-accent-solid: rgb(254 234 0);
   }
 
   html,
@@ -59,24 +59,10 @@
     @apply max-h-[min(80vh,32rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-base-300/60 bg-base-100 p-6 text-base-content shadow-2xl;
   }
 
-  /* Frosted map overlay base, used for bottom sheets across map variants. */
+  /* Solid dark map overlay base, used for bottom sheets across map variants. */
   .map-panel {
     @apply pointer-events-auto rounded-3xl border border-base-300/60 text-base-100 shadow-2xl;
-    background-color: rgba(24, 38, 52, 0.68);
-    background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-  }
-
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .map-panel {
-      background-color: rgba(24, 38, 52, 0.85);
-      background-image: none;
-    }
+    background-color: var(--color-base-200);
   }
 
   /* Floating drawer for global controls (theme + display). */
@@ -227,7 +213,7 @@
 
   .circle-action-button {
     @apply flex h-10 w-10 items-center justify-center rounded-full text-base-100;
-    background-color: color-mix(in oklab, var(--color-base-900) 70%, transparent);
+    background-color: color-mix(in oklab, var(--color-base-100) 70%, transparent);
   }
 
   .circle-action-button--ghost {
@@ -319,7 +305,7 @@
 
   .map-panel__handle {
     @apply flex justify-center pb-3 pt-3;
-    background-color: color-mix(in oklch, rgba(0, 0, 0, 0.9) 80%, var(--color-base-100));
+    background-color: var(--color-base-200);
   }
 
   .map-panel__handle.bg-transparent {
@@ -344,7 +330,7 @@
   }
 
   .section-heading {
-    @apply flex items-center gap-2 text-lg font-semibold;
+    @apply flex items-center gap-2 font-display text-lg font-bold tracking-wider;
   }
 
   .section-heading--spacious {
@@ -352,7 +338,7 @@
   }
 
   .section-title {
-    @apply mb-4 text-lg font-semibold text-base-content;
+    @apply mb-4 font-display text-lg font-bold tracking-wider text-base-content;
   }
 
   .interest-mix__slider {
@@ -392,7 +378,7 @@
   }
 
   .cta-button {
-    @apply btn btn-accent btn-lg w-full text-base font-semibold;
+    @apply btn btn-accent btn-lg w-full font-display text-base font-bold tracking-widest;
   }
 
   .cta-button--rounded {
@@ -432,7 +418,12 @@
   }
 
   .bottom-nav__item--active {
-    @apply text-base-content;
+    @apply text-primary;
+  }
+
+  .bottom-nav__item--active::after {
+    content: "";
+    @apply mt-0.5 block h-1 w-1 rounded-full bg-primary;
   }
 
   .map-viewport__tab {
@@ -472,7 +463,7 @@
   }
 
   .section-hero__title {
-    @apply text-3xl font-semibold;
+    @apply font-display text-3xl font-extrabold tracking-widest;
   }
 
   .section-hero__description {
@@ -565,7 +556,7 @@
   }
 
   .map-route__stat-value {
-    @apply text-lg font-semibold text-accent;
+    @apply font-display text-lg font-extrabold text-accent;
   }
 
   .dialog-surface {
@@ -597,7 +588,7 @@
   }
 
   .slider-control__title {
-    @apply flex items-center gap-2 text-lg font-semibold;
+    @apply flex items-center gap-2 font-display text-lg font-bold;
   }
 
   .slider-control__icon {
@@ -637,7 +628,7 @@
   }
 
   .toggle-switch {
-    @apply relative inline-flex h-6 w-11 items-center rounded-full border border-base-300/60 bg-base-300/60 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100;
+    @apply relative inline-flex h-7 w-[52px] items-center rounded-full border border-base-300/60 bg-base-300/60 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100;
   }
 
   .toggle-switch--muted {
@@ -646,15 +637,11 @@
   }
 
   .toggle-switch--accent[data-state="checked"] {
-    /* Prefer the semantic solid accent, fall back to the default token if it is ever fully opaque. */
-    background-color: var(--semantic-accent-solid, var(--color-accent));
-    background-color: rgb(from var(--semantic-accent-solid, var(--color-accent)) r g b / 0.85);
-    background-image: none;
-    --tw-bg-opacity: 1;
+    background-color: var(--color-primary);
   }
 
   .toggle-switch__thumb {
-    @apply block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px];
+    @apply block h-[22px] w-[22px] translate-x-[3px] rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[27px];
   }
 
   .customize-surface__option {
@@ -715,6 +702,97 @@
   .wizard-stepper__pulse {
     @apply absolute -top-1 block h-4 w-4 animate-pulse rounded-full border-2 border-accent;
     inset-inline-start: -0.25rem;
+    box-shadow: 0 0 12px rgba(254, 234, 0, 0.6);
+  }
+
+  /* v2a signature: cut-corner motif for buttons and panels. */
+  .cut-corner {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
+  }
+
+  /* v2a signature: cyber-yellow glow for containers. */
+  .glow-shadow {
+    box-shadow: 0 0 40px rgba(254, 234, 0, 0.2);
+  }
+
+  /* v2a signature: cyber-yellow text glow for titles. */
+  .glow-text {
+    text-shadow: 0 0 20px rgba(254, 234, 0, 0.3);
+  }
+
+  /* v2a signature: horizontal sweep animation for hero sections. */
+  .scan-line {
+    @apply pointer-events-none absolute inset-x-0 h-0.5;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    animation: scan 3s ease-in-out infinite;
+  }
+
+  /* v2a signature: breathing scale+opacity for icon badges. */
+  .pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* v2a signature: scale-up entrance for celebration elements. */
+  .celebration-burst {
+    animation: burst 0.6s ease-out;
+  }
+
+  /* v2a signature: glow filter for map location markers. */
+  .location-marker-glow {
+    filter: drop-shadow(0 0 12px rgba(254, 234, 0, 0.6));
+  }
+
+  /* v2a signature: vertical gradient connector between itinerary stops. */
+  .itinerary-connector {
+    @apply h-8 w-0.5;
+    margin-inline-start: 1rem;
+    background: linear-gradient(to bottom, var(--color-primary), transparent);
+  }
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    top: 0;
+    opacity: 0;
+  }
+  50% {
+    top: 50%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes burst {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 

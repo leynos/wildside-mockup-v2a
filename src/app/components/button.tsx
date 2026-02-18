@@ -4,7 +4,7 @@ import { Slot } from "@radix-ui/react-slot";
 import type { ButtonHTMLAttributes } from "react";
 import { forwardRef } from "react";
 
-type ButtonVariant = "accent" | "ghost" | "circle";
+type ButtonVariant = "accent" | "ghost" | "circle" | "tool" | "cta";
 type ButtonSize = "sm" | "md";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -31,18 +31,29 @@ function resolveVariant(variant: ButtonVariant, active?: boolean): string {
       ? "h-10 w-10 rounded-full border border-base-300/60 bg-accent text-base-900"
       : "h-10 w-10 rounded-full border border-base-300/60 bg-base-200/70 text-base-content";
   }
+  if (variant === "tool") {
+    return "h-14 w-14 cut-corner bg-primary text-primary-content hover:scale-105 active:scale-95";
+  }
+  if (variant === "cta") {
+    return "cut-corner bg-base-200 text-primary font-display font-bold tracking-widest";
+  }
   return "bg-accent text-base-900 hover:bg-accent/90";
 }
 
 function resolveSize(size: ButtonSize, variant: ButtonVariant): string {
-  if (variant === "circle") {
-    return ""; // Circle variant has fixed dimensions
+  if (variant === "circle" || variant === "tool") {
+    return ""; // Fixed-dimension variants
+  }
+  if (variant === "cta") {
+    return "px-6 py-3 text-base";
   }
   return size === "sm" ? "px-3 py-1.5 text-sm" : "px-4 py-2 text-base";
 }
 
 function resolveShape(variant: ButtonVariant): string {
-  return variant === "circle" ? "" : "rounded-xl";
+  if (variant === "circle") return "";
+  if (variant === "tool" || variant === "cta") return ""; // cut-corner handles shape
+  return "rounded-xl";
 }
 
 /**

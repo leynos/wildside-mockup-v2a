@@ -36,7 +36,7 @@ export function RouteSummarySection({
   return (
     <div className="map-route__summary">
       <p className="text-sm font-medium text-base-content/60">{suggestedRouteCaption}</p>
-      <h1 className="mt-1 text-2xl font-semibold text-base-content">{routeName}</h1>
+      <h1 className="font-display mt-1 text-2xl font-extrabold text-base-content">{routeName}</h1>
       {routeDescription ? (
         <p className="mt-3 text-sm text-base-content/70">{routeDescription}</p>
       ) : null}
