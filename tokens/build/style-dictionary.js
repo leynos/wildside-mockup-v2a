@@ -358,7 +358,7 @@ let tokensCss = `${GENERATED_BANNER}${formatCssBlock(":root", rootDeclarations)}
 // (e.g. font-display, font-body, font-sans) from the base token variables.
 const themeDeclarations = {};
 for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
-  themeDeclarations[`--font-family-${key}`] = value;
+  themeDeclarations[`--font-${key}`] = value;
 }
 if (Object.keys(themeDeclarations).length > 0) {
   tokensCss += `${formatCssBlock("@theme", themeDeclarations)}\n`;
