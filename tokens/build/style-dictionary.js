@@ -139,6 +139,26 @@ function toFontArray(fontList) {
 }
 
 /**
+ * Infer a stable fallback stack for a font family token key.
+ *
+ * @param {string} key - Font family token key.
+ * @returns {string} CSS fallback font-family list.
+ */
+function inferFallbackStack(key) {
+  const normalizedKey = key.toLowerCase();
+  if (/(^|[-_])mono(space)?($|[-_])/.test(normalizedKey)) {
+    return "ui-monospace, monospace";
+  }
+  if (/(^|[-_])sans($|[-_])/.test(normalizedKey)) {
+    return "ui-sans-serif, system-ui, sans-serif";
+  }
+  if (/(^|[-_])serif($|[-_])/.test(normalizedKey)) {
+    return "ui-serif, Georgia, serif";
+  }
+  return "ui-sans-serif, system-ui, sans-serif";
+}
+
+/**
  * Produce a human-friendly title from kebab/underscore notation.
  *
  * @param {string} name - Input string.
@@ -338,6 +358,17 @@ const themes = themeFiles.map((fileName) => {
 });
 
 // Build CSS payload (`tokens/dist/tokens.css`)
+const rawFontFamilyTokens = resolvedTokens.font?.family;
+if (
+  rawFontFamilyTokens !== undefined &&
+  (rawFontFamilyTokens === null ||
+    typeof rawFontFamilyTokens !== "object" ||
+    Array.isArray(rawFontFamilyTokens))
+) {
+  throw new TypeError("Expected resolvedTokens.font.family to be an object when provided");
+}
+const fontFamilyTokens = rawFontFamilyTokens ?? {};
+
 const rootDeclarations = {};
 for (const [key, value] of Object.entries(resolvedTokens.space ?? {})) {
   rootDeclarations[`--space-${key}`] = value;
@@ -348,7 +379,7 @@ for (const [key, value] of Object.entries(resolvedTokens.radius ?? {})) {
 for (const [key, value] of Object.entries(resolvedTokens.font?.size ?? {})) {
   rootDeclarations[`--font-size-${key}`] = value;
 }
-for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
+for (const [key, value] of Object.entries(fontFamilyTokens)) {
   rootDeclarations[`--font-family-${key}`] = value;
 }
 
@@ -357,8 +388,13 @@ let tokensCss = `${GENERATED_BANNER}${formatCssBlock(":root", rootDeclarations)}
 // Emit an unnamed @theme block so Tailwind v4 generates utility classes
 // (e.g. font-display, font-body, font-sans) from the base token variables.
 const themeDeclarations = {};
-for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
-  themeDeclarations[`--font-${key}`] = value;
+for (const [key, fallback] of Object.entries(fontFamilyTokens)) {
+  // Keep `--font-family-*` as the canonical token surface and expose
+  // `--font-*` aliases for Tailwind's font namespace utilities.
+  themeDeclarations[`--font-${key}`] =
+    typeof fallback === "string"
+      ? `var(--font-family-${key}, ${fallback})`
+      : `var(--font-family-${key}, ${inferFallbackStack(key)})`;
 }
 if (Object.keys(themeDeclarations).length > 0) {
   tokensCss += `${formatCssBlock("@theme", themeDeclarations)}\n`;
