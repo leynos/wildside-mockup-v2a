@@ -149,6 +149,9 @@ function inferFallbackStack(key) {
   if (/(^|[-_])mono(space)?($|[-_])/.test(normalizedKey)) {
     return "ui-monospace, monospace";
   }
+  if (/(^|[-_])sans($|[-_])/.test(normalizedKey)) {
+    return "ui-sans-serif, system-ui, sans-serif";
+  }
   if (/(^|[-_])serif($|[-_])/.test(normalizedKey)) {
     return "ui-serif, Georgia, serif";
   }
