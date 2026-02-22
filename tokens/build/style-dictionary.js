@@ -357,8 +357,10 @@ let tokensCss = `${GENERATED_BANNER}${formatCssBlock(":root", rootDeclarations)}
 // Emit an unnamed @theme block so Tailwind v4 generates utility classes
 // (e.g. font-display, font-body, font-sans) from the base token variables.
 const themeDeclarations = {};
-for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
-  themeDeclarations[`--font-${key}`] = value;
+for (const [key] of Object.entries(resolvedTokens.font?.family ?? {})) {
+  // Keep `--font-family-*` as the canonical token surface and expose
+  // `--font-*` aliases for Tailwind's font namespace utilities.
+  themeDeclarations[`--font-${key}`] = `var(--font-family-${key})`;
 }
 if (Object.keys(themeDeclarations).length > 0) {
   tokensCss += `${formatCssBlock("@theme", themeDeclarations)}\n`;
