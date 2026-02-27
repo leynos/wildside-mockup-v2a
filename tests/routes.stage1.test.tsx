@@ -115,34 +115,6 @@ const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""),
 
 const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
 
-const buildSavedRouteCopy = (route: WalkRouteSummary) => {
-  const savedMetrics = formatRouteMetrics(route);
-  const savedDistanceCopy =
-    i18n.t("saved-route-distance-value", {
-      value: savedMetrics.distance.value,
-      unit: savedMetrics.distance.unitLabel,
-      defaultValue: savedMetrics.distanceText,
-    }) ?? savedMetrics.distanceText;
-  const savedDurationCopy =
-    i18n.t("saved-route-duration-value", {
-      value: savedMetrics.duration.value,
-      unit: savedMetrics.duration.unitLabel,
-      defaultValue: savedMetrics.durationText,
-    }) ?? savedMetrics.durationText;
-  const savedStopsCopy =
-    i18n.t("saved-route-stops-value", {
-      value: savedMetrics.stops.value,
-      unit: savedMetrics.stops.unitLabel,
-      defaultValue: savedMetrics.stopsText,
-    }) ?? savedMetrics.stopsText;
-
-  return {
-    savedDistanceCopy,
-    savedDurationCopy,
-    savedStopsCopy,
-  } as const;
-};
-
 /**
  * Generic helper to resolve labels from Fluent translations or fixture
  * localisations. Tries translation first, then falls back to fixture data.
@@ -714,7 +686,7 @@ describe("Stage 2 routed flows", () => {
 
     await user.click(wandTrigger);
 
-    const wizardHeading = translate("wizard-header-title", "Walk Wizard");
+    const wizardHeading = translate("wizard-header-title", "Route Wizard");
     expect(
       await screen.findByRole(
         "heading",
@@ -889,17 +861,24 @@ describe("Stage 2 routed flows", () => {
     expect(
       view.getByRole("heading", { name: new RegExp(escapeRegExp(savedRouteName), "i") }),
     ).toBeTruthy();
-    const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
-      buildSavedRouteCopy(savedRoute);
+    const savedMetrics = formatRouteMetrics(savedRoute);
 
-    expect(view.getByText(localizedRegex(savedDistanceCopy))).toBeTruthy();
-    expect(view.getByText(localizedRegex(savedDurationCopy))).toBeTruthy();
-    expect(view.getByText(localizedRegex(savedStopsCopy))).toBeTruthy();
+    expect(view.getAllByText(localizedRegex(savedMetrics.distance.value)).length).toBeGreaterThan(
+      0,
+    );
+    expect(
+      view.getAllByText(localizedRegex(savedMetrics.distance.unitLabel)).length,
+    ).toBeGreaterThan(0);
+    expect(view.getAllByText(localizedRegex(savedMetrics.duration.value)).length).toBeGreaterThan(
+      0,
+    );
+    expect(view.getAllByText(localizedRegex(savedMetrics.stops.value)).length).toBeGreaterThan(0);
 
     const shareTrigger = view.getByRole("button", { name: /^share$/i });
     const favouriteButton = view.getByRole("button", {
-      name: /remove saved walk/i,
+      name: /save route/i,
     });
+    expect(favouriteButton.getAttribute("aria-pressed")).toBe("true");
 
     await act(async () => {
       clickElement(shareTrigger);
@@ -914,10 +893,7 @@ describe("Stage 2 routed flows", () => {
     act(() => clickElement(closeButton));
 
     act(() => clickElement(favouriteButton));
-    const resetFavourite = view.getByRole("button", {
-      name: /save this walk/i,
-    });
-    expect(resetFavourite.getAttribute("aria-pressed")).toBe("false");
+    expect(favouriteButton.getAttribute("aria-pressed")).toBe("false");
   });
 });
 
@@ -987,8 +963,7 @@ describe("Stage 3 wizard flows", () => {
       name: localizedRegex(interestsAria),
     });
     expect(interestsSection.classList.contains("wizard-section")).toBe(true);
-    const continueLabel =
-      translate("wizard-step-one-continue", "Continue to preferences") ?? "Continue to preferences";
+    const continueLabel = translate("wizard-step-one-next", "Next step") ?? "Next step";
     const continueButton = view.getByRole("button", {
       name: localizedRegex(continueLabel),
     });
@@ -1018,8 +993,8 @@ describe("Stage 3 wizard flows", () => {
 
       const durationAria = i18n.t("wizard-step-one-duration-section-aria") ?? "";
       expect(view.getByRole("region", { name: localizedRegex(durationAria) })).toBeTruthy();
-      const continueLabel = i18n.t("wizard-step-one-continue") ?? "";
-      expect(view.getByRole("button", { name: localizedRegex(continueLabel) })).toBeTruthy();
+      const nextLabel = i18n.t("wizard-step-one-next", { defaultValue: "Next step" });
+      expect(view.getByRole("button", { name: localizedRegex(nextLabel) })).toBeTruthy();
 
       const selectionSummary = view.getByText(/seleccionados$/i);
       expect(selectionSummary.textContent?.trim()).toBe("2 seleccionados");
@@ -1135,7 +1110,7 @@ describe("Stage 3 wizard flows", () => {
       const footer = view.getByRole("contentinfo");
       expect(
         within(footer).getByRole("button", {
-          name: localizedRegex(i18n.t("wizard-step-two-review") ?? ""),
+          name: localizedRegex(i18n.t("wizard-step-two-next", { defaultValue: "Next" })),
         }),
       ).toBeTruthy();
       expect(
@@ -1150,9 +1125,8 @@ describe("Stage 3 wizard flows", () => {
     await runWizardStepThreeSpanish(async ({ view, routeTitle }) => {
       expect(view.getByRole("heading", { name: localizedRegex(routeTitle) })).toBeTruthy();
 
-      const startOverLabel =
-        translate("wizard-step-three-start-over", "Start over") ?? "Start over";
-      expect(view.getByRole("button", { name: localizedRegex(startOverLabel) })).toBeTruthy();
+      const backLabel = translate("wizard-step-three-back-label", "Back") ?? "Back";
+      expect(view.getByRole("button", { name: localizedRegex(backLabel) })).toBeTruthy();
 
       const summaryRegionLabel =
         translate("wizard-step-three-route-panel-aria", "Hidden Gems Loop summary") ??
@@ -1163,6 +1137,11 @@ describe("Stage 3 wizard flows", () => {
       const localizedStats = buildWizardStatsCopy();
       localizedStats.forEach((stat) => {
         expect(within(summaryRegion).getByText(localizedRegex(stat.unitLabel))).toBeTruthy();
+      });
+
+      wizardRouteSummary.details.forEach((detail) => {
+        const localized = pickLocalization(detail.localizations, "es");
+        expect(within(summaryRegion).getByText(localizedRegex(localized.name))).toBeTruthy();
       });
     });
   });
@@ -1229,11 +1208,9 @@ describe("Stage 3 wizard flows", () => {
 
   it("localises wizard step three save dialog for Spanish", async () => {
     await runWizardStepThreeSpanish(async ({ view, routeTitle }) => {
-      const saveLabel =
-        translate("wizard-step-three-save-button", "Save walk and view map") ??
-        "Save walk and view map";
+      const goLabel = translate("wizard-step-three-go-label", "Go") ?? "Go";
       const saveButton = view.getByRole("button", {
-        name: localizedRegex(saveLabel),
+        name: localizedRegex(goLabel),
       });
 
       await act(async () => {
@@ -1273,11 +1250,9 @@ describe("Stage 3 wizard flows", () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);
     const view = within(container);
-    const saveLabel =
-      translate("wizard-step-three-save-button", "Save walk and view map") ??
-      "Save walk and view map";
+    const goLabel = translate("wizard-step-three-go-label", "Go") ?? "Go";
     const saveButton = view.getByRole("button", {
-      name: localizedRegex(saveLabel),
+      name: localizedRegex(goLabel),
     });
 
     await act(async () => {
@@ -1296,7 +1271,7 @@ describe("Stage 3 wizard flows", () => {
     act(() => clickElement(closeButton));
   });
 
-  it("renders saved summary panel with semantic class", async () => {
+  it("renders saved showcase panel with route stats", async () => {
     ({ mount, root } = await renderRoute("/saved"));
     const container = requireContainer(mount);
     const view = within(container);
@@ -1305,12 +1280,18 @@ describe("Stage 3 wizard flows", () => {
         name: new RegExp(escapeRegExp(resolveRouteName(savedRoute.localizations)), "i"),
       }),
     ).toBeTruthy();
-    const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
-      buildSavedRouteCopy(savedRoute);
+    const savedMetrics = formatRouteMetrics(savedRoute);
 
-    expect(view.getByText(localizedRegex(savedDistanceCopy))).toBeTruthy();
-    expect(view.getByText(localizedRegex(savedDurationCopy))).toBeTruthy();
-    expect(view.getByText(localizedRegex(savedStopsCopy))).toBeTruthy();
+    expect(view.getAllByText(localizedRegex(savedMetrics.distance.value)).length).toBeGreaterThan(
+      0,
+    );
+    expect(
+      view.getAllByText(localizedRegex(savedMetrics.distance.unitLabel)).length,
+    ).toBeGreaterThan(0);
+    expect(view.getAllByText(localizedRegex(savedMetrics.duration.value)).length).toBeGreaterThan(
+      0,
+    );
+    expect(view.getAllByText(localizedRegex(savedMetrics.stops.value)).length).toBeGreaterThan(0);
   });
 
   it("renders wizard summary panels with semantic class", async () => {
@@ -1340,14 +1321,28 @@ describe("Stage 3 wizard flows", () => {
       name: localizedRegex(weatherPanelTitle),
     });
 
-    [routePanel, preferencesPanel, stopsPanel, weatherPanel].forEach((panel) => {
+    expect(routePanel.classList.contains("accent-card")).toBe(true);
+
+    [preferencesPanel, stopsPanel, weatherPanel].forEach((panel) => {
       expect(panel.classList.contains("wizard-summary__panel")).toBe(true);
       expect(panel.classList.contains("wizard-section")).toBe(true);
     });
 
+    const routeHeading =
+      translate("wizard-step-three-route-heading", "Route summary") ?? "Route summary";
+    expect(view.getByRole("heading", { name: localizedRegex(routeHeading) })).toBeTruthy();
+
     const badgeLabel = pickLocalization(wizardRouteSummary.badgeLocalizations, "en-GB").name;
     const summaryBadge = within(routePanel).getByText(localizedRegex(badgeLabel));
     expect(summaryBadge.classList.contains("wizard-badge")).toBe(true);
+
+    wizardRouteSummary.details.forEach((detail) => {
+      const localized = pickLocalization(detail.localizations, "en-GB");
+      expect(within(routePanel).getByText(localizedRegex(localized.name))).toBeTruthy();
+      expect(
+        within(routePanel).getAllByText(localizedRegex(localized.description ?? "")).length,
+      ).toBeGreaterThan(0);
+    });
 
     wizardSummaryHighlights.forEach((highlight) => {
       const label = pickLocalization(highlight.localizations, "en-GB").name;

@@ -41,7 +41,7 @@ export function CustomizeScreen(): JSX.Element {
     <MobileShell
       tone="dark"
       background={
-        <div className="h-full w-full bg-gradient-to-b from-base-300/40 via-transparent to-transparent" />
+        <div className="h-full w-full bg-gradient-to-b from-base-300 via-transparent to-transparent" />
       }
     >
       <div className="screen-stack">

@@ -8,7 +8,7 @@ import { buildInterestLookup } from "../data/registries/interests";
 import { Icon } from "./icon";
 
 const CHIP_BASE_CLASSES =
-  "interest-chip inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60";
+  "interest-chip inline-flex items-center gap-2 rounded-full border border-neutral bg-base-200 px-4 py-2 text-sm font-medium text-base-content/70 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60";
 
 export interface InterestToggleGroupProps {
   interestIds: string[];

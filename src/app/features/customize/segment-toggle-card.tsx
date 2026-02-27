@@ -20,8 +20,8 @@ export function CustomizeSegmentToggle({
 
   return (
     <ToggleGroup.Item {...itemProps} className={composedClassName}>
-      <p className="font-semibold text-base-content">{label}</p>
-      <p className="mt-1 text-xs text-base-content/60">{description}</p>
+      <p className="font-semibold">{label}</p>
+      <p className="mt-1 text-xs opacity-70">{description}</p>
     </ToggleGroup.Item>
   );
 }

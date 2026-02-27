@@ -6,6 +6,7 @@ import type { TFunction } from "i18next";
 import { type JSX, type ReactNode, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { AccentCard } from "../../../components/accent-card";
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { WizardSection, type WizardSectionProps } from "../../../components/wizard-section";
@@ -90,8 +91,20 @@ export function WizardStepThreeView({
 
   const routeLocalization = pickLocalization(wizardRouteSummary.localizations, language);
   const routeTitle = routeLocalization.name;
-  const routeDescription = routeLocalization.description;
   const badgeTitle = pickLocalization(wizardRouteSummary.badgeLocalizations, language).name;
+  const routeDetails = useMemo(
+    () =>
+      wizardRouteSummary.details.map((detail) => {
+        const localized = pickLocalization(detail.localizations, language);
+        return {
+          id: detail.id,
+          iconToken: detail.iconToken,
+          label: localized.name,
+          value: localized.description ?? "",
+        };
+      }),
+    [language],
+  );
 
   return (
     <WizardLayout
@@ -100,20 +113,28 @@ export function WizardStepThreeView({
       onBack={() => navigateTo("/wizard/step-2")}
       onHelp={() => window.alert(helpMessage)}
       footer={
-        <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-3 gap-2">
           <button
             type="button"
-            className="btn btn-ghost"
+            className="cta-button cta-button--secondary cta-button--compact"
+            onClick={() => navigateTo("/wizard/step-2")}
+          >
+            <Icon token="{icon.navigation.back}" aria-hidden className="me-2 inline" />
+            {t("wizard-step-three-back-label", { defaultValue: "Back" })}
+          </button>
+          <button
+            type="button"
+            className="cta-button cta-button--secondary cta-button--compact"
             onClick={() => navigateTo("/wizard/step-1")}
           >
-            {t("wizard-step-three-start-over", { defaultValue: "Start over" })}
+            <Icon token="{icon.action.regenerate}" aria-hidden className="me-2 inline" />
+            {t("wizard-step-three-reset-label", { defaultValue: "Reset" })}
           </button>
           <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild>
-              <button type="button" className="btn btn-accent btn-lg w-full">
-                {t("wizard-step-three-save-button", {
-                  defaultValue: "Save walk and view map",
-                })}
+              <button type="button" className="cta-button cta-button--compact">
+                <Icon token="{icon.object.magic}" aria-hidden className="me-2 inline" />
+                {t("wizard-step-three-go-label", { defaultValue: "Go" })}
               </button>
             </Dialog.Trigger>
             <Dialog.Portal>
@@ -123,7 +144,7 @@ export function WizardStepThreeView({
                   ? (() => {
                       return (
                         <>
-                          <Dialog.Title className="text-lg font-semibold text-base-content">
+                          <Dialog.Title className="font-display font-bold tracking-wider text-lg text-base-content">
                             {t("wizard-step-three-dialog-title", {
                               defaultValue: "Walk saved!",
                             })}
@@ -162,51 +183,74 @@ export function WizardStepThreeView({
         </div>
       }
     >
-      <WizardSummaryPanel
-        aria-label={t("wizard-step-three-route-panel-aria", {
-          routeName: routeTitle,
-          defaultValue: "{{routeName}}",
-        })}
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">{routeTitle}</h2>
-          <span className="wizard-badge font-semibold">{badgeTitle}</span>
-        </div>
-        <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
-          {routeStats.map((stat) => (
-            <div key={stat.id}>
-              <p className="font-display text-lg font-bold text-accent">{stat.value}</p>
-              <p>{stat.unitLabel}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-4 text-sm text-base-content/70">{routeDescription}</p>
-      </WizardSummaryPanel>
+      <div className="mb-6">
+        <h2 className="section-heading section-heading--spacious mb-4 text-base-content">
+          <Icon token="{icon.action.preview}" className="text-accent" aria-hidden />
+          {t("wizard-step-three-route-heading", {
+            defaultValue: "Route summary",
+          })}
+        </h2>
+        <AccentCard
+          aria-label={t("wizard-step-three-route-panel-aria", {
+            routeName: routeTitle,
+            defaultValue: "{{routeName}}",
+          })}
+        >
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="font-display font-bold tracking-wider text-xl">{routeTitle}</h3>
+            <span className="wizard-badge font-semibold">{badgeTitle}</span>
+          </div>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            {routeStats.map((stat) => (
+              <div key={stat.id}>
+                <Icon token={stat.iconToken} className="mx-auto mb-2 text-accent" aria-hidden />
+                <p className="font-display text-lg font-bold text-accent">{stat.value}</p>
+                <p className="text-xs text-base-content/70">{stat.unitLabel}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 space-y-3 border-t border-neutral pt-4">
+            {routeDetails.map((detail) => (
+              <div key={detail.id} className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-sm">
+                  <Icon token={detail.iconToken} className="text-accent" aria-hidden />
+                  {detail.label}
+                </span>
+                <span className="text-sm font-semibold">{detail.value}</span>
+              </div>
+            ))}
+          </div>
+        </AccentCard>
+      </div>
 
       <WizardSummaryPanel
         aria-label={t("wizard-step-three-preferences-panel-aria", {
           defaultValue: "Your preferences applied",
         })}
       >
-        <h3 className="text-lg font-semibold">
+        <h3 className="font-display font-bold tracking-wider text-lg">
           {t("wizard-step-three-preferences-heading", {
             defaultValue: "Your preferences applied",
           })}
         </h3>
-        <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+        <div className="mt-4 space-y-2">
           {wizardSummaryHighlights.map((highlight) => {
             const localized = pickLocalization(highlight.localizations, language);
             return (
               <div key={highlight.id} className="wizard-summary__highlight">
+                <span className="flex items-center gap-3">
+                  <Icon
+                    token={highlight.iconToken}
+                    className="wizard-summary__highlight-icon"
+                    aria-hidden
+                  />
+                  <span className="text-sm">{localized.name}</span>
+                </span>
                 <Icon
-                  token={highlight.iconToken}
-                  className="wizard-summary__highlight-icon"
+                  token="{icon.action.check}"
+                  className="wizard-summary__highlight-check"
                   aria-hidden
                 />
-                <div>
-                  <p className="font-semibold">{localized.name}</p>
-                  <p className="text-xs text-base-content/60">{localized.description}</p>
-                </div>
               </div>
             );
           })}
@@ -218,7 +262,7 @@ export function WizardStepThreeView({
           defaultValue: "Featured stops",
         })}
       >
-        <h3 className="text-lg font-semibold">
+        <h3 className="font-display font-bold tracking-wider text-lg">
           {t("wizard-step-three-stops-heading", {
             defaultValue: "Featured stops",
           })}
@@ -256,7 +300,7 @@ export function WizardStepThreeView({
             return (
               <div key={stop.id} className="wizard-summary__stop">
                 <span className="wizard-summary__stop-icon">
-                  <Icon token={stop.iconToken} className={stop.accentClass} aria-hidden />
+                  <Icon token={stop.iconToken} aria-hidden />
                 </span>
                 <div>
                   <p className="text-base font-semibold">{localized.name}</p>

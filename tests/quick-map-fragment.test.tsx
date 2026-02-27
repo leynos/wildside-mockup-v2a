@@ -7,6 +7,7 @@ import { DisplayModeProvider } from "../src/app/providers/display-mode-provider"
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
 import { UnitPreferencesProvider } from "../src/app/units/unit-preferences-provider";
+import i18n from "../src/i18n";
 
 async function renderRoute(path: string) {
   window.history.replaceState(null, "", path);
@@ -51,7 +52,10 @@ describe("quick map hash fragments", () => {
     host = null;
   };
 
-  beforeEach(() => cleanup());
+  beforeEach(async () => {
+    cleanup();
+    await i18n.changeLanguage("en-GB");
+  });
   afterEach(() => cleanup());
 
   it("activates the stops tab when loading #stops", async () => {

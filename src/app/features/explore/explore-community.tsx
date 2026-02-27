@@ -67,7 +67,7 @@ export function CommunityPickPanel({
         {heading}
       </h2>
       <div className="mb-3 flex items-center gap-3">
-        <div className="h-9 w-9 overflow-hidden rounded-full border border-base-300/60">
+        <div className="h-9 w-9 overflow-hidden rounded-full border border-neutral">
           <img
             src={pick.curator.avatar.url}
             alt={pick.curator.avatar.alt}

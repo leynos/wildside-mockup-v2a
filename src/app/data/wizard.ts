@@ -15,6 +15,9 @@ import {
   loopRouteLocalizations,
   routeBadgeLocalizations,
   routeTitleLocalizations,
+  routeTypeDetailLocalizations,
+  surfacesDetailLocalizations,
+  terrainDetailLocalizations,
   weatherSentimentLocalizations,
   weatherSkyLocalizations,
   weatherTitleLocalizations,
@@ -127,24 +130,57 @@ export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
 
 export interface WizardRouteStat {
   readonly id: string;
+  readonly iconToken: string;
   readonly quantity:
     | { kind: "distance"; metres: number }
     | { kind: "duration"; seconds: number }
     | { kind: "count"; value: number };
 }
 
+export interface WizardRouteDetail {
+  readonly id: string;
+  readonly iconToken: string;
+  readonly localizations: EntityLocalizations;
+}
+
 export interface WizardRouteSummary {
   readonly localizations: EntityLocalizations;
   readonly badgeLocalizations: EntityLocalizations;
   readonly stats: ReadonlyArray<WizardRouteStat>;
+  readonly details: ReadonlyArray<WizardRouteDetail>;
 }
 
 export const wizardRouteSummary: WizardRouteSummary = {
   localizations: routeTitleLocalizations,
   badgeLocalizations: routeBadgeLocalizations,
   stats: [
-    { id: "distance", quantity: { kind: "distance", metres: 3_700 } },
-    { id: "duration", quantity: { kind: "duration", seconds: 2_700 } },
-    { id: "stops", quantity: { kind: "count", value: 7 } },
+    {
+      id: "distance",
+      iconToken: "{icon.object.distance}",
+      quantity: { kind: "distance", metres: 3_700 },
+    },
+    {
+      id: "duration",
+      iconToken: "{icon.object.duration}",
+      quantity: { kind: "duration", seconds: 2_700 },
+    },
+    { id: "stops", iconToken: "{icon.object.stops}", quantity: { kind: "count", value: 7 } },
+  ],
+  details: [
+    {
+      id: "terrain",
+      iconToken: "{icon.accessibility.elevation}",
+      localizations: terrainDetailLocalizations,
+    },
+    {
+      id: "route-type",
+      iconToken: "{icon.object.routeType}",
+      localizations: routeTypeDetailLocalizations,
+    },
+    {
+      id: "surfaces",
+      iconToken: "{icon.object.surfaces}",
+      localizations: surfacesDetailLocalizations,
+    },
   ],
 } as const;

@@ -4,41 +4,18 @@ import * as Dialog from "@radix-ui/react-dialog";
 import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import type { TFunction } from "i18next";
-import type { JSX, ReactNode } from "react";
+import type { JSX } from "react";
 
 import { Icon } from "../../../components/icon";
 import { DRAGGABLE_HANDLE_CLASS } from "../../../components/map/map-panel-constants";
-import { MapViewport } from "../../../components/map-viewport";
-import { PointOfInterestList } from "../../../components/point-of-interest-list";
-import { WildsideMap } from "../../../components/wildside-map";
 import { getRouteShareUrl } from "../../../config/route-urls";
 import type { WalkRouteSummary } from "../../../data/map";
 import { getTagDescriptor } from "../../../data/registries/tags";
 import { pickLocalization } from "../../../domain/entities/localization";
+import { RouteFlowList } from "./route-flow-list";
+import type { RouteShowcasePanelProps } from "./saved-route-showcase";
+import { RouteShowcasePanel } from "./saved-route-showcase";
 import type { SavedRouteData } from "./use-saved-route-data";
-
-/**
- * Props for the RouteSummaryMeta component.
- */
-export type RouteSummaryMetaProps = {
-  readonly iconToken: string;
-  readonly children: ReactNode;
-};
-
-/**
- * Renders a route summary metadata item with an icon and content.
- *
- * @param iconToken - Design token for the metadata icon.
- * @param children - Content to display alongside the icon.
- */
-export function RouteSummaryMeta({ iconToken, children }: RouteSummaryMetaProps): JSX.Element {
-  return (
-    <span className="route-summary__meta">
-      <Icon token={iconToken} className="text-accent" aria-hidden />
-      {children}
-    </span>
-  );
-}
 
 /**
  * Props for the MapOverlay component (extends Radix Tabs.Content).
@@ -77,6 +54,15 @@ type MapTabContentProps = {
   readonly distance: SavedRouteData["distance"];
   readonly duration: SavedRouteData["duration"];
   readonly stops: SavedRouteData["stops"];
+  readonly difficultyLabel: string;
+  readonly ratingFormatter: Intl.NumberFormat;
+  readonly numberFormatter: Intl.NumberFormat;
+  readonly isFavourite: boolean;
+  readonly onToggleFavourite: () => void;
+  readonly onViewDetails: () => void;
+  readonly onCustomize: () => void;
+  readonly onOffline: () => void;
+  readonly onStartRoute: () => void;
   readonly t: TFunction;
   readonly onBack: () => void;
   readonly shareOpen: boolean;
@@ -84,9 +70,8 @@ type MapTabContentProps = {
 };
 
 /**
- * Renders the map tab content showing route summary, map viewport, and share dialog.
- *
- * Displays route name, distance, duration, and stops metadata, with Back and Share actions.
+ * Renders the map tab overlay with back/share actions and the route
+ * showcase panel. The map canvas itself lives in the parent viewport.
  */
 export function MapTabContent({
   savedRoute,
@@ -94,88 +79,84 @@ export function MapTabContent({
   distance,
   duration,
   stops,
+  difficultyLabel,
+  ratingFormatter,
+  numberFormatter,
+  isFavourite,
+  onToggleFavourite,
+  onViewDetails,
+  onCustomize,
+  onOffline,
+  onStartRoute,
   t,
   onBack,
   shareOpen,
   onShareOpenChange,
 }: MapTabContentProps): JSX.Element {
+  const showcaseProps: RouteShowcasePanelProps = {
+    routeCopy,
+    distance,
+    duration,
+    stops,
+    savedRoute,
+    difficultyLabel,
+    ratingFormatter,
+    numberFormatter,
+    isFavourite,
+    onToggleFavourite,
+    onViewDetails,
+    onCustomize,
+    onOffline,
+    onStartRoute,
+    t,
+  };
+
   return (
     <MapOverlay value="map" forceMount>
-      <MapViewport
-        map={<WildsideMap />}
-        gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
-      >
-        <div className="flex flex-col justify-between px-6 pb-6 pt-8">
-          <div className="flex items-center justify-between text-base-100">
-            <button
-              type="button"
-              aria-label={t("action-back", { defaultValue: "Back" })}
-              className="circle-action-button"
-              onClick={onBack}
-            >
-              <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
-            </button>
-            <Dialog.Root open={shareOpen} onOpenChange={onShareOpenChange}>
-              <Dialog.Trigger asChild>
-                <button
-                  type="button"
-                  aria-label={t("action-share", { defaultValue: "Share" })}
-                  className="circle-action-button"
-                >
-                  <Icon token="{icon.action.share}" aria-hidden className="h-5 w-5" />
-                </button>
-              </Dialog.Trigger>
-              <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-                <Dialog.Content className="dialog-surface">
-                  <Dialog.Title className="text-lg font-semibold text-base-content">
-                    {t("map-saved-share-title", { defaultValue: "Share saved walk" })}
-                  </Dialog.Title>
-                  <Dialog.Description className="text-sm text-base-content/70">
-                    {t("map-saved-share-description", {
-                      defaultValue:
-                        "Sharing is not wired up yet, but this is where the integration will live.",
-                    })}
-                  </Dialog.Description>
-                  <div className="route-share__preview">{getRouteShareUrl(savedRoute.id)}</div>
-                  <Dialog.Close asChild>
-                    <button type="button" className="btn btn-accent btn-sm self-end">
-                      {t("action-close", { defaultValue: "Close" })}
-                    </button>
-                  </Dialog.Close>
-                </Dialog.Content>
-              </Dialog.Portal>
-            </Dialog.Root>
-          </div>
-
-          <div className="mt-auto saved-summary__panel">
-            <h1 className="font-display text-2xl font-extrabold">{routeCopy.name}</h1>
-            <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
-              <RouteSummaryMeta iconToken="{icon.object.route}">
-                {t("saved-route-distance-value", {
-                  value: distance.value,
-                  unit: distance.unitLabel,
-                  defaultValue: `${distance.value} ${distance.unitLabel}`,
-                })}
-              </RouteSummaryMeta>
-              <RouteSummaryMeta iconToken="{icon.object.duration}">
-                {t("saved-route-duration-value", {
-                  value: duration.value,
-                  unit: duration.unitLabel,
-                  defaultValue: `${duration.value} ${duration.unitLabel}`,
-                })}
-              </RouteSummaryMeta>
-              <RouteSummaryMeta iconToken="{icon.object.stops}">
-                {t("saved-route-stops-value", {
-                  value: stops.value,
-                  unit: stops.unitLabel,
-                  defaultValue: `${stops.value} ${stops.unitLabel}`,
-                })}
-              </RouteSummaryMeta>
-            </div>
-          </div>
+      <div className="flex flex-col justify-between px-6 pb-6 pt-8">
+        <div className="flex items-center justify-between text-base-100">
+          <button
+            type="button"
+            aria-label={t("action-back", { defaultValue: "Back" })}
+            className="circle-action-button"
+            onClick={onBack}
+          >
+            <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
+          </button>
+          <Dialog.Root open={shareOpen} onOpenChange={onShareOpenChange}>
+            <Dialog.Trigger asChild>
+              <button
+                type="button"
+                aria-label={t("action-share", { defaultValue: "Share" })}
+                className="circle-action-button"
+              >
+                <Icon token="{icon.action.share}" aria-hidden className="h-5 w-5" />
+              </button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="fixed inset-0 bg-black/60" />
+              <Dialog.Content className="dialog-surface">
+                <Dialog.Title className="text-lg font-semibold text-base-content">
+                  {t("map-saved-share-title", { defaultValue: "Share saved walk" })}
+                </Dialog.Title>
+                <Dialog.Description className="text-sm text-base-content/70">
+                  {t("map-saved-share-description", {
+                    defaultValue:
+                      "Sharing is not wired up yet, but this is where the integration will live.",
+                  })}
+                </Dialog.Description>
+                <div className="route-share__preview">{getRouteShareUrl(savedRoute.id)}</div>
+                <Dialog.Close asChild>
+                  <button type="button" className="btn btn-accent btn-sm self-end">
+                    {t("action-close", { defaultValue: "Close" })}
+                  </button>
+                </Dialog.Close>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </div>
-      </MapViewport>
+      </div>
+      <RouteShowcasePanel {...showcaseProps} />
     </MapOverlay>
   );
 }
@@ -208,7 +189,7 @@ export function StopsTabContent({ savedRoute, onClose, t }: StopsTabContentProps
             />
           </div>
           <div className="map-panel__body">
-            <PointOfInterestList points={savedRoute.pointsOfInterest} />
+            <RouteFlowList points={savedRoute.pointsOfInterest} />
           </div>
           <div className="map-overlay__fade map-overlay__fade--top" aria-hidden="true" />
           <div className="map-overlay__fade map-overlay__fade--bottom" aria-hidden="true" />
@@ -233,9 +214,8 @@ export type NotesTabContentProps = {
 };
 
 /**
- * Renders the notes tab content displaying route metrics, highlights, description, and notes.
- *
- * Shows rating, saves, difficulty, updated date, highlight tags, route description, and per-language notes.
+ * Renders the notes tab content displaying route metrics, highlights,
+ * description, and notes.
  */
 export function NotesTabContent({
   savedRoute,

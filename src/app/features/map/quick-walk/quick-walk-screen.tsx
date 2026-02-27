@@ -8,22 +8,23 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
+import { DRAGGABLE_HANDLE_CLASS } from "../../../components/map/map-panel-constants";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
-import { PointOfInterestList } from "../../../components/point-of-interest-list";
 import { SliderControl } from "../../../components/slider-control";
 import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
 import { useUnitLabelFormatters } from "../../../units/use-unit-labels";
+import { RouteFlowList } from "../saved/route-flow-list";
 
 type TabKey = "map" | "stops" | "notes";
 
 const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
 
-const panelHandleClass = "mx-auto mb-4 block h-2 w-12 rounded-full bg-base-300/70";
+const panelHandleClass = "mx-auto mb-4 block h-2 w-12 rounded-full bg-neutral";
 
 type MapViewportTabProps = TabsContentProps;
 
@@ -79,17 +80,13 @@ export function QuickWalkScreen(): JSX.Element {
   const durationLabel = t("quick-walk-duration-label", { defaultValue: "Duration" });
   const durationAria = t("quick-walk-duration-aria", { defaultValue: "Walk duration" });
   const { min: minDurationSeconds, max: maxDurationSeconds } = quickWalkConfig.durationRangeSeconds;
-  const midpointDurationSeconds = useMemo(
-    () => Math.round((minDurationSeconds + maxDurationSeconds) / 2),
-    [maxDurationSeconds, minDurationSeconds],
-  );
   const durationMarkers = useMemo(
     () => [
       formatDurationLabel(minDurationSeconds),
-      formatDurationLabel(midpointDurationSeconds),
+      formatDurationLabel(quickWalkConfig.markerMidpointSeconds),
       formatDurationLabel(maxDurationSeconds),
     ],
-    [formatDurationLabel, maxDurationSeconds, midpointDurationSeconds, minDurationSeconds],
+    [formatDurationLabel, maxDurationSeconds, minDurationSeconds],
   );
   const interestsHeading = t("quick-walk-interests-heading", { defaultValue: "Interests" });
   const interestsAria = t("quick-walk-interests-aria", {
@@ -182,21 +179,23 @@ export function QuickWalkScreen(): JSX.Element {
             >
               <MapViewportTab value="map" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
-                  <div className="quick-walk__panel">
+                  <div className="quick-walk__panel max-h-[60vh] overflow-y-auto">
                     <button
                       type="button"
                       onClick={handleDismissPanels}
-                      className={panelHandleClass}
+                      className={DRAGGABLE_HANDLE_CLASS}
                       aria-label={dismissPanelLabel}
                     />
                     <header className="mb-6 flex items-center justify-between">
                       <div>
-                        <h1 className="text-xl font-semibold text-base-content">{headerTitle}</h1>
+                        <h1 className="font-display font-bold tracking-wider text-xl text-base-content">
+                          {headerTitle}
+                        </h1>
                         <p className="text-sm text-base-content/70">{headerDescription}</p>
                       </div>
                       <button
                         type="button"
-                        className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-base-900 shadow-lg shadow-accent/40 transition hover:scale-105"
+                        className="cut-corner flex h-12 w-12 shrink-0 items-center justify-center bg-accent text-accent-content shadow-lg shadow-glow transition hover:scale-105"
                         aria-label={generateWalkLabel}
                         onClick={() => navigate({ to: "/wizard/step-1" })}
                       >
@@ -204,38 +203,41 @@ export function QuickWalkScreen(): JSX.Element {
                       </button>
                     </header>
 
-                    <SliderControl
-                      id="quick-walk-duration"
-                      label={durationLabel}
-                      iconToken="{icon.object.duration}"
-                      value={durationSeconds}
-                      min={quickWalkConfig.durationRangeSeconds.min}
-                      max={quickWalkConfig.durationRangeSeconds.max}
-                      step={quickWalkConfig.durationRangeSeconds.step}
-                      valueFormatter={formatDurationLabel}
-                      markers={durationMarkers}
-                      ariaLabel={durationAria}
-                      onValueChange={setDurationSeconds}
-                      className="mb-6"
-                    />
-
-                    <section>
-                      <div className="section-header-row">
-                        <h2 className="section-heading text-base-content">
-                          <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
-                          {interestsHeading}
-                        </h2>
-                        <span className="text-xs font-medium text-base-content/60">
-                          {selectedLabel}
-                        </span>
-                      </div>
-                      <InterestToggleGroup
-                        interestIds={quickWalkConfig.interestIds}
-                        selected={selectedInterests}
-                        onChange={setSelectedInterests}
-                        ariaLabel={interestsAria}
+                    <div className="mb-6 rounded-lg bg-base-300 p-4">
+                      <SliderControl
+                        id="quick-walk-duration"
+                        label={durationLabel}
+                        iconToken="{icon.object.duration}"
+                        value={durationSeconds}
+                        min={quickWalkConfig.durationRangeSeconds.min}
+                        max={quickWalkConfig.durationRangeSeconds.max}
+                        step={quickWalkConfig.durationRangeSeconds.step}
+                        valueFormatter={formatDurationLabel}
+                        markers={durationMarkers}
+                        ariaLabel={durationAria}
+                        onValueChange={setDurationSeconds}
                       />
-                    </section>
+                    </div>
+
+                    <div className="rounded-lg bg-base-300 p-4">
+                      <section>
+                        <div className="section-header-row">
+                          <h2 className="section-heading text-base-content">
+                            <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
+                            {interestsHeading}
+                          </h2>
+                          <span className="text-xs font-medium text-base-content/60">
+                            {selectedLabel}
+                          </span>
+                        </div>
+                        <InterestToggleGroup
+                          interestIds={quickWalkConfig.interestIds}
+                          selected={selectedInterests}
+                          onChange={setSelectedInterests}
+                          ariaLabel={interestsAria}
+                        />
+                      </section>
+                    </div>
                   </div>
                 </div>
               </MapViewportTab>
@@ -259,7 +261,7 @@ export function QuickWalkScreen(): JSX.Element {
                       />
                     </div>
                     <div className="flex-1 overflow-y-auto px-4 pb-5">
-                      <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
+                      <RouteFlowList points={waterfrontDiscoveryRoute.pointsOfInterest} />
                     </div>
                     <div className="map-overlay__fade map-overlay__fade--top" aria-hidden="true" />
                     <div
@@ -316,7 +318,7 @@ export function QuickWalkScreen(): JSX.Element {
         <div className="map-fab-layer">
           <button
             type="button"
-            className="pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-base-900 shadow-xl shadow-accent/40 transition hover:scale-105"
+            className="pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-content shadow-xl shadow-glow transition hover:scale-105"
             aria-label={saveWalkLabel}
             onClick={() => navigate({ to: "/saved" })}
           >

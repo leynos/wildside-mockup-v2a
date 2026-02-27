@@ -88,7 +88,7 @@ function WalkCompleteShareDialog({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/60" />
         <Dialog.Content className="dialog-surface">
-          <Dialog.Title className="text-lg font-semibold text-base-content">
+          <Dialog.Title className="font-display font-bold tracking-wider text-lg text-base-content">
             {shareDialogTitle}
           </Dialog.Title>
           <Dialog.Description className="text-sm text-base-content/70">
@@ -156,13 +156,17 @@ function WalkCompleteRemixSection({
     <WalkCompleteSection>
       <div className="walk-complete__remix">
         <div className="inline-action-cluster mb-3 items-start">
-          <Icon token="{icon.object.magic}" className="text-purple-300" aria-hidden />
+          <Icon token="{icon.object.magic}" className="text-accent" aria-hidden />
           <div>
-            <h3 className="text-base font-semibold">{remixTitle}</h3>
+            <h3 className="font-display font-bold tracking-wider text-base">{remixTitle}</h3>
             <p className="text-sm text-base-content/70">{remixDescription}</p>
           </div>
         </div>
-        <button type="button" className="btn btn-primary btn-sm" onClick={onRemix}>
+        <button
+          type="button"
+          className="btn btn-neutral btn-sm font-display tracking-widest"
+          onClick={onRemix}
+        >
           {remixButtonLabel}
         </button>
       </div>
@@ -176,7 +180,7 @@ function WalkCompleteShareChannelsSection({
 }: WalkCompleteShareChannelsSectionProps): JSX.Element {
   return (
     <WalkCompleteSection spacing="spacious" className="pb-12">
-      <h3 className="mb-4 text-center text-base font-semibold text-base-content">
+      <h3 className="mb-4 text-center font-display font-bold tracking-wider text-base text-base-content">
         {shareSectionHeading}
       </h3>
       <div className="flex justify-center gap-4">
@@ -232,7 +236,7 @@ export function WalkCompleteScreen(): JSX.Element {
     <Toast.Provider swipeDirection={toastSwipeDirection}>
       <MobileShell tone="dark">
         <div className="relative screen-stack">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(74,240,213,0.12),_transparent_55%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(254,234,0,0.06),_transparent_55%)]" />
           <main className="relative z-10 flex-1 overflow-y-auto pb-28">
             <WalkCompleteHero
               heroTitle={heroTitle}

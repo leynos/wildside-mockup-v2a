@@ -71,8 +71,8 @@ export function WizardStepOne(): JSX.Element {
   const interestPickerAria = t("wizard-step-one-interests-picker-aria", {
     defaultValue: "Select walk interests",
   });
-  const continueLabel = t("wizard-step-one-continue", {
-    defaultValue: "Continue to preferences",
+  const nextStepLabel = t("wizard-step-one-next", {
+    defaultValue: "Next step",
   });
 
   const interestIds = useMemo(() => discoverInterestDescriptors.map((option) => option.id), []);
@@ -117,7 +117,8 @@ export function WizardStepOne(): JSX.Element {
           className="cta-button"
           onClick={() => navigate({ to: "/wizard/step-2" })}
         >
-          {continueLabel}
+          {nextStepLabel}
+          <Icon token="{icon.navigation.forward}" aria-hidden className="ms-3 inline" />
         </button>
       }
     >

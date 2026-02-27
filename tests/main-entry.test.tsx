@@ -37,7 +37,9 @@ describe("main entry Suspense flow", () => {
 
   it("renders the loading backdrop whilst translations hydrate", async () => {
     const { Component, resolve } = createDeferredComponent("App ready");
-    render(<AppRoot AppComponent={Component} fallback={<LoadingBackdrop />} />);
+    await act(async () => {
+      render(<AppRoot AppComponent={Component} fallback={<LoadingBackdrop />} />);
+    });
 
     expect(screen.getByRole("status", { name: /loading/i })).toBeTruthy();
 
@@ -62,11 +64,13 @@ describe("main entry Suspense flow", () => {
     });
 
     expect(mount.textContent).toContain("Mounted");
-    dispose?.();
+    act(() => dispose?.());
   });
 
-  it("exposes polite semantics on the loading backdrop", () => {
-    render(<LoadingBackdrop />);
+  it("exposes polite semantics on the loading backdrop", async () => {
+    await act(async () => {
+      render(<LoadingBackdrop />);
+    });
     const output = screen.getByRole("status");
     expect(output?.getAttribute("aria-live")).toBe("polite");
     expect(output?.textContent).toMatch(/loading/i);

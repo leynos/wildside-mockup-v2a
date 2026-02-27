@@ -133,7 +133,7 @@ export function TrendingRoutesList({ cards }: TrendingRoutesListProps): JSX.Elem
                   <p className="text-sm font-semibold text-base-content">{viewModel.title}</p>
                   <p className="text-xs text-base-content/60">{viewModel.subtitle}</p>
                 </div>
-                <span className="flex items-center gap-1 text-sm font-semibold text-orange-300">
+                <span className="flex items-center gap-1 text-sm font-semibold text-accent">
                   <Icon token="{icon.object.trend}" aria-hidden className="h-4 w-4" />
                   {viewModel.trendDelta}
                 </span>

@@ -1,12 +1,23 @@
 @import "../tokens/dist/tokens.css";
 @import "tailwindcss";
+@import "./styles/v2a-animations.css";
+@import "./styles/map-components.css";
+@import "./styles/form-components.css";
+@import "./styles/feature-components.css";
 
 @layer base {
   :root {
     font-family: var(--font-family-sans);
     min-height: 100%;
-    /* Solid accent variant for UI affordances where DaisyUI may encode with transparency. */
-    --semantic-accent-solid: rgb(254 234 0);
+    --shadow-glow: 0 0 40px rgba(254, 234, 0, 0.2);
+    --clip-cut-corner: polygon(
+      0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
   }
 
   html,
@@ -24,647 +35,13 @@
 }
 
 @layer components {
-  .customize-segment {
-    @apply rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition;
-    text-align: start;
-  }
-
-  .customize-segment:focus-visible {
-    @apply outline-none ring-2 ring-accent/50;
-  }
-
-  .customize-segment[data-state="on"] {
-    @apply border-accent bg-accent/15 text-accent-content;
-    box-shadow:
-      0 1px 3px 0 color-mix(in oklab, var(--color-accent) 20%, transparent),
-      0 1px 2px -1px color-mix(in oklab, var(--color-accent) 20%, transparent);
-  }
-
-  /* Card affordance for list items that open POI sheets; keeps hover/focus feedback consistent. */
-  .poi-list__item {
-    @apply w-full rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/30 transition;
-    text-align: start;
-  }
-
-  .poi-list__item:hover {
-    @apply border-accent;
-  }
-
-  .poi-list__item:focus-visible {
-    @apply outline-none ring-2 ring-accent/60;
-  }
-
-  /* Sheet surface for detailed POI content, reused whenever map overlays need a panel shell. */
-  .poi-sheet {
-    @apply max-h-[min(80vh,32rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-base-300/60 bg-base-100 p-6 text-base-content shadow-2xl;
-  }
-
-  /* Solid dark map overlay base, used for bottom sheets across map variants. */
-  .map-panel {
-    @apply pointer-events-auto rounded-3xl border border-base-300/60 text-base-100 shadow-2xl;
-    background-color: var(--color-base-200);
-  }
-
   /* Floating drawer for global controls (theme + display). */
   .global-controls__panel {
-    @apply flex w-56 flex-col gap-3 rounded-2xl border border-base-300/50 bg-base-100/95 p-4 text-base-content shadow-2xl shadow-base-300/40 backdrop-blur;
-  }
-
-  .wizard-section {
-    @apply rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content;
-  }
-
-  /* Wizard summary panels on step three. */
-  .wizard-summary__panel {
-    @apply mb-6;
-  }
-
-  .wizard-badge {
-    @apply rounded-lg bg-accent/20 px-2 py-1 text-xs text-accent;
-  }
-
-  .wizard-summary__highlight {
-    @apply flex items-start gap-2 rounded-xl bg-base-300/40 px-3 py-2;
-  }
-
-  .wizard-summary__highlight-icon {
-    @apply text-accent;
-  }
-
-  .wizard-discovery__summary {
-    @apply mt-3 rounded-xl border border-base-300/60 bg-base-200/80 px-4 py-3 text-center text-sm font-medium text-accent;
-  }
-
-  .wizard-accessibility__option {
-    @apply flex items-center justify-between rounded-2xl border border-base-300/60 bg-base-300/30 px-4 py-3;
-  }
-
-  .wizard-accessibility__icon {
-    @apply flex h-10 w-10 items-center justify-center rounded-xl bg-base-300/60 text-base-content;
-  }
-
-  .wizard-accessibility__toggle {
-    @apply relative h-6 w-11 rounded-full border border-base-300/60 bg-base-300/70 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=checked]:bg-accent/80;
-  }
-
-  .wizard-accessibility__thumb {
-    @apply block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px];
-  }
-
-  .wizard-summary__stop {
-    @apply flex items-start gap-3 rounded-2xl border border-base-300/60 bg-base-300/30 px-4 py-3;
-  }
-
-  .wizard-summary__stop-icon {
-    @apply flex h-12 w-12 items-center justify-center rounded-xl bg-base-300/60 text-base-content;
-  }
-
-  .wizard-summary__weather {
-    @apply mt-3 flex items-center justify-between rounded-2xl border border-amber-200/40 bg-amber-200/10 px-4 py-3;
-  }
-
-  /* Offline downloads manager cards. */
-  .offline-download__card {
-    @apply relative flex gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-4 text-base-content shadow-inner shadow-base-300/30;
-  }
-
-  .offline-download__dismiss {
-    @apply absolute top-2 text-base-content/60 transition hover:text-error;
-    inset-inline-end: 0.5rem;
-  }
-
-  .offline-download__undo {
-    @apply flex items-center justify-between rounded-2xl border border-dashed border-base-300/60 bg-base-200/70 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20;
-  }
-
-  /* Explore catalogue panels and cards. */
-  .explore-featured__panel {
-    @apply space-y-4 rounded-2xl border border-base-300/70 bg-base-200/60 p-4 text-base-content shadow-inner shadow-base-300/30;
-  }
-
-  .explore-info__panel {
-    @apply rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-inner shadow-base-300/20;
-  }
-
-  .explore-meta-list {
-    @apply flex flex-wrap items-center gap-3 text-xs text-base-content/60;
-  }
-
-  .explore-compact__card {
-    @apply rounded-xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
-  }
-
-  .explore-collection__card {
-    @apply rounded-xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
-  }
-
-  .saved-summary__panel {
-    @apply rounded-3xl border border-base-300/60 bg-base-100/90 p-6 text-base-content shadow-2xl backdrop-blur;
-  }
-
-  /* Shared metric tokens for route summaries (saved + explore detail panels). */
-  .route-metric {
-    @apply flex items-center gap-1;
-  }
-
-  .route-highlight {
-    @apply rounded-full border border-accent/40 bg-base-200/75 px-3 py-1 text-xs font-medium text-accent;
-  }
-
-  .route-summary__meta {
-    @apply flex items-center gap-1;
-  }
-
-  /* Keeps route note bullet lists consistent between itinerary and saved overlays. */
-  .route-note-list {
-    @apply list-disc space-y-2 text-base-content/70;
-    padding-inline-start: 1.25rem;
-  }
-
-  /* Floating action buttons that sit above the map bottom navigation. */
-  .map-fab-layer {
-    @apply pointer-events-none absolute bottom-[116px] z-30;
-    inset-inline-end: 1.5rem;
-  }
-
-  .header-icon-button {
-    @apply flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60 text-accent shadow-sm shadow-base-300/30 transition hover:border-accent/60 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
-  }
-
-  .inline-action-cluster {
-    @apply flex items-center justify-center gap-2;
-  }
-
-  .screen-stack {
-    @apply flex h-full flex-col;
-  }
-
-  .header-nav-button {
-    @apply flex h-full w-full items-center justify-center text-base-content;
-  }
-
-  .screen-scroll {
-    @apply flex-1 overflow-y-auto px-6 pb-28;
-  }
-
-  .btn-outline--fill {
-    @apply btn btn-outline w-full justify-center gap-2 text-base-content;
-  }
-
-  .circle-action-button {
-    @apply flex h-10 w-10 items-center justify-center rounded-full text-base-100;
-    background-color: color-mix(in oklab, var(--color-base-100) 70%, transparent);
-  }
-
-  .circle-action-button--ghost {
-    @apply flex h-10 w-10 items-center justify-center rounded-full border border-base-300/70 text-base-content;
-    background-color: color-mix(in oklab, var(--color-base-200) 80%, transparent);
-  }
-
-  .walk-complete__section {
-    @apply mt-6 px-6;
-  }
-
-  .walk-complete__section--tight {
-    @apply mt-4 px-6;
-  }
-
-  .walk-complete__section--spacious {
-    @apply mt-8 px-6;
-  }
-
-  .offline-search__input {
-    @apply w-full rounded-xl border border-base-300/60 bg-base-200/60 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20 placeholder:text-base-content/50 focus:border-accent focus:outline-none;
-  }
-
-  .walk-share__option {
-    @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-transparent px-3 py-1 text-sm text-base-content/80 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
-  }
-
-  .walk-share__icon {
-    @apply flex h-12 w-12 items-center justify-center rounded-full text-white shadow;
-  }
-
-  .walk-complete__remix {
-    @apply rounded-2xl border border-purple-400/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4 text-base-content;
-  }
-
-  .walk-complete__secondary-icon {
-    @apply mx-auto mb-2 text-xl;
-  }
-
-  .split-row {
-    @apply mb-1 flex items-center justify-between;
-  }
-
-  .map-panel__tablist {
-    @apply grid grid-cols-3 shrink-0 border-t border-base-300/60 bg-base-200/80;
-  }
-
-  .poi-highlight {
-    @apply flex items-center gap-1 rounded-full bg-base-300/60 px-2 py-0.5 text-base-content/80;
-  }
-
-  .map-shell__main {
-    @apply relative flex flex-1 min-h-0 flex-col overflow-hidden;
-  }
-
-  .map-shell__pane {
-    @apply flex flex-1 min-h-0 flex-col justify-end overflow-hidden;
-  }
-
-  .map-shell__viewport {
-    @apply relative flex flex-1 flex-col justify-end overflow-hidden;
-  }
-
-  .map-overlay__fade {
-    @apply pointer-events-none absolute inset-x-0;
-  }
-
-  .map-overlay__fade--top {
-    @apply top-0 h-6 bg-gradient-to-b;
-    background-image: linear-gradient(
-      to bottom,
-      color-mix(in oklch, var(--color-base-100) 12%, transparent) 0%,
-      transparent 100%
-    );
-  }
-
-  .map-overlay__fade--bottom {
-    @apply bottom-0 h-10 bg-gradient-to-t;
-    background-image: linear-gradient(
-      to top,
-      color-mix(in oklch, var(--color-base-100) 15%, transparent) 0%,
-      transparent 100%
-    );
-  }
-
-  .offline-download__meta {
-    @apply text-xs text-base-content/70;
-  }
-
-  .map-panel__handle {
-    @apply flex justify-center pb-3 pt-3;
-    background-color: var(--color-base-200);
-  }
-
-  .map-panel__handle.bg-transparent {
-    background-color: transparent;
-  }
-
-  .map-panel__body {
-    @apply flex-1 overflow-y-auto px-5 pb-5;
-  }
-
-  .discover-interests__section {
-    @apply mt-10 flex flex-1 flex-col;
-  }
-
-  .discover-screen__content {
-    @apply relative flex flex-1 flex-col overflow-y-auto px-6 pb-10 pt-20;
-  }
-
-  .discover-screen__skip {
-    @apply absolute top-16 rounded-full px-4 py-2 text-sm font-medium text-base-content/70 transition-colors hover:text-base-content;
-    inset-inline-end: 1.5rem;
-  }
-
-  .section-heading {
-    @apply flex items-center gap-2 font-display text-lg font-bold tracking-wider;
-  }
-
-  .section-heading--spacious {
-    @apply gap-3;
-  }
-
-  .section-title {
-    @apply mb-4 font-display text-lg font-bold tracking-wider text-base-content;
-  }
-
-  .interest-mix__slider {
-    @apply relative flex h-5 w-full items-center;
-  }
-
-  .interest-mix__track {
-    @apply relative h-2 w-full overflow-hidden rounded-full bg-base-300/60;
-  }
-
-  .interest-mix__range {
-    @apply absolute h-full rounded-full bg-accent;
-  }
-
-  .interest-mix__thumb {
-    @apply block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow shadow-accent/30 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50;
-  }
-
-  .route-share__trigger {
-    @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/70 px-4 py-2 text-sm font-medium text-base-content transition hover:bg-base-200/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
-  }
-
-  .route-share__preview {
-    @apply rounded-xl border border-base-300/60 bg-base-200/80 p-3 text-xs text-base-content/70;
-  }
-
-  .rating-indicator {
-    @apply flex items-center gap-1 text-amber-400;
-  }
-
-  .rating-indicator--strong {
-    @apply text-sm font-semibold;
-  }
-
-  .poi-list__summary {
-    @apply flex items-start justify-between gap-3;
-  }
-
-  .cta-button {
-    @apply btn btn-accent btn-lg w-full font-display text-base font-bold tracking-widest;
-  }
-
-  .cta-button--rounded {
-    @apply rounded-2xl;
-  }
-
-  .map-panel__notes {
-    @apply max-h-[60vh] p-5 text-sm text-base-content;
-  }
-
-  .map-panel__notes--spacious {
-    @apply space-y-6;
-  }
-
-  .explore-stat-group {
-    @apply flex flex-col items-end text-sm text-base-content/60;
-  }
-
-  .explore-stat-group--right {
-    text-align: end;
-  }
-
-  .bottom-nav {
-    @apply sticky bottom-0 left-0 right-0 z-30 border-t border-base-300/60 bg-base-200/80 px-2 pb-3 pt-2 backdrop-blur;
-  }
-
-  .bottom-nav--map {
-    @apply border-base-300/40;
-  }
-
-  .bottom-nav__grid {
-    @apply grid grid-cols-4 gap-1 text-xs font-medium;
-  }
-
-  .bottom-nav__item {
-    @apply flex flex-col items-center gap-1 rounded-xl py-2 text-base-content/60 transition hover:text-base-content;
-  }
-
-  .bottom-nav__item--active {
-    @apply text-primary;
-  }
-
-  .bottom-nav__item--active::after {
-    content: "";
-    @apply mt-0.5 block h-1 w-1 rounded-full bg-primary;
-  }
-
-  .map-viewport__tab {
-    @apply flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden;
-  }
-
-  .offline-overview__panel {
-    @apply rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
-  }
-
-  .quick-walk__panel {
-    @apply pointer-events-auto rounded-3xl border border-base-300/40 bg-base-200/80 p-6 text-base-content shadow-2xl backdrop-blur;
-  }
-
-  .map-overlay {
-    @apply absolute inset-0 flex flex-col justify-end;
-  }
-
-  .section-hero {
-    @apply text-center text-base-content;
-  }
-
-  .section-hero__badge {
-    @apply mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full;
-  }
-
-  .section-hero__badge--accent {
-    @apply bg-accent/15 text-accent;
-  }
-
-  .section-hero__badge--celebration {
-    @apply bg-amber-400/20 text-amber-300;
-  }
-
-  .section-hero__icon {
-    @apply text-4xl;
-  }
-
-  .section-hero__title {
-    @apply font-display text-3xl font-extrabold tracking-widest;
-  }
-
-  .section-hero__description {
-    @apply mt-3 text-base text-base-content/70;
-  }
-
-  .discover-interest__card {
-    @apply flex h-full flex-col items-center rounded-2xl border-2 border-transparent bg-base-300/40 p-4 text-center transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
-  }
-
-  .discover-interest__card[data-state="on"] {
-    @apply border-accent bg-accent/10;
-  }
-
-  /* Celebration recap surfaces on the walk complete screen. */
-  .walk-complete__hero-card {
-    @apply rounded-3xl border border-base-300/60 bg-base-200/20 p-4 shadow-2xl backdrop-blur;
-  }
-
-  .walk-complete__stat-card {
-    @apply rounded-2xl border border-base-300/60 bg-base-200/30 p-4 shadow-inner shadow-base-300/30;
-  }
-
-  .walk-complete__badge {
-    @apply absolute top-4 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-content shadow;
-    inset-inline-start: 1rem;
-  }
-
-  .walk-complete__avatar-stack {
-    @apply absolute bottom-4 flex;
-    inset-inline-end: 1rem;
-  }
-
-  .walk-complete__avatar-stack > * + * {
-    margin-inline-start: -0.5rem;
-  }
-
-  .map-route__meta {
-    @apply rounded-2xl border border-base-300/60 bg-base-200/80 px-4 py-2 text-xs text-base-content/70 shadow-lg shadow-base-300/30 backdrop-blur;
-  }
-
-  .preference-card {
-    @apply flex items-start justify-between gap-3 rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-base-content shadow-sm shadow-base-300/20;
-  }
-
-  .preference-card__content {
-    @apply flex flex-1 items-start gap-3;
-  }
-
-  .preference-card__icon {
-    @apply text-base;
-  }
-
-  .preference-card__copy {
-    @apply flex-1;
-  }
-
-  .preference-card__title {
-    @apply text-sm font-semibold text-base-content;
-  }
-
-  .preference-card__description {
-    @apply mt-1 text-xs text-base-content/60;
-  }
-
-  .preference-card__switch {
-    @apply flex-shrink-0;
-  }
-
-  /* Ensure toggled switches reach full accent strength regardless of other mixins. */
-  .preference-card__switch[data-state="checked"] {
-    background-color: var(--color-accent);
-  }
-
-  .map-panel--stacked {
-    @apply relative flex flex-col overflow-hidden;
-  }
-
-  .map-panel--scroll {
-    @apply overflow-y-auto;
-  }
-
-  /* Summary surface shown above the itinerary map. */
-  .map-route__summary {
-    @apply rounded-3xl border border-base-300/60 bg-base-100/90 p-5 text-base-content shadow-2xl backdrop-blur;
-  }
-
-  .map-route__stat {
-    @apply text-center text-sm text-base-content/70;
-  }
-
-  .map-route__stat-value {
-    @apply font-display text-lg font-extrabold text-accent;
-  }
-
-  .dialog-surface {
-    @apply fixed inset-0 m-auto flex h-fit w-80 flex-col gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-6 shadow-2xl;
-  }
-
-  .interest-chip {
-    @apply inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
-  }
-
-  .interest-chip:focus-visible {
-    @apply outline-none ring-2 ring-accent/60;
-  }
-
-  .interest-chip__icon {
-    @apply text-lg transition;
-  }
-
-  .slider-control {
-    @apply mb-6;
-  }
-
-  .slider-control__header {
-    @apply mb-3 flex items-center justify-between text-base-content;
-  }
-
-  .section-header-row {
-    @apply mb-3 flex items-center justify-between;
-  }
-
-  .slider-control__title {
-    @apply flex items-center gap-2 font-display text-lg font-bold;
-  }
-
-  .slider-control__icon {
-    @apply text-accent;
-  }
-
-  .slider-control__value {
-    @apply rounded-full border border-base-300/70 bg-base-200/60 px-3 py-1 text-sm font-semibold text-base-content;
-  }
-
-  .slider-control__root {
-    @apply relative flex h-6 w-full items-center;
-  }
-
-  .slider-control__track {
-    @apply relative h-2 w-full overflow-hidden rounded-full bg-base-300/60;
-  }
-
-  .slider-control__range {
-    @apply absolute h-full rounded-full bg-accent;
-  }
-
-  .slider-control__thumb {
-    @apply block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/30 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70;
-  }
-
-  .slider-control__markers {
-    @apply mt-2 flex justify-between text-xs text-base-content/60;
-  }
-
-  .slider-control__marker {
-    @apply whitespace-nowrap;
-  }
-
-  .preference-toggle {
-    @apply flex items-center justify-between rounded-2xl border border-base-300/60 bg-base-200/40 px-4 py-3;
-  }
-
-  .toggle-switch {
-    @apply relative inline-flex h-7 w-[52px] items-center rounded-full border border-base-300/60 bg-base-300/60 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100;
-  }
-
-  .toggle-switch--muted {
-    /* Keep muted switches airy so the "off" state reads as inactive. */
-    @apply border-base-300/40 bg-base-300/30 text-base-content/70;
-  }
-
-  .toggle-switch--accent[data-state="checked"] {
-    background-color: var(--color-primary);
-  }
-
-  .toggle-switch__thumb {
-    @apply block h-[22px] w-[22px] translate-x-[3px] rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[27px];
-  }
-
-  .customize-surface__option {
-    @apply flex items-center gap-3 rounded-xl border border-base-300/70 bg-base-200/60 px-4 py-3 text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50;
-  }
-
-  .customize-surface__option[data-state="on"] {
-    @apply border-accent bg-accent/15;
-  }
-
-  .explore-search__input {
-    @apply w-full rounded-xl border border-base-300/70 bg-base-200/60 py-3 text-sm text-base-content shadow-inner shadow-base-300/30 placeholder:text-base-content/50 focus:border-accent focus:outline-none;
-    padding-inline-start: 2.75rem;
-    padding-inline-end: 1rem;
-  }
-
-  .explore-search__icon {
-    @apply absolute top-1/2 -translate-y-1/2 text-base-content/50;
-    inset-inline-start: 1rem;
+    @apply flex w-56 flex-col gap-3 rounded-lg border border-neutral bg-base-100 p-4 text-base-content shadow-2xl;
   }
 
   .global-controls__trigger {
-    @apply pointer-events-auto border border-base-300/50 bg-base-100/90 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-base-content/70 shadow-xl shadow-base-300/40 backdrop-blur transition hover:text-base-content;
+    @apply pointer-events-auto border border-neutral bg-base-100 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-base-content/70 shadow-xl transition hover:text-base-content;
     border-start-start-radius: 1rem;
     border-end-start-radius: 1rem;
     border-start-end-radius: 0;
@@ -694,105 +71,110 @@
     align-items: flex-start;
   }
 
-  .explore-theme__badge {
-    @apply absolute top-2 rounded-full bg-accent px-2 py-1 text-xs font-semibold text-accent-content;
-    inset-inline-end: 0.5rem;
+  .header-icon-button {
+    @apply flex h-14 w-14 items-center justify-center bg-accent text-accent-content transition-transform hover:scale-110 focus:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
+    clip-path: var(--clip-cut-corner);
   }
 
-  .wizard-stepper__pulse {
-    @apply absolute -top-1 block h-4 w-4 animate-pulse rounded-full border-2 border-accent;
-    inset-inline-start: -0.25rem;
-    box-shadow: 0 0 12px rgba(254, 234, 0, 0.6);
+  .inline-action-cluster {
+    @apply flex items-center justify-center gap-2;
   }
 
-  /* v2a signature: cut-corner motif for buttons and panels. */
-  .cut-corner {
-    clip-path: polygon(
-      0 0,
-      calc(100% - 10px) 0,
-      100% 10px,
-      100% 100%,
-      10px 100%,
-      0 calc(100% - 10px)
-    );
+  .screen-stack {
+    @apply flex h-full flex-col;
   }
 
-  /* v2a signature: cyber-yellow glow for containers. */
-  .glow-shadow {
-    box-shadow: 0 0 40px rgba(254, 234, 0, 0.2);
+  .header-nav-button {
+    @apply flex h-full w-full items-center justify-center text-base-content;
   }
 
-  /* v2a signature: cyber-yellow text glow for titles. */
-  .glow-text {
-    text-shadow: 0 0 20px rgba(254, 234, 0, 0.3);
+  .screen-scroll {
+    @apply flex-1 overflow-y-auto px-6 pb-28;
   }
 
-  /* v2a signature: horizontal sweep animation for hero sections. */
-  .scan-line {
-    @apply pointer-events-none absolute inset-x-0 h-0.5;
-    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-    animation: scan 3s ease-in-out infinite;
+  .btn-outline--fill {
+    @apply btn btn-outline w-full justify-center gap-2 text-base-content;
   }
 
-  /* v2a signature: breathing scale+opacity for icon badges. */
-  .pulse-ring {
-    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  .circle-action-button {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-base-100;
+    background-color: color-mix(in oklab, var(--color-base-900) 70%, transparent);
   }
 
-  /* v2a signature: scale-up entrance for celebration elements. */
-  .celebration-burst {
-    animation: burst 0.6s ease-out;
+  .circle-action-button--ghost {
+    @apply flex h-10 w-10 items-center justify-center rounded-full border border-neutral bg-base-200 text-base-content;
   }
 
-  /* v2a signature: glow filter for map location markers. */
-  .location-marker-glow {
-    filter: drop-shadow(0 0 12px rgba(254, 234, 0, 0.6));
+  .split-row {
+    @apply mb-1 flex items-center justify-between;
   }
 
-  /* v2a signature: vertical gradient connector between itinerary stops. */
-  .itinerary-connector {
-    @apply h-8 w-0.5;
-    margin-inline-start: 1rem;
-    background: linear-gradient(to bottom, var(--color-primary), transparent);
+  .dialog-surface {
+    @apply fixed inset-0 m-auto flex h-fit w-80 flex-col gap-4 rounded-lg border border-neutral bg-base-100 p-6 shadow-2xl;
   }
-}
 
-@keyframes scan {
-  0%,
-  100% {
-    top: 0;
-    opacity: 0;
+  .section-heading {
+    @apply flex items-center gap-2 font-display text-lg font-bold tracking-wider;
   }
-  50% {
-    top: 50%;
-    opacity: 0.6;
-  }
-}
 
-@keyframes pulse-ring {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
+  .section-heading--spacious {
+    @apply gap-3;
   }
-  50% {
-    opacity: 0.3;
-    transform: scale(1.1);
-  }
-}
 
-@keyframes burst {
-  0% {
-    transform: scale(0);
-    opacity: 0;
+  .section-title {
+    @apply mb-4 font-display text-lg font-bold tracking-wider text-base-content;
   }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
+
+  .section-header-row {
+    @apply mb-3 flex items-center justify-between;
   }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+
+  .cta-button {
+    @apply btn btn-accent btn-lg w-full font-display text-base font-bold tracking-widest transition-all duration-200 hover:bg-base-content hover:text-base-100 active:scale-[0.98];
+  }
+
+  .cta-button--rounded {
+    @apply rounded-lg;
+  }
+
+  .cta-button--inverted {
+    @apply bg-base-200 text-accent hover:bg-neutral;
+  }
+
+  .cta-button--secondary {
+    @apply bg-neutral text-base-content;
+  }
+
+  .cta-button--secondary:hover {
+    @apply bg-base-300 text-base-content;
+  }
+
+  .cta-button--compact {
+    @apply py-4 text-sm;
+  }
+
+  .bottom-nav {
+    @apply sticky bottom-0 left-0 right-0 z-30 border-t border-neutral bg-base-200 px-2 pb-3 pt-2;
+  }
+
+  .bottom-nav--map {
+    @apply border-neutral;
+  }
+
+  .bottom-nav__grid {
+    @apply grid grid-cols-4 gap-1 text-xs font-medium;
+  }
+
+  .bottom-nav__item {
+    @apply flex flex-col items-center gap-1 rounded-xl py-2 text-base-content-muted transition hover:text-base-content;
+  }
+
+  .bottom-nav__item--active {
+    @apply text-accent;
+  }
+
+  .bottom-nav__dot {
+    @apply block h-1 w-1 rounded-full bg-accent;
   }
 }
 
@@ -802,7 +184,7 @@
   }
 
   .interest-chip[data-state="on"] .interest-chip__icon {
-    @apply text-base-content;
+    @apply text-accent-content;
   }
 
   .text-start {
@@ -815,5 +197,17 @@
 
   .me-2 {
     margin-inline-end: 0.5rem;
+  }
+
+  .cut-corner {
+    clip-path: var(--clip-cut-corner);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px rgba(254, 234, 0, 0.3);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
   }
 }

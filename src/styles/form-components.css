@@ -1,0 +1,150 @@
+/** @file Form control component classes (sliders, toggles, chips, preferences). */
+
+@layer components {
+  .customize-segment {
+    @apply rounded-xl border border-neutral bg-base-200 p-4 text-sm font-medium text-base-content/80 transition;
+    text-align: start;
+  }
+
+  .customize-segment:focus-visible {
+    @apply outline-none ring-2 ring-accent/50;
+  }
+
+  .customize-segment[data-state="on"] {
+    @apply border-accent bg-accent text-accent-content;
+  }
+
+  .customize-surface__option {
+    @apply flex items-center gap-3 rounded-xl border border-neutral bg-base-200 px-4 py-3 text-sm font-medium text-base-content/80 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50;
+  }
+
+  .customize-surface__option[data-state="on"] {
+    @apply border-accent bg-accent text-accent-content;
+  }
+
+  .interest-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-neutral bg-base-200 px-4 py-2 text-sm font-medium text-base-content/70 transition;
+  }
+
+  .interest-chip:focus-visible {
+    @apply outline-none ring-2 ring-accent/60;
+  }
+
+  .interest-chip__icon {
+    @apply text-lg transition;
+  }
+
+  .interest-mix__slider {
+    @apply relative flex h-5 w-full items-center;
+  }
+
+  .interest-mix__track {
+    @apply relative h-2 w-full overflow-hidden rounded-full bg-neutral;
+  }
+
+  .interest-mix__range {
+    @apply absolute h-full rounded-full bg-accent;
+  }
+
+  .interest-mix__thumb {
+    @apply block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow shadow-accent/30 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50;
+  }
+
+  .slider-control {
+    @apply mb-6;
+  }
+
+  .slider-control__header {
+    @apply mb-3 flex items-center justify-between text-base-content;
+  }
+
+  .slider-control__title {
+    @apply flex items-center gap-2 font-display text-lg font-bold;
+  }
+
+  .slider-control__icon {
+    @apply text-accent;
+  }
+
+  .slider-control__value {
+    @apply font-display font-extrabold text-2xl text-accent;
+  }
+
+  .slider-control__root {
+    @apply relative flex h-6 w-full items-center;
+  }
+
+  .slider-control__track {
+    @apply relative h-2 w-full overflow-hidden rounded-full bg-neutral;
+  }
+
+  .slider-control__range {
+    @apply absolute h-full rounded-full bg-accent;
+  }
+
+  .slider-control__thumb {
+    @apply block h-5 w-5 rounded-full border-3 border-base-200 bg-accent shadow-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70;
+  }
+
+  .slider-control__markers {
+    @apply mt-2 flex justify-between text-xs text-base-content/60;
+  }
+
+  .slider-control__marker {
+    @apply whitespace-nowrap;
+  }
+
+  .preference-card {
+    @apply flex items-start justify-between gap-3 rounded-xl border border-neutral bg-base-200 p-4 text-base-content;
+  }
+
+  .preference-card__content {
+    @apply flex flex-1 items-start gap-3;
+  }
+
+  .preference-card__icon {
+    @apply text-base;
+  }
+
+  .preference-card__copy {
+    @apply flex-1;
+  }
+
+  .preference-card__title {
+    @apply text-sm font-semibold text-base-content;
+  }
+
+  .preference-card__description {
+    @apply mt-1 text-xs text-base-content/60;
+  }
+
+  .preference-card__switch {
+    @apply flex-shrink-0;
+  }
+
+  /* Ensure toggled switches reach full accent strength regardless of other mixins. */
+  .preference-card__switch[data-state="checked"] {
+    background-color: var(--color-accent);
+  }
+
+  .preference-toggle {
+    @apply flex items-center justify-between rounded-lg border border-neutral bg-base-200 px-4 py-3;
+  }
+
+  .toggle-switch {
+    @apply relative inline-flex h-7 w-[52px] items-center rounded-full border border-neutral bg-neutral transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100;
+  }
+
+  .toggle-switch--muted {
+    /* Keep muted switches subdued so the "off" state reads as inactive. */
+    @apply border-neutral bg-neutral text-base-content/70;
+  }
+
+  .toggle-switch--accent[data-state="checked"] {
+    @apply bg-accent;
+  }
+
+  .toggle-switch__thumb {
+    @apply block h-[22px] w-[22px] translate-x-[3px] rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[27px];
+  }
+}

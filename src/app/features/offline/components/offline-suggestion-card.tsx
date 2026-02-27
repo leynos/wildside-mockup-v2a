@@ -40,7 +40,7 @@ export function OfflineSuggestionCard({
   return (
     <article
       className={clsx(
-        "rounded-2xl border border-base-300/60 bg-gradient-to-r p-4 shadow-lg",
+        "rounded-lg border border-neutral bg-gradient-to-r p-4",
         suggestion.accentClass,
       )}
       aria-label={suggestionCopy.name}

@@ -11,6 +11,7 @@ export interface QuickWalkConfig {
   backgroundAlt: string;
   defaultDurationSeconds: number;
   durationRangeSeconds: { min: number; max: number; step: number };
+  markerMidpointSeconds: number;
   interestIds: string[];
 }
 
@@ -56,6 +57,7 @@ export const quickWalkConfig: QuickWalkConfig = {
     max: secondsFromMinutes(180),
     step: secondsFromMinutes(5),
   },
+  markerMidpointSeconds: secondsFromMinutes(90),
   interestIds: ["parks", "coffee", "street-art", "historic", "waterfront", "markets"],
 };
 

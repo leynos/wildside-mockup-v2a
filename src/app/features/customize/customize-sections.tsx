@@ -256,8 +256,8 @@ export function RoutePreview({
               onClick={() => onSelect(preview.id)}
               className={`rounded-lg border px-3 py-3 text-start text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
                 isActive
-                  ? "border-accent bg-accent/15 text-base-content"
-                  : "border-base-300/70 bg-base-200/60 text-base-content/80"
+                  ? "border-accent bg-accent text-accent-content"
+                  : "border-neutral bg-base-200 text-base-content/80"
               }`}
               aria-pressed={isActive}
             >
@@ -281,15 +281,12 @@ export function RoutePreview({
       <div className="mt-3 flex gap-2">
         <button
           type="button"
-          className="btn btn-ghost btn-sm flex-1 rounded-xl border border-base-300/70 bg-base-200/60 text-base-content"
+          className="btn btn-ghost btn-sm flex-1 rounded-xl border border-neutral bg-base-200 text-base-content"
         >
           <Icon token="{icon.action.regenerate}" aria-hidden className="me-2 h-4 w-4" />
           {regenerateLabel}
         </button>
-        <button
-          type="button"
-          className="btn btn-accent btn-sm flex-1 rounded-xl text-base font-semibold"
-        >
+        <button type="button" className="cta-button cta-button--inverted flex-1 text-base">
           <Icon token="{icon.action.play}" aria-hidden className="me-2 h-4 w-4" />
           {startLabel}
         </button>

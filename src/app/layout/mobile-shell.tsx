@@ -20,7 +20,7 @@ function joinClassNames(...tokens: Array<string | false | null | undefined>): st
 }
 
 /**
- * Constrains content to a 390×844px viewport with rounded corners and drop shadow.
+ * Constrains content to a 428×926px viewport with rounded corners and glow shadow.
  *
  * @example
  * ```tsx
@@ -48,14 +48,14 @@ export function MobileShell({
 
   if (mode === "hosted") {
     const frameClasses = joinClassNames(
-      "relative h-[844px] w-[390px] overflow-hidden rounded-[40px] border bg-base-100 shadow-2xl",
-      tone === "dark" ? "border-base-300/40 bg-base-100/95" : "border-base-200 bg-base-100",
+      "relative h-[926px] w-[428px] overflow-hidden rounded-[40px] border-4 bg-base-100 shadow-glow",
+      tone === "dark" ? "border-neutral" : "border-base-200 bg-base-100",
       className,
     );
 
     return (
       <div
-        className="flex min-h-screen items-center justify-center bg-base-200/80 px-4 py-10"
+        className="flex min-h-screen items-center justify-center bg-base-200 px-4 py-10"
         data-mobile-shell="hosted"
       >
         <div className={frameClasses}>

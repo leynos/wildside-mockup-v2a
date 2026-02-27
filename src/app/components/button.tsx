@@ -24,12 +24,12 @@ function joinClassNames(...tokens: Array<string | false | null | undefined>): st
 
 function resolveVariant(variant: ButtonVariant, active?: boolean): string {
   if (variant === "ghost") {
-    return "border border-base-content/20 bg-transparent text-base-content hover:bg-base-200/60";
+    return "border border-base-content/20 bg-transparent text-base-content hover:bg-base-200";
   }
   if (variant === "circle") {
     return active
-      ? "h-10 w-10 rounded-full border border-base-300/60 bg-accent text-base-900"
-      : "h-10 w-10 rounded-full border border-base-300/60 bg-base-200/70 text-base-content";
+      ? "h-10 w-10 rounded-full border border-neutral bg-accent text-accent-content"
+      : "h-10 w-10 rounded-full border border-neutral bg-base-200 text-base-content";
   }
   if (variant === "tool") {
     return "h-14 w-14 cut-corner bg-primary text-primary-content hover:scale-105 active:scale-95";
@@ -37,7 +37,7 @@ function resolveVariant(variant: ButtonVariant, active?: boolean): string {
   if (variant === "cta") {
     return "cut-corner bg-base-200 text-primary font-display font-bold tracking-widest";
   }
-  return "bg-accent text-base-900 hover:bg-accent/90";
+  return "cut-corner bg-accent text-accent-content hover:bg-base-content hover:text-base-100";
 }
 
 function resolveSize(size: ButtonSize, variant: ButtonVariant): string {

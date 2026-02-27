@@ -73,7 +73,7 @@ function RouteBadge({ id, locale }: RouteBadgeProps): JSX.Element {
   }
   const badgeLabel =
     badgeDescriptor?.localization.shortLabel ?? badgeDescriptor?.localization.name ?? id;
-  const badgeToneClass = badgeDescriptor?.accentClass ?? "bg-accent/20 text-accent";
+  const badgeToneClass = badgeDescriptor?.accentClass ?? "bg-accent text-accent-content";
   return (
     <span className={`rounded-full px-3 py-1 text-xs font-semibold ${badgeToneClass}`}>
       {badgeLabel}
@@ -106,7 +106,7 @@ export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Ele
             {categories.map((category) => (
               <article
                 key={category.id}
-                className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}
+                className={`flex min-w-[150px] flex-col gap-1 rounded-lg p-4 text-white ${category.gradientClass}`}
               >
                 <Icon token={category.iconToken} className="text-lg" aria-hidden />
                 <p className="text-sm font-semibold">
@@ -117,10 +117,10 @@ export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Ele
             ))}
           </div>
         </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar orientation="horizontal" className="h-1 rounded bg-base-300/60">
-          <ScrollArea.Thumb className="rounded bg-accent/60" />
+        <ScrollArea.Scrollbar orientation="horizontal" className="h-1 rounded bg-neutral">
+          <ScrollArea.Thumb className="rounded bg-accent" />
         </ScrollArea.Scrollbar>
-        <ScrollArea.Corner className="bg-base-300/40" />
+        <ScrollArea.Corner className="bg-neutral" />
       </ScrollArea.Root>
     </section>
   );
@@ -150,7 +150,7 @@ export function FeaturedRouteCard({
         <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
         {heading}
       </h2>
-      <figure className="overflow-hidden rounded-xl border border-base-300/50">
+      <figure className="overflow-hidden rounded-lg border border-neutral">
         <img
           src={route.heroImage.url}
           alt={route.heroImage.alt}
@@ -161,7 +161,9 @@ export function FeaturedRouteCard({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-base-content">{localization.name}</h3>
+            <h3 className="font-display font-bold tracking-wider text-base text-base-content">
+              {localization.name}
+            </h3>
             <p className="text-sm text-base-content/70">{localization.description}</p>
           </div>
           <div className="explore-stat-group">
@@ -278,11 +280,11 @@ export function CuratedCollectionsList({
         {collections.map((collection) => {
           const localization = safeLocalization(collection.localizations, locale, collection.id);
           const difficulty = difficultyLookup.get(collection.difficultyId);
-          const badgeToneClass = difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
+          const badgeToneClass = difficulty?.badgeToneClass ?? "bg-neutral text-base-content";
           return (
             <article key={collection.id} className="explore-collection__card">
               <div className="flex gap-4">
-                <div className="h-16 w-16 overflow-hidden rounded-lg border border-base-300/50">
+                <div className="h-16 w-16 overflow-hidden rounded-lg border border-neutral">
                   <img
                     src={collection.leadImage.url}
                     alt={collection.leadImage.alt}
@@ -315,7 +317,7 @@ export function CuratedCollectionsList({
                   </span>
                 </div>
               </div>
-              <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">
+              <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-neutral">
                 <img
                   src={collection.mapPreview.url}
                   alt={collection.mapPreview.alt}

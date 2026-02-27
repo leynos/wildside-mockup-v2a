@@ -24,13 +24,10 @@ export function WizardLayout({
   children,
   footer,
   onBack,
-  onHelp,
   steps,
 }: WizardLayoutProps): JSX.Element {
   const { t } = useTranslation();
-  const wizardTitle = t("wizard-header-title", { defaultValue: "Walk Wizard" });
-  const backLabel = t("wizard-header-back-label", { defaultValue: "Back" });
-  const helpLabel = t("wizard-header-help-label", { defaultValue: "Help" });
+  const wizardTitle = t("wizard-header-title", { defaultValue: "Route Wizard" });
 
   const localizedSteps = useMemo(
     () =>
@@ -44,33 +41,38 @@ export function WizardLayout({
     [steps, t],
   );
 
+  const isFirstStep = activeStepId === steps[0]?.id;
+  const backLabel = isFirstStep
+    ? t("wizard-header-back-to-explore", { defaultValue: "Back to Explore" })
+    : t("wizard-header-back-label", { defaultValue: "Back" });
+
+  const activeIndex = localizedSteps.findIndex((s) => s.id === activeStepId);
+  const activeStep = localizedSteps[activeIndex];
+  const subtitle = activeStep
+    ? t("wizard-header-step-subtitle", {
+        step: activeIndex + 1,
+        total: localizedSteps.length,
+        description: activeStep.title,
+        defaultValue: `Step ${activeIndex + 1} of ${localizedSteps.length} \u2013 ${activeStep.title}`,
+      })
+    : undefined;
+
   return (
     <MobileShell tone="dark">
       <div className="screen-stack">
         <AppHeader
           variant="wizard"
           title={wizardTitle}
+          subtitle={subtitle}
           leading={
             onBack ? (
               <button
                 type="button"
-                aria-label={backLabel}
-                className="header-nav-button"
+                className="flex items-center gap-2 text-sm font-semibold text-base-content/60 transition-colors hover:text-accent"
                 onClick={onBack}
               >
-                <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
-              </button>
-            ) : undefined
-          }
-          trailing={
-            onHelp ? (
-              <button
-                type="button"
-                aria-label={helpLabel}
-                className="header-icon-button"
-                onClick={onHelp}
-              >
-                <Icon token="{icon.action.help}" aria-hidden className="h-5 w-5" />
+                <Icon token="{icon.navigation.back}" aria-hidden className="text-lg" />
+                <span>{backLabel}</span>
               </button>
             ) : undefined
           }

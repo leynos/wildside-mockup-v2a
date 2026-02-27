@@ -137,9 +137,9 @@ export function OfflineDownloadCard({
           {renderStatusBadge(area.status, statusLabels)}
         </div>
         <div className="mt-2 flex items-center gap-3">
-          <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
+          <div className="h-1.5 flex-1 rounded-full bg-neutral">
             <div
-              className={`h-1.5 rounded-full ${area.status === "downloading" ? "bg-amber-400" : "bg-accent"}`}
+              className={`h-1.5 rounded-full ${area.status === "downloading" ? "bg-accent/60" : "bg-accent"}`}
               style={{ width: `${Math.round(clampedProgress * 100)}%` }}
             />
           </div>

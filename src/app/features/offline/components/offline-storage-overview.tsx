@@ -41,7 +41,7 @@ export function OfflineStorageOverview({
               {storageUsedDescription}
             </MetaComponent>
           </div>
-          <div className="h-2 w-full rounded-full bg-base-300/60">
+          <div className="h-2 w-full rounded-full bg-neutral">
             {/* Placeholder: 35% progress until real storage API is wired */}
             <div className="h-2 w-[35%] rounded-full bg-accent" />
           </div>
@@ -52,7 +52,7 @@ export function OfflineStorageOverview({
             {storageMapsLabel}
           </span>
           <span className="flex items-center gap-1">
-            <span className="block h-2 w-2 rounded-full bg-base-300/80" />
+            <span className="block h-2 w-2 rounded-full bg-neutral" />
             {storageAvailableLabel}
           </span>
         </div>

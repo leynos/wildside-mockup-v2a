@@ -400,6 +400,18 @@ if (Object.keys(themeDeclarations).length > 0) {
   tokensCss += `${formatCssBlock("@theme", themeDeclarations)}\n`;
 }
 
+// Emit Tailwind v4 @theme block with font-family utilities.
+// Uses --font-{key} naming (no -family- infix) so Tailwind v4 resolves
+// font-sans, font-body, font-display utility classes automatically.
+const fontFamilyEntries = Object.entries(resolvedTokens.font?.family ?? {});
+if (fontFamilyEntries.length > 0) {
+  const fontLines = fontFamilyEntries
+    .sort(([a], [b]) => collator.compare(a, b))
+    .map(([key, value]) => `  --font-${key}: ${value};`)
+    .join("\n");
+  tokensCss += `@theme {\n${fontLines}\n}\n\n`;
+}
+
 const daisyPluginThemes = themes.map((theme) => {
   const flags = [];
   if (theme.meta.default) flags.push("--default");

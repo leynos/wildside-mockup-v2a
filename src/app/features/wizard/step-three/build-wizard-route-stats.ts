@@ -7,6 +7,7 @@ import type { UnitSystem } from "../../../units/unit-system";
 
 export type WizardRouteStatCopy = {
   readonly id: string;
+  readonly iconToken: string;
   readonly value: string;
   readonly unitLabel: string;
 };
@@ -21,7 +22,7 @@ export const buildWizardRouteStats = (
     switch (stat.quantity.kind) {
       case "distance": {
         const { value, unitLabel } = formatDistance(stat.quantity.metres, unitOptions);
-        return { id: stat.id, value, unitLabel };
+        return { id: stat.id, iconToken: stat.iconToken, value, unitLabel };
       }
       case "duration": {
         const duration = formatDuration(stat.quantity.seconds, {
@@ -33,7 +34,7 @@ export const buildWizardRouteStats = (
           count: duration.numericValue,
           defaultValue: duration.unitLabel,
         });
-        return { id: stat.id, value: duration.value, unitLabel };
+        return { id: stat.id, iconToken: stat.iconToken, value: duration.value, unitLabel };
       }
       case "count": {
         const stops = formatStops(stat.quantity.value, {
@@ -45,10 +46,10 @@ export const buildWizardRouteStats = (
           count: stops.numericValue,
           defaultValue: stops.unitLabel,
         });
-        return { id: stat.id, value: stops.value, unitLabel };
+        return { id: stat.id, iconToken: stat.iconToken, value: stops.value, unitLabel };
       }
       default: {
-        return { id: stat.id, value: "", unitLabel: "" };
+        return { id: stat.id, iconToken: stat.iconToken, value: "", unitLabel: "" };
       }
     }
   });

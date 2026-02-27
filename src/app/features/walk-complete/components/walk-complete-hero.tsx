@@ -36,10 +36,10 @@ export function WalkCompleteHero({
 }: WalkCompleteHeroProps): JSX.Element {
   return (
     <>
-      <div className="px-6 pt-16 pb-8">
+      <div className="animate-burst px-6 pt-16 pb-8">
         <SectionHero
           iconToken="{icon.object.trophy}"
-          iconClassName="animate-pulse"
+          iconClassName="animate-pulse-glow"
           title={heroTitle}
           description={heroDescription}
           badgeTone="celebration"
@@ -48,7 +48,7 @@ export function WalkCompleteHero({
 
       <section className="px-6">
         <div className="walk-complete__hero-card">
-          <div className="relative h-44 overflow-hidden rounded-2xl border border-base-300/60">
+          <div className="relative h-44 overflow-hidden rounded-lg border border-neutral">
             <img
               src={walkCompletionMapImage}
               alt={mapAlt}

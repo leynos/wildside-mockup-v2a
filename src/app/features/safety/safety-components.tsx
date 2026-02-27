@@ -25,10 +25,7 @@ export const SafetyAccordionSection = ({
   toggleState,
   onToggle,
 }: SafetyAccordionSectionProps): JSX.Element => (
-  <Accordion.Item
-    value={section.id}
-    className="rounded-2xl border border-base-300/60 bg-base-200/20"
-  >
+  <Accordion.Item value={section.id} className="rounded-lg border border-neutral bg-base-200">
     <Accordion.Header>
       <Accordion.Trigger className="flex w-full items-center justify-between gap-3 px-5 py-4 text-start">
         <div className="flex items-center gap-3">
@@ -128,7 +125,7 @@ export const SavedPreferencesDialog = ({
     <Dialog.Portal>
       <Dialog.Overlay className="fixed inset-0 bg-black/60" />
       <Dialog.Content className="modal-panel">
-        <Dialog.Title className="text-lg font-semibold text-base-content">
+        <Dialog.Title className="font-display font-bold tracking-wider text-lg text-base-content">
           {translations.dialogTitle}
         </Dialog.Title>
         <Dialog.Description className="text-sm text-base-content/70">
@@ -140,7 +137,7 @@ export const SavedPreferencesDialog = ({
             .map((id) => {
               const toggleId = id as SafetyToggleId;
               return (
-                <span key={toggleId} className="rounded-full border border-base-300/60 px-3 py-1">
+                <span key={toggleId} className="rounded-full border border-neutral px-3 py-1">
                   {toggleLabelLookup.get(toggleId) ?? translations.dialogChipFallback(toggleId)}
                 </span>
               );

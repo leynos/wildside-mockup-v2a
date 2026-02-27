@@ -8,7 +8,7 @@ export interface AppHeaderProps {
   /** Main heading displayed within the shell. */
   title: string;
   /** Optional secondary text beneath the title. */
-  subtitle?: string;
+  subtitle?: string | undefined;
   /** Slot for leading controls (e.g., back button). */
   leading?: ReactNode;
   /** Slot for trailing controls (e.g., settings, theme toggle). */
@@ -43,23 +43,32 @@ export function AppHeader({
   const { isFullBrowser } = useDisplayMode();
 
   const headerClassName = [
-    "select-none px-6 border-b border-base-300/60 bg-base-100/80 pb-4 pt-8 text-base-content",
-    isFullBrowser ? "sticky top-0 inset-x-0 z-30 backdrop-blur" : "",
+    "select-none px-6 bg-base-200 text-base-content",
+    isWizard ? "py-6" : "border-b border-neutral pb-4 pt-8",
+    isFullBrowser ? "sticky top-0 inset-x-0 z-30" : "",
   ]
     .filter(Boolean)
     .join(" ");
 
-  const leadingContainerClassName = [
-    "flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60",
-    isWizard ? "bg-base-800/60 text-base-content" : "bg-base-200/70 text-base-content/80",
-  ].join(" ");
+  if (isWizard) {
+    return (
+      <header className={headerClassName}>
+        <div className="mb-6 flex items-center justify-between">
+          <div>{leading}</div>
+          <div>{children}</div>
+        </div>
+        <h1 className="mb-2 font-display font-extrabold text-3xl tracking-widest uppercase text-accent glow-text">
+          {title}
+        </h1>
+        {subtitle ? <p className="text-sm text-base-content/60">{subtitle}</p> : null}
+      </header>
+    );
+  }
 
-  const titleContainerClassName = ["flex-1", isWizard ? "text-center" : "text-start"].join(" ");
+  const leadingContainerClassName =
+    "flex h-10 w-10 items-center justify-center rounded-full border border-neutral bg-base-200 text-base-content/80";
 
-  const trailingContainerClassName = [
-    "flex items-center gap-2",
-    isWizard ? "text-base-content" : "text-base-content/80",
-  ].join(" ");
+  const trailingContainerClassName = "flex items-center gap-2 text-base-content/80";
 
   const subtitleClassName = "text-sm font-medium text-base-content/60";
 
@@ -68,8 +77,10 @@ export function AppHeader({
       <div className="flex items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-3">
           {leading ? <div className={leadingContainerClassName}>{leading}</div> : null}
-          <div className={titleContainerClassName}>
-            <h1 className="text-xl font-semibold text-base-content">{title}</h1>
+          <div className="flex-1 text-start">
+            <h1 className="font-display font-extrabold tracking-widest uppercase text-accent glow-text">
+              {title}
+            </h1>
             {subtitle ? <p className={subtitleClassName}>{subtitle}</p> : null}
           </div>
         </div>

@@ -30,12 +30,14 @@ export function SafetyAccessibilityScreen(): JSX.Element {
             <button
               type="button"
               aria-label={translations.backLabel}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/30"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral bg-base-200"
               onClick={() => navigate({ to: "/explore" })}
             >
               <Icon token="{icon.navigation.back}" className="text-accent" aria-hidden />
             </button>
-            <h1 className="text-2xl font-semibold">{translations.headerTitle}</h1>
+            <h1 className="font-display font-bold tracking-wider text-2xl">
+              {translations.headerTitle}
+            </h1>
           </div>
           <p className="text-sm text-base-300">{translations.headerDescription}</p>
         </header>
@@ -57,7 +59,9 @@ export function SafetyAccessibilityScreen(): JSX.Element {
           </Accordion.Root>
 
           <section className="space-y-3">
-            <h2 className="text-base font-semibold text-base-100">{translations.presetsHeading}</h2>
+            <h2 className="font-display font-bold tracking-wider text-base text-base-100">
+              {translations.presetsHeading}
+            </h2>
             <div className="grid gap-3">
               {resolvedPresets.map((preset) => (
                 <SafetyPresetCard

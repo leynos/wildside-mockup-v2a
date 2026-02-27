@@ -72,7 +72,7 @@ export function WizardStepTwo(): JSX.Element {
     defaultValue: "Accessibility & safety",
   });
   const backButtonLabel = t("wizard-header-back-label", { defaultValue: "Back" });
-  const reviewButtonLabel = t("wizard-step-two-review", { defaultValue: "Review walk" });
+  const nextLabel = t("wizard-step-two-next", { defaultValue: "Next" });
 
   const resolvedAccessibilityOptions = useMemo(
     () =>
@@ -95,20 +95,22 @@ export function WizardStepTwo(): JSX.Element {
       onBack={() => navigate({ to: "/wizard/step-1" })}
       onHelp={() => window.alert(helpMessage)}
       footer={
-        <div className="flex gap-3">
+        <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
-            className="btn btn-ghost flex-1"
+            className="cta-button cta-button--secondary"
             onClick={() => navigate({ to: "/wizard/step-1" })}
           >
+            <Icon token="{icon.navigation.back}" aria-hidden className="me-2 inline" />
             {backButtonLabel}
           </button>
           <button
             type="button"
-            className="btn btn-accent flex-1"
+            className="cta-button"
             onClick={() => navigate({ to: "/wizard/step-3" })}
           >
-            {reviewButtonLabel}
+            {nextLabel}
+            <Icon token="{icon.navigation.forward}" aria-hidden className="ms-2 inline" />
           </button>
         </div>
       }
@@ -136,12 +138,12 @@ export function WizardStepTwo(): JSX.Element {
           aria-label={discoverySliderAria}
           className="relative mt-3 flex h-7 items-center"
         >
-          <Slider.Track className="relative h-3 flex-1 rounded-full bg-base-300/60">
+          <Slider.Track className="relative h-3 flex-1 rounded-full bg-neutral">
             <Slider.Range className="absolute h-full rounded-full bg-accent" />
           </Slider.Track>
           <Slider.Thumb
             aria-label={discoveryThumbAria}
-            className="block h-6 w-6 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+            className="block h-6 w-6 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
           />
         </Slider.Root>
         <div className="wizard-discovery__summary">{discoverySummary}</div>

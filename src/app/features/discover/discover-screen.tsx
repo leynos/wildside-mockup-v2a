@@ -19,7 +19,7 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
   return (
     <ToggleGroup.Item value={interest.id} className="discover-interest__card group">
       <div
-        className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl text-base-content/70 transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-accent/20 group-data-[state=on]:text-accent ${interest.iconBackgroundClass}`}
+        className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-accent ${interest.iconBackgroundClass}`}
       >
         <Icon
           token={interest.iconToken}
@@ -27,7 +27,7 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
           aria-hidden
         />
       </div>
-      <h3 className="text-center text-sm font-medium text-base-content group-data-[state=on]:text-accent">
+      <h3 className="text-center text-sm font-medium">
         {interest.localization.shortLabel ?? interest.localization.name}
       </h3>
     </ToggleGroup.Item>
@@ -59,10 +59,13 @@ export function DiscoverScreen(): JSX.Element {
     <MobileShell
       tone="dark"
       background={
-        <div className="h-full w-full bg-[radial-gradient(circle_at_top,_rgba(74,240,213,0.08),_transparent_55%),linear-gradient(135deg,_rgba(13,26,38,1)_0%,_rgba(32,52,69,0.85)_100%)]" />
+        <div className="h-full w-full bg-[radial-gradient(circle_at_top,_rgba(254,234,0,0.06),_transparent_55%),linear-gradient(135deg,_#000000_0%,_#1A1A1A_100%)]" />
       }
     >
       <div className="discover-screen__content">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+          <div className="animate-scan absolute h-0.5 w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
+        </div>
         <button
           type="button"
           onClick={() => navigate({ to: "/explore" })}
@@ -82,7 +85,7 @@ export function DiscoverScreen(): JSX.Element {
 
         <section className="discover-interests__section">
           <div className="mb-6 text-center">
-            <h2 className="text-lg font-semibold text-base-content">
+            <h2 className="font-display font-bold tracking-wider uppercase text-base text-base-content">
               {t("discover-curiosity-heading", { defaultValue: "What sparks your curiosity?" })}
             </h2>
             <p className="mt-1 text-sm text-base-content/60">

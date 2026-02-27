@@ -12,6 +12,7 @@ import { rootRoute } from "./root-route";
 import { safetyAccessibilityRoute } from "./safety-accessibility/route";
 import { savedRoute } from "./saved/route";
 import { walkCompleteRoute } from "./walk-complete/route";
+import { welcomeRoute } from "./welcome/route";
 import { wizardIndexRoute } from "./wizard/index-route";
 import { wizardStepOneRoute } from "./wizard/step-one-route";
 import { wizardStepThreeRoute } from "./wizard/step-three-route";
@@ -19,6 +20,7 @@ import { wizardStepTwoRoute } from "./wizard/step-two-route";
 
 export const routeTree = rootRoute.addChildren([
   indexRoute,
+  welcomeRoute,
   discoverRoute,
   exploreRoute,
   customizeRoute,

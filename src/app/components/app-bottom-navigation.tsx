@@ -40,6 +40,7 @@ export function AppBottomNavigation({
           >
             <Icon token={item.iconToken} className="text-lg" label={item.label} />
             {item.label}
+            {item.isActive ? <span className="bottom-nav__dot" /> : null}
           </button>
         ))}
       </div>
