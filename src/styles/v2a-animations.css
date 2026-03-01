@@ -2,7 +2,7 @@
 
 @layer utilities {
   .animate-scan {
-    animation: scan 3s linear infinite;
+    animation: scan 3s ease-in-out infinite;
   }
 
   .animate-pulse-ring {
@@ -19,16 +19,14 @@
 }
 
 @keyframes scan {
-  0% {
-    transform: translateY(-100%);
+  0%,
+  100% {
+    top: 0;
     opacity: 0;
   }
   50% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(100%);
-    opacity: 0;
+    top: 50%;
+    opacity: 0.6;
   }
 }
 
