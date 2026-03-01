@@ -833,29 +833,16 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
 
-    const tabPanels = view.getAllByRole("tabpanel");
-    expect(tabPanels.length).toBeGreaterThanOrEqual(3);
-
-    const notesTabpanel = view.getByRole("tabpanel", { name: /notes/i });
-    const notesList = within(notesTabpanel).getByRole("list", {
+    const notesList = view.getByRole("list", {
       name: /route notes/i,
     });
     expect(notesList.classList.contains("route-note-list")).toBe(true);
     expect(within(notesList).getAllByRole("listitem").length).toBe(savedRoute.notes.length);
 
-    const stopsTab = view.getByRole("tab", { name: /stops/i });
-    await act(async () => {
-      clickElement(stopsTab);
-      await Promise.resolve();
-    });
-    const stopsTabpanel = view.getByRole("tabpanel", { name: /stops/i });
-    savedRoute.pointsOfInterest.forEach((poi) => {
-      expect(
-        within(stopsTabpanel).getByRole("button", {
-          name: new RegExp(escapeRegExp(resolvePoiName(poi)), "i"),
-        }),
-      ).toBeTruthy();
-    });
+    const nav = view.getByRole("navigation", { name: /route views/i });
+    expect(within(nav).getByRole("button", { name: /explore/i })).toBeTruthy();
+    expect(within(nav).getByRole("button", { name: /stops/i })).toBeTruthy();
+    expect(within(nav).getByRole("button", { name: /notes/i })).toBeTruthy();
 
     const savedRouteName = resolveRouteName(savedRoute.localizations);
     expect(

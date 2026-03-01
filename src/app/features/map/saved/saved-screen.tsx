@@ -110,17 +110,29 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
             <MapToolbar t={t} />
           </div>
 
-          <Tabs.List className="map-panel__tablist">
-            <Tabs.Trigger value="map" className={tabTriggerClass}>
+          <nav className="map-panel__tablist" aria-label="Route views">
+            <button
+              type="button"
+              className={tabTriggerClass}
+              onClick={() => navigate({ to: "/map/quick" })}
+            >
               Explore
-            </Tabs.Trigger>
-            <Tabs.Trigger value="stops" className={tabTriggerClass}>
+            </button>
+            <button
+              type="button"
+              className={tabTriggerClass}
+              onClick={() => navigate({ to: "/map/quick", hash: "stops" })}
+            >
               Stops
-            </Tabs.Trigger>
-            <Tabs.Trigger value="notes" className={tabTriggerClass}>
+            </button>
+            <button
+              type="button"
+              className={tabTriggerClass}
+              onClick={() => navigate({ to: "/map/quick", hash: "notes" })}
+            >
               Notes
-            </Tabs.Trigger>
-          </Tabs.List>
+            </button>
+          </nav>
         </Tabs.Root>
 
         <MapBottomNavigation activeId="routes" />
