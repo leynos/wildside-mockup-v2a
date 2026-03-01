@@ -143,7 +143,7 @@
   }
 
   .cta-button--secondary {
-    @apply bg-neutral text-base-content;
+    @apply border-neutral bg-neutral text-base-content;
   }
 
   .cta-button--secondary:hover {
