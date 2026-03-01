@@ -135,7 +135,7 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
           </nav>
         </Tabs.Root>
 
-        <MapBottomNavigation activeId="routes" />
+        <MapBottomNavigation activeId="map" />
       </main>
     </MobileShell>
   );
