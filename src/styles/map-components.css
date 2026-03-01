@@ -209,7 +209,7 @@
 
   /* Vertical floating toolbar for map controls (zoom, layers, recentre). */
   .map-toolbar {
-    @apply absolute top-1/2 z-10 -translate-y-1/2;
+    @apply absolute top-1/2 -translate-y-1/2;
     inset-inline-start: 1rem;
   }
 
