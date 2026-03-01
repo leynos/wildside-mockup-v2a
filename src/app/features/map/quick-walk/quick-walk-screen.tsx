@@ -189,7 +189,7 @@ export function QuickWalkScreen(): JSX.Element {
                     </div>
                     <header className="mb-6 flex items-center justify-between">
                       <div>
-                        <h1 className="font-display font-bold tracking-wider text-xl text-base-content">
+                        <h1 className="font-sans font-bold tracking-wider text-xl text-base-content">
                           {headerTitle}
                         </h1>
                         <p className="text-sm text-base-content/70">{headerDescription}</p>
