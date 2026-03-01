@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
-import { DRAGGABLE_HANDLE_CLASS } from "../../../components/map/map-panel-constants";
 import { MapToolbar } from "../../../components/map/map-toolbar";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
@@ -135,8 +134,7 @@ export function QuickWalkScreen(): JSX.Element {
   const saveWalkLabel = t("quick-walk-save-aria", { defaultValue: "Save quick walk" });
 
   const handleDismissPanels = () => {
-    setActiveTab("map");
-    navigate({ to: "." });
+    navigate({ to: "/map" });
   };
 
   useEffect(() => {
@@ -181,12 +179,14 @@ export function QuickWalkScreen(): JSX.Element {
               <MapViewportTab value="map" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
                   <div className="quick-walk__panel max-h-[60vh] overflow-y-auto">
-                    <button
-                      type="button"
-                      onClick={handleDismissPanels}
-                      className={DRAGGABLE_HANDLE_CLASS}
-                      aria-label={dismissPanelLabel}
-                    />
+                    <div className="map-panel__handle bg-transparent">
+                      <button
+                        type="button"
+                        onClick={handleDismissPanels}
+                        className={panelHandleClass}
+                        aria-label={dismissPanelLabel}
+                      />
+                    </div>
                     <header className="mb-6 flex items-center justify-between">
                       <div>
                         <h1 className="font-display font-bold tracking-wider text-xl text-base-content">
@@ -276,16 +276,18 @@ export function QuickWalkScreen(): JSX.Element {
               <MapViewportTab value="notes" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
                   <section
-                    className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm text-base-content"
+                    className="map-panel map-panel--scroll max-h-[53vh] px-6 pb-6 text-sm text-base-content"
                     data-testid="quick-walk-notes-panel"
                     aria-labelledby="quick-walk-notes-heading"
                   >
-                    <button
-                      type="button"
-                      onClick={handleDismissPanels}
-                      className={panelHandleClass}
-                      aria-label={dismissPanelLabel}
-                    />
+                    <div className="map-panel__handle bg-transparent">
+                      <button
+                        type="button"
+                        onClick={handleDismissPanels}
+                        className={panelHandleClass}
+                        aria-label={dismissPanelLabel}
+                      />
+                    </div>
                     <h2
                       id="quick-walk-notes-heading"
                       className="text-base font-semibold text-base-content"

@@ -41,6 +41,7 @@ type TestRoute =
   | "/discover"
   | "/explore"
   | "/customize"
+  | "/map"
   | "/map/quick"
   | "/map/itinerary"
   | "/saved"
@@ -592,6 +593,24 @@ describe("Stage 2 routed flows", () => {
     cleanup();
     setDocumentDirection("ltr");
     await resetLanguage();
+  });
+
+  it("renders the bare map screen with toolbar and save button", async () => {
+    ({ mount, root } = await renderRoute("/map"));
+    const container = requireContainer(mount);
+    const view = within(container);
+
+    const saveLabel = translate("quick-walk-save-aria", "Save quick walk");
+    const saveButton = view.getByRole("button", {
+      name: localizedRegex(saveLabel),
+    });
+    expect(saveButton).toBeTruthy();
+
+    const mapControlsLabel = translate("map-controls", "Map controls");
+    const toolbar = view.getByRole("navigation", {
+      name: localizedRegex(mapControlsLabel),
+    });
+    expect(toolbar).toBeTruthy();
   });
 
   it("updates quick walk interests and navigates to saved", async () => {

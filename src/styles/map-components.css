@@ -115,7 +115,7 @@
   }
 
   .quick-walk__panel {
-    @apply pointer-events-auto rounded-3xl bg-base-200 p-6 text-base-content;
+    @apply pointer-events-auto rounded-3xl bg-base-200 px-6 pb-6 text-base-content;
     box-shadow:
       0 25px 50px -12px rgb(0 0 0 / 0.25),
       var(--shadow-glow);
