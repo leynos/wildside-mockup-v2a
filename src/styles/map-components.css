@@ -218,8 +218,18 @@
   }
 
   .map-toolbar__button {
-    @apply flex h-14 w-14 items-center justify-center bg-accent text-accent-content transition-transform hover:scale-110 focus:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
+    @apply flex h-14 w-14 items-center justify-center bg-accent text-accent-content transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
     clip-path: var(--clip-cut-corner);
+  }
+
+  .map-toolbar__button:hover {
+    animation: toolbar-pulse 1.2s ease-in-out infinite;
+  }
+
+  .map-toolbar__button:active {
+    @apply bg-neutral text-neutral-content;
+    animation: none;
+    scale: 0.95;
   }
 
   /* Shared metric tokens for route summaries (saved + explore detail panels). */
