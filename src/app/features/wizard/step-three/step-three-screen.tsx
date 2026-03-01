@@ -170,7 +170,7 @@ export function WizardStepThreeView({
                   <button
                     type="button"
                     className="btn btn-accent btn-sm"
-                    onClick={() => navigateTo("/map/quick")}
+                    onClick={() => navigateTo("/saved")}
                   >
                     {t("wizard-step-three-dialog-view-map", {
                       defaultValue: "View on map",
