@@ -5,12 +5,12 @@ import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { MapToolbar } from "../../../components/map/map-toolbar";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { WildsideMap } from "../../../components/wildside-map";
 import { savedRoutes } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
-import { MapToolbar } from "./map-toolbar";
 import { MapTabContent, NotesTabContent, StopsTabContent } from "./saved-screen-tabs";
 import { useSavedRouteData } from "./use-saved-route-data";
 

@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { DRAGGABLE_HANDLE_CLASS } from "../../../components/map/map-panel-constants";
+import { MapToolbar } from "../../../components/map/map-toolbar";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { SliderControl } from "../../../components/slider-control";
@@ -300,6 +301,7 @@ export function QuickWalkScreen(): JSX.Element {
                 </div>
               </MapViewportTab>
             </MapViewport>
+            <MapToolbar t={t} />
           </div>
 
           <Tabs.List className="map-panel__tablist">

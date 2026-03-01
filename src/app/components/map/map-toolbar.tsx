@@ -3,7 +3,7 @@
 import type { TFunction } from "i18next";
 import type { JSX } from "react";
 
-import { Icon } from "../../../components/icon";
+import { Icon } from "../icon";
 
 type MapToolbarProps = {
   readonly t: TFunction;
