@@ -23,7 +23,7 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
       >
         <Icon
           token={interest.iconToken}
-          className={`${interest.iconColorClass} text-2xl`}
+          className={`${interest.iconColorClass} group-data-[state=on]:text-accent-content text-2xl`}
           aria-hidden
         />
       </div>
