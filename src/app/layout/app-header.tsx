@@ -57,7 +57,7 @@ export function AppHeader({
           <div>{leading}</div>
           <div>{children}</div>
         </div>
-        <h1 className="mb-2 font-display font-extrabold text-3xl tracking-widest uppercase text-accent glow-text">
+        <h1 className="mb-2 font-sans font-extrabold text-3xl tracking-widest uppercase text-accent glow-text">
           {title}
         </h1>
         {subtitle ? <p className="text-sm text-base-content/60">{subtitle}</p> : null}
@@ -78,7 +78,7 @@ export function AppHeader({
         <div className="flex flex-1 items-center gap-3">
           {leading ? <div className={leadingContainerClassName}>{leading}</div> : null}
           <div className="flex-1 text-start">
-            <h1 className="font-display font-extrabold tracking-widest uppercase text-accent glow-text">
+            <h1 className="font-sans font-extrabold tracking-widest uppercase text-accent glow-text">
               {title}
             </h1>
             {subtitle ? <p className={subtitleClassName}>{subtitle}</p> : null}
