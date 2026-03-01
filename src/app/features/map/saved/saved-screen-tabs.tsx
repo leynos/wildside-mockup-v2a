@@ -39,7 +39,7 @@ export function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Elemen
 export function Metric({ label, value }: { label: string; value: string }): JSX.Element {
   return (
     <div className="text-center">
-      <p className="font-display text-lg font-bold text-base-content">{value}</p>
+      <p className="font-sans text-lg font-bold text-base-content">{value}</p>
       <p className="text-xs text-base-content/60">{label}</p>
     </div>
   );

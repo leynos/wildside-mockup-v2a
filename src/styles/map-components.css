@@ -152,12 +152,12 @@
   }
 
   .route-showcase__title {
-    @apply font-display font-extrabold text-2xl tracking-widest uppercase;
+    @apply font-sans font-extrabold text-2xl tracking-widest uppercase;
     text-shadow: 0 0 20px rgba(254, 234, 0, 0.3);
   }
 
   .route-showcase__distance {
-    @apply font-display font-extrabold text-4xl;
+    @apply font-sans font-extrabold text-4xl;
     text-align: end;
   }
 
@@ -177,7 +177,7 @@
   }
 
   .route-showcase__stat-value {
-    @apply font-display font-bold text-base;
+    @apply font-sans font-bold text-base;
   }
 
   .route-showcase__stat-label {
