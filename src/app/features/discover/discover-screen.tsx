@@ -63,9 +63,6 @@ export function DiscoverScreen(): JSX.Element {
       }
     >
       <div className="discover-screen__content">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-          <div className="animate-scan absolute h-0.5 w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
-        </div>
         <button
           type="button"
           onClick={() => navigate({ to: "/explore" })}
