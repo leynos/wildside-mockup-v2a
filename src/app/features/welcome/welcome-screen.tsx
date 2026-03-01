@@ -7,29 +7,18 @@ import { useTranslation } from "react-i18next";
 import { Icon } from "../../components/icon";
 import { MobileShell } from "../../layout/mobile-shell";
 
+/** Resolves a public-directory asset path with the Vite base URL. */
+function publicUrl(path: string): string {
+  const base = import.meta.env.BASE_URL ?? "/";
+  const normalisedBase = base.endsWith("/") ? base : `${base}/`;
+  return `${normalisedBase}${path.replace(/^\/+/, "")}`;
+}
+
+const LOGO_URL = publicUrl("images/wildside-logo.svg");
+const HERO_BG_URL = publicUrl("images/hero-citymap.png");
+
 function WildsideMark(): JSX.Element {
-  return (
-    <svg
-      viewBox="0 0 92.787613 139.96045"
-      xmlns="http://www.w3.org/2000/svg"
-      className="relative z-10 h-28 w-20"
-      aria-hidden
-    >
-      <title>Wildside</title>
-      <g transform="translate(-98.193485,-34.001541)">
-        <path
-          d="m 108.69104,34.001542 a 10.497414,10.497414 0 0 0 -10.49755,10.497551 10.497414,10.497414 0 0 0 0,5.16e-4 v 51.617005 l 74.50295,74.387706 a 10.497414,10.497414 0 0 0 0.002,0.002 l 5.2e-4,5.2e-4 a 10.497414,10.497414 0 0 0 7.78454,3.45508 10.497414,10.497414 0 0 0 10.49755,-10.49755 10.497414,10.497414 0 0 0 0,-0.0124 V 44.511495 a 10.497414,10.497414 0 0 1 -0.045,0.674377 10.497414,10.497414 0 0 0 0.045,-0.686779 10.497414,10.497414 0 0 0 -10.49755,-10.497551 10.497414,10.497414 0 0 0 -5.2e-4,0 H 108.6915 a 10.497414,10.497414 0 0 1 -5.2e-4,0 z"
-          fill="currentColor"
-          className="text-base-content"
-        />
-        <path
-          d="m 111.48467,37.613208 a 9.680407,9.680407 0 0 0 -9.68055,9.680546 v 47.600195 l 28.62254,28.578101 h 56.94382 V 47.305123 a 9.680407,9.680407 0 0 1 -0.0419,0.621667 9.680407,9.680407 0 0 0 0.0419,-0.633036 9.680407,9.680407 0 0 0 -9.68055,-9.680546 9.680407,9.680407 0 0 0 -5.2e-4,0 h -66.20423 a 9.680407,9.680407 0 0 1 -5.1e-4,0 z"
-          fill="currentColor"
-          className="text-accent"
-        />
-      </g>
-    </svg>
-  );
+  return <img src={LOGO_URL} className="relative z-10 h-28 w-auto" alt="" aria-hidden />;
 }
 
 interface ValuePropProps {
@@ -60,7 +49,15 @@ export function WelcomeScreen(): JSX.Element {
     <MobileShell
       tone="dark"
       background={
-        <div className="h-full w-full bg-[radial-gradient(circle_at_top,_rgba(254,234,0,0.08),_transparent_60%),linear-gradient(180deg,_#000000_0%,_#1A1A1A_100%)]" />
+        <div className="relative h-full w-full">
+          <img
+            src={HERO_BG_URL}
+            className="absolute inset-0 h-full w-full object-cover opacity-30"
+            alt=""
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-base-100" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(254,234,0,0.08),_transparent_60%)]" />
+        </div>
       }
     >
       <div className="welcome-screen__content">
