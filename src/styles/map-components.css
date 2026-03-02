@@ -326,4 +326,12 @@
   .route-flow__meta {
     @apply mt-3 flex flex-wrap items-center gap-3 text-xs text-base-content/70;
   }
+
+  .map-fab {
+    @apply pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-content shadow-xl shadow-glow transition hover:scale-105 active:bg-neutral active:text-neutral-content;
+  }
+
+  .route-showcase__icon {
+    @apply mx-auto mb-1 h-4 w-4;
+  }
 }
