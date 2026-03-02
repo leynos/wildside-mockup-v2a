@@ -197,6 +197,7 @@
 
   .decorative-overlay {
     @apply pointer-events-none absolute inset-0 overflow-hidden;
+    container-type: size;
   }
 
   .detail-tag {
