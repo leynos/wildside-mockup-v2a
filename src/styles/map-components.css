@@ -153,6 +153,7 @@
 
   .route-showcase__title {
     @apply font-sans font-extrabold text-2xl tracking-widest uppercase;
+
     text-shadow: 0 0 20px rgba(254, 234, 0, 0.3);
   }
 
@@ -219,6 +220,7 @@
 
   .map-toolbar__button {
     @apply flex h-14 w-14 items-center justify-center bg-accent text-accent-content transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
+
     clip-path: var(--clip-cut-corner);
   }
 
@@ -228,6 +230,7 @@
 
   .map-toolbar__button:active {
     @apply bg-neutral text-neutral-content;
+
     animation: none;
     scale: 0.95;
   }
@@ -329,6 +332,7 @@
 
   .map-fab {
     @apply pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-content shadow-xl transition hover:scale-105 active:bg-neutral active:text-neutral-content;
+
     box-shadow:
       0 20px 25px -5px rgb(0 0 0 / 0.1),
       0 8px 10px -6px rgb(0 0 0 / 0.1),
