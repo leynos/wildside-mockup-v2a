@@ -126,7 +126,7 @@ export function DiscoverScreen(): JSX.Element {
             ) : (
               <span className="inline-action-cluster">
                 {t("discover-start", { defaultValue: "Start exploring" })}
-                <Icon token="{icon.navigation.forward}" aria-hidden className="h-4 w-4" />
+                <Icon token="{icon.navigation.forward}" aria-hidden />
               </span>
             )}
           </button>
