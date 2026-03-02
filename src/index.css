@@ -131,6 +131,7 @@
 
   .cta-button {
     @apply btn btn-accent btn-lg w-full font-sans text-base font-bold tracking-widest transition-all duration-200 hover:bg-base-content hover:text-base-100 active:scale-[0.98];
+
     clip-path: var(--clip-cut-corner);
   }
 
