@@ -58,9 +58,7 @@ export function WalkCompleteSecondaryStats({
               className={`walk-complete__secondary-icon ${secondaryStatIconTone[stat.id] ?? "text-accent"}`}
               aria-hidden
             />
-            <p className="font-display text-lg font-bold text-base-content">
-              {formatStatValue(stat.value)}
-            </p>
+            <p className="dialog-title">{formatStatValue(stat.value)}</p>
             <p className="text-xs text-base-content/70">{localized.name}</p>
           </article>
         );
