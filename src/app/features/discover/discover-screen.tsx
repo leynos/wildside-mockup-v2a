@@ -19,7 +19,7 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
   return (
     <ToggleGroup.Item value={interest.id} className="discover-interest__card group">
       <div
-        className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-accent ${interest.iconBackgroundClass}`}
+        className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-[#EFDC68] ${interest.iconBackgroundClass}`}
       >
         <Icon
           token={interest.iconToken}
