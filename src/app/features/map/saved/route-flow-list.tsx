@@ -96,10 +96,7 @@ function RouteFlowSegment({
                   <span aria-hidden>{categoryLabel}</span>
                 </span>
                 {tagDescriptors.map((tag) => (
-                  <span
-                    key={tag.id}
-                    className="rounded-full border border-base-300/60 bg-base-100 px-2 py-0.5"
-                  >
+                  <span key={tag.id} className="detail-badge">
                     {tag.localization.name}
                   </span>
                 ))}
@@ -131,10 +128,7 @@ function RouteFlowSegment({
               {tagDescriptors.length > 0 ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {tagDescriptors.map((tag) => (
-                    <span
-                      key={tag.id}
-                      className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs text-base-content/70"
-                    >
+                    <span key={tag.id} className="detail-tag text-base-content/70">
                       {tag.localization.name}
                     </span>
                   ))}
