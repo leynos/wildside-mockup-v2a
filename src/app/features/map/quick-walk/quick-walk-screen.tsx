@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { MapToolbar } from "../../../components/map/map-toolbar";
+import { useMapToolbarLabels } from "../../../components/map/use-map-toolbar-labels";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { SliderControl } from "../../../components/slider-control";
@@ -49,6 +50,7 @@ export function QuickWalkScreen(): JSX.Element {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const toolbarLabels = useMapToolbarLabels();
   const { formatDurationValue } = useUnitLabelFormatters();
 
   const formatDurationLabel = useCallback(
@@ -303,7 +305,7 @@ export function QuickWalkScreen(): JSX.Element {
                 </div>
               </MapViewportTab>
             </MapViewport>
-            <MapToolbar t={t} />
+            <MapToolbar labels={toolbarLabels} />
           </div>
 
           <Tabs.List className="map-panel__tablist">

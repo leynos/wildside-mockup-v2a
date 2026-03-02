@@ -6,6 +6,7 @@ import { type JSX, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { MapToolbar } from "../../../components/map/map-toolbar";
+import { useMapToolbarLabels } from "../../../components/map/use-map-toolbar-labels";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { WildsideMap } from "../../../components/wildside-map";
@@ -41,6 +42,7 @@ type SavedScreenWithRouteProps = {
 function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.Element {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const toolbarLabels = useMapToolbarLabels();
   const [isFavourite, setIsFavourite] = useState(true);
   const [shareOpen, setShareOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("map");
@@ -107,7 +109,7 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
                 t={t}
               />
             </MapViewport>
-            <MapToolbar t={t} />
+            <MapToolbar labels={toolbarLabels} />
           </div>
 
           <nav className="map-panel__tablist" aria-label="Route views">

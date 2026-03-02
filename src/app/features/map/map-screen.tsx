@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import { MapToolbar } from "../../components/map/map-toolbar";
+import { useMapToolbarLabels } from "../../components/map/use-map-toolbar-labels";
 import { MapBottomNavigation } from "../../components/map-bottom-navigation";
 import { MapViewport } from "../../components/map-viewport";
 import { WildsideMap } from "../../components/wildside-map";
@@ -16,6 +17,7 @@ const tabTriggerClass = "py-3 text-sm font-semibold text-base-content/70";
 export function MapScreen(): JSX.Element {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const toolbarLabels = useMapToolbarLabels();
   const saveWalkLabel = t("quick-walk-save-aria", { defaultValue: "Save quick walk" });
   const exploreLabel = t("quick-walk-tab-map", { defaultValue: "Explore" });
   const stopsLabel = t("quick-walk-tab-stops", { defaultValue: "Stops" });
@@ -30,7 +32,7 @@ export function MapScreen(): JSX.Element {
               map={<WildsideMap />}
               gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
             />
-            <MapToolbar t={t} />
+            <MapToolbar labels={toolbarLabels} />
           </div>
 
           <nav

@@ -1,19 +1,26 @@
 /** @file Floating map control toolbar with zoom, layers, and recentre buttons. */
 
-import type { TFunction } from "i18next";
 import type { JSX } from "react";
 
 import { Icon } from "../icon";
 
+export type MapToolbarLabels = {
+  readonly controls: string;
+  readonly zoomIn: string;
+  readonly zoomOut: string;
+  readonly layers: string;
+  readonly recentre: string;
+};
+
 type MapToolbarProps = {
-  readonly t: TFunction;
+  readonly labels: MapToolbarLabels;
 };
 
 const toolbarButtons = [
-  { token: "{icon.map.zoomIn}", labelKey: "map-control-zoom-in", defaultLabel: "Zoom in" },
-  { token: "{icon.map.zoomOut}", labelKey: "map-control-zoom-out", defaultLabel: "Zoom out" },
-  { token: "{icon.map.layers}", labelKey: "map-control-layers", defaultLabel: "Layers" },
-  { token: "{icon.map.recentre}", labelKey: "map-control-recentre", defaultLabel: "Recentre" },
+  { token: "{icon.map.zoomIn}", key: "zoomIn" },
+  { token: "{icon.map.zoomOut}", key: "zoomOut" },
+  { token: "{icon.map.layers}", key: "layers" },
+  { token: "{icon.map.recentre}", key: "recentre" },
 ] as const;
 
 /**
@@ -22,17 +29,12 @@ const toolbarButtons = [
  * All buttons are presentational (no-op handlers) since the map is a
  * static mockup. Wire to MapLibre APIs when the map becomes interactive.
  */
-export function MapToolbar({ t }: MapToolbarProps): JSX.Element {
+export function MapToolbar({ labels }: MapToolbarProps): JSX.Element {
   return (
-    <nav className="map-toolbar" aria-label={t("map-controls", { defaultValue: "Map controls" })}>
+    <nav className="map-toolbar" aria-label={labels.controls}>
       <div className="map-toolbar__stack">
-        {toolbarButtons.map(({ token, labelKey, defaultLabel }) => (
-          <button
-            key={labelKey}
-            type="button"
-            className="map-toolbar__button"
-            aria-label={t(labelKey, { defaultValue: defaultLabel })}
-          >
+        {toolbarButtons.map(({ token, key }) => (
+          <button key={key} type="button" className="map-toolbar__button" aria-label={labels[key]}>
             <Icon token={token} aria-hidden />
           </button>
         ))}
