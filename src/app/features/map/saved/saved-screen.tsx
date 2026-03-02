@@ -2,7 +2,7 @@
 
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useCallback, useState } from "react";
+import { type JSX, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { MapToolbar } from "../../../components/map/map-toolbar";
@@ -54,6 +54,16 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
   const handleOffline = useCallback(() => navigate({ to: "/offline" }), [navigate]);
   const handleStartRoute = useCallback(() => navigate({ to: "/map/itinerary" }), [navigate]);
   const handleToggleFavourite = useCallback(() => setIsFavourite((prev) => !prev), []);
+
+  const routeViewLabels = useMemo(
+    () => ({
+      ariaLabel: t("saved-route-views-aria", { defaultValue: "Route views" }),
+      explore: t("quick-walk-tab-map", { defaultValue: "Explore" }),
+      stops: t("quick-walk-tab-stops", { defaultValue: "Stops" }),
+      notes: t("quick-walk-tab-notes", { defaultValue: "Notes" }),
+    }),
+    [t],
+  );
 
   const {
     routeCopy,
@@ -112,27 +122,27 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
             <MapToolbar labels={toolbarLabels} />
           </div>
 
-          <nav className="map-panel__tablist" aria-label="Route views">
+          <nav className="map-panel__tablist" aria-label={routeViewLabels.ariaLabel}>
             <button
               type="button"
               className={tabTriggerClass}
               onClick={() => navigate({ to: "/map/quick" })}
             >
-              Explore
+              {routeViewLabels.explore}
             </button>
             <button
               type="button"
               className={tabTriggerClass}
               onClick={() => navigate({ to: "/map/quick", hash: "stops" })}
             >
-              Stops
+              {routeViewLabels.stops}
             </button>
             <button
               type="button"
               className={tabTriggerClass}
               onClick={() => navigate({ to: "/map/quick", hash: "notes" })}
             >
-              Notes
+              {routeViewLabels.notes}
             </button>
           </nav>
         </Tabs.Root>
