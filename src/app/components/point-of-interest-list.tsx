@@ -126,7 +126,7 @@ const PointOfInterestItem = ({
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-        <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <Dialog.Content className="lightbox-overlay">
           <div className="poi-sheet">
             <div className="poi-list__summary">
               <div>

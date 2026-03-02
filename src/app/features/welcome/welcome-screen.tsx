@@ -62,7 +62,7 @@ export function WelcomeScreen(): JSX.Element {
     >
       <div className="welcome-screen__content">
         <section className="welcome-hero">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+          <div className="decorative-overlay" aria-hidden>
             <div className="animate-scan absolute h-0.5 w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
           </div>
 
