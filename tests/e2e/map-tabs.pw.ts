@@ -79,22 +79,26 @@ test.describe("Map tab bar alignment", () => {
 
   test("saved map tab buttons navigate to quick-walk tabs", async ({ page }) => {
     await page.goto("/saved");
-    const tabNav = page.getByRole("navigation", { name: /route views/i });
+    let tabNav = page.getByRole("navigation", { name: /route views/i });
     await expect(tabNav).toBeVisible();
 
     await tabNav.getByRole("button", { name: "Stops" }).click();
     await expect(page).toHaveURL(/#stops$/);
-    const quickTablist = page.getByRole("tablist").first();
+    let quickTablist = page.getByRole("tablist").first();
     await expectTablistReachable(quickTablist);
 
     await page.goto("/saved");
+    tabNav = page.getByRole("navigation", { name: /route views/i });
     await tabNav.getByRole("button", { name: "Notes" }).click();
     await expect(page).toHaveURL(/#notes$/);
+    quickTablist = page.getByRole("tablist").first();
     await expectTablistReachable(quickTablist);
 
     await page.goto("/saved");
+    tabNav = page.getByRole("navigation", { name: /route views/i });
     await tabNav.getByRole("button", { name: "Explore" }).click();
     await expect(page).toHaveURL(/\/map\/quick(\?.*)?$/);
+    quickTablist = page.getByRole("tablist").first();
     await expectTablistReachable(quickTablist);
   });
 
