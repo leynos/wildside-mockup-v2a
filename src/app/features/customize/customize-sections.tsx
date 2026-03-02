@@ -279,11 +279,11 @@ export function RoutePreview({
         })}
       </div>
       <div className="mt-3 grid grid-cols-2 gap-3">
-        <button type="button" className="cta-button cta-button--secondary">
+        <button type="button" className="cta-button cta-button--secondary" disabled>
           <Icon token="{icon.action.regenerate}" aria-hidden className="me-2 inline" />
           {regenerateLabel}
         </button>
-        <button type="button" className="cta-button">
+        <button type="button" className="cta-button" disabled>
           <Icon token="{icon.action.play}" aria-hidden className="me-2 inline" />
           {startLabel}
         </button>
