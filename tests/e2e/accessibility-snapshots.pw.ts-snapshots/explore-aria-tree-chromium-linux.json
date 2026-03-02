@@ -45,16 +45,16 @@
                                             "children": [
                                               {
                                                 "role": "heading",
-                                                "name": "Discover",
+                                                "name": "DISCOVER",
                                                 "level": 1,
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "Discover",
+                                                    "name": "DISCOVER",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Discover"
+                                                        "name": "DISCOVER"
                                                       }
                                                     ]
                                                   }
@@ -397,7 +397,11 @@
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Harbour Lights Promenade"
+                                                                "name": "Harbour Lights "
+                                                              },
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Promenade"
                                                               }
                                                             ]
                                                           }

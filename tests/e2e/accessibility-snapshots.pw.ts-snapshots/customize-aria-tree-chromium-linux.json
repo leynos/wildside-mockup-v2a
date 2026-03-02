@@ -55,16 +55,16 @@
                                             "children": [
                                               {
                                                 "role": "heading",
-                                                "name": "Customise Route",
+                                                "name": "CUSTOMISE ROUTE",
                                                 "level": 1,
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "Customise Route",
+                                                    "name": "CUSTOMISE ROUTE",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Customise Route"
+                                                        "name": "CUSTOMISE ROUTE"
                                                       }
                                                     ]
                                                   }

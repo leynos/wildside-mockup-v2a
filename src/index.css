@@ -187,7 +187,8 @@
   }
 
   .brand-heading {
-    @apply font-sans font-extrabold tracking-widest uppercase text-accent glow-text;
+    @apply font-sans font-extrabold tracking-widest uppercase text-accent;
+    text-shadow: 0 0 20px rgba(254, 234, 0, 0.3);
   }
 
   .lightbox-overlay {

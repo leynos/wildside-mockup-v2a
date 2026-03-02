@@ -91,16 +91,16 @@
                                   },
                                   {
                                     "role": "heading",
-                                    "name": "Route Wizard",
+                                    "name": "ROUTE WIZARD",
                                     "level": 1,
                                     "children": [
                                       {
                                         "role": "text",
-                                        "name": "Route Wizard",
+                                        "name": "ROUTE WIZARD",
                                         "children": [
                                           {
                                             "role": "InlineTextBox",
-                                            "name": "Route Wizard"
+                                            "name": "ROUTE WIZARD"
                                           }
                                         ]
                                       }
