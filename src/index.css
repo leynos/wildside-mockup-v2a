@@ -177,6 +177,34 @@
   .bottom-nav__dot {
     @apply block h-1 w-1 rounded-full bg-accent;
   }
+
+  .dialog-title {
+    @apply font-display text-lg font-bold tracking-wider text-base-content;
+  }
+
+  .section-subheading {
+    @apply font-display text-base font-bold tracking-wider;
+  }
+
+  .brand-heading {
+    @apply font-sans font-extrabold tracking-widest uppercase text-accent glow-text;
+  }
+
+  .lightbox-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+  }
+
+  .decorative-overlay {
+    @apply pointer-events-none absolute inset-0 overflow-hidden;
+  }
+
+  .detail-tag {
+    @apply rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs;
+  }
+
+  .detail-badge {
+    @apply rounded-full border border-base-300/60 bg-base-100 px-2 py-0.5;
+  }
 }
 
 @layer utilities {
