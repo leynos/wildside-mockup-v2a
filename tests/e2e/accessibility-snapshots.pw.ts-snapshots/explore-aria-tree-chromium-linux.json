@@ -397,11 +397,7 @@
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Harbour Lights "
-                                                              },
-                                                              {
-                                                                "role": "InlineTextBox",
-                                                                "name": "Promenade"
+                                                                "name": "Harbour Lights Promenade"
                                                               }
                                                             ]
                                                           }
