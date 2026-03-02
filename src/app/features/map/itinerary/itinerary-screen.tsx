@@ -5,6 +5,8 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useCallback, useState } from "react";
 
+import { MapToolbar } from "../../../components/map/map-toolbar";
+import { useMapToolbarLabels } from "../../../components/map/use-map-toolbar-labels";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { WildsideMap } from "../../../components/wildside-map";
@@ -29,6 +31,7 @@ function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Element {
 
 export function ItineraryScreen(): JSX.Element {
   const navigate = useNavigate();
+  const toolbarLabels = useMapToolbarLabels();
   const [activeTab, setActiveTab] = useState("map");
   const { language, routeCopy, distance, duration, stops, labels } =
     useItineraryData(waterfrontDiscoveryRoute);
@@ -78,6 +81,7 @@ export function ItineraryScreen(): JSX.Element {
             <MapOverlay value="notes" forceMount>
               <NotesOverlayPanel notes={waterfrontDiscoveryRoute.notes} language={language} />
             </MapOverlay>
+            <MapToolbar labels={toolbarLabels} />
           </div>
 
           <Tabs.List className="map-panel__tablist">

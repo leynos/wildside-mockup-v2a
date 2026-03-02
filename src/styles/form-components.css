@@ -59,7 +59,7 @@
   }
 
   .slider-control__title {
-    @apply flex items-center gap-2 font-display text-lg font-bold;
+    @apply flex items-center gap-2 font-sans text-lg font-bold;
   }
 
   .slider-control__icon {
@@ -67,7 +67,7 @@
   }
 
   .slider-control__value {
-    @apply font-display font-extrabold text-2xl text-accent;
+    @apply font-sans font-extrabold text-2xl text-accent;
   }
 
   .slider-control__root {

@@ -19,11 +19,11 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
   return (
     <ToggleGroup.Item value={interest.id} className="discover-interest__card group">
       <div
-        className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-accent ${interest.iconBackgroundClass}`}
+        className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-[#EFDC68] ${interest.iconBackgroundClass}`}
       >
         <Icon
           token={interest.iconToken}
-          className={`${interest.iconColorClass} text-2xl`}
+          className={`${interest.iconColorClass} group-data-[state=on]:text-accent-content text-2xl`}
           aria-hidden
         />
       </div>
@@ -63,9 +63,6 @@ export function DiscoverScreen(): JSX.Element {
       }
     >
       <div className="discover-screen__content">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-          <div className="animate-scan absolute h-0.5 w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
-        </div>
         <button
           type="button"
           onClick={() => navigate({ to: "/explore" })}
@@ -85,7 +82,7 @@ export function DiscoverScreen(): JSX.Element {
 
         <section className="discover-interests__section">
           <div className="mb-6 text-center">
-            <h2 className="font-display font-bold tracking-wider uppercase text-base text-base-content">
+            <h2 className="section-subheading font-sans uppercase text-base-content">
               {t("discover-curiosity-heading", { defaultValue: "What sparks your curiosity?" })}
             </h2>
             <p className="mt-1 text-sm text-base-content/60">
@@ -129,7 +126,7 @@ export function DiscoverScreen(): JSX.Element {
             ) : (
               <span className="inline-action-cluster">
                 {t("discover-start", { defaultValue: "Start exploring" })}
-                <Icon token="{icon.navigation.forward}" aria-hidden className="h-4 w-4" />
+                <Icon token="{icon.navigation.forward}" aria-hidden />
               </span>
             )}
           </button>

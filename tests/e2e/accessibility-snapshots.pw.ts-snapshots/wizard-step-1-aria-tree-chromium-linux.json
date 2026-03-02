@@ -40,31 +40,20 @@
                                         "name": "",
                                         "children": [
                                           {
-                                            "role": "none",
-                                            "name": "",
+                                            "role": "button",
+                                            "name": "Back to Explore",
                                             "children": [
                                               {
-                                                "role": "button",
-                                                "name": "Back"
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "heading",
-                                                "name": "Walk Wizard",
-                                                "level": 1,
+                                                "role": "none",
+                                                "name": "",
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "Walk Wizard",
+                                                    "name": "Back to Explore",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Walk Wizard"
+                                                        "name": "Back to Explore"
                                                       }
                                                     ]
                                                   }
@@ -79,102 +68,55 @@
                                         "name": "",
                                         "children": [
                                           {
-                                            "role": "button",
-                                            "name": "Help"
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              },
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              },
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              }
+                                            ]
                                           }
                                         ]
                                       }
                                     ]
                                   },
                                   {
-                                    "role": "none",
+                                    "role": "heading",
+                                    "name": "ROUTE WIZARD",
+                                    "level": 1,
+                                    "children": [
+                                      {
+                                        "role": "text",
+                                        "name": "ROUTE WIZARD",
+                                        "children": [
+                                          {
+                                            "role": "InlineTextBox",
+                                            "name": "ROUTE WIZARD"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "paragraph",
                                     "name": "",
                                     "children": [
                                       {
-                                        "role": "none",
-                                        "name": "",
+                                        "role": "text",
+                                        "name": "Step 1 of 3 – Duration & interests",
                                         "children": [
                                           {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "none",
-                                                "name": "",
-                                                "children": [
-                                                  {
-                                                    "role": "generic",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "none",
-                                                        "name": ""
-                                                      },
-                                                      {
-                                                        "role": "none",
-                                                        "name": ""
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": ""
-                                                  }
-                                                ]
-                                              },
-                                              {
-                                                "role": "none",
-                                                "name": "",
-                                                "children": [
-                                                  {
-                                                    "role": "generic",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "none",
-                                                        "name": ""
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": ""
-                                                  }
-                                                ]
-                                              },
-                                              {
-                                                "role": "none",
-                                                "name": "",
-                                                "children": [
-                                                  {
-                                                    "role": "generic",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "none",
-                                                        "name": ""
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "paragraph",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "Duration & interests",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "Duration & interests"
-                                                  }
-                                                ]
-                                              }
-                                            ]
+                                            "role": "InlineTextBox",
+                                            "name": "Step 1 of 3 – Duration & interests"
                                           }
                                         ]
                                       }
@@ -443,15 +385,15 @@
                                 "children": [
                                   {
                                     "role": "button",
-                                    "name": "Continue to preferences",
+                                    "name": "Next step",
                                     "children": [
                                       {
                                         "role": "text",
-                                        "name": "Continue to preferences",
+                                        "name": "Next step",
                                         "children": [
                                           {
                                             "role": "InlineTextBox",
-                                            "name": "Continue to preferences"
+                                            "name": "Next step"
                                           }
                                         ]
                                       }

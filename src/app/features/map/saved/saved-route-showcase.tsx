@@ -158,7 +158,7 @@ type StatCellProps = {
 function StatCell({ iconToken, value, label }: StatCellProps): JSX.Element {
   return (
     <div className="text-center">
-      <Icon token={iconToken} aria-hidden className="mx-auto mb-1 h-4 w-4" />
+      <Icon token={iconToken} aria-hidden className="route-showcase__icon" />
       <p className="route-showcase__stat-value">{value}</p>
       <p className="route-showcase__stat-label">{label}</p>
     </div>
@@ -239,11 +239,11 @@ function ShowcaseActions({
   return (
     <div className="route-showcase__action-grid">
       <button type="button" className="route-showcase__action-button" onClick={onViewDetails}>
-        <Icon token="{icon.action.preview}" aria-hidden className="mx-auto mb-1 h-4 w-4" />
+        <Icon token="{icon.action.preview}" aria-hidden className="route-showcase__icon" />
         {t("saved-route-action-details", { defaultValue: "VIEW DETAILS" })}
       </button>
       <button type="button" className="route-showcase__action-button" onClick={onCustomize}>
-        <Icon token="{icon.action.settings}" aria-hidden className="mx-auto mb-1 h-4 w-4" />
+        <Icon token="{icon.action.settings}" aria-hidden className="route-showcase__icon" />
         {t("saved-route-action-customize", { defaultValue: "CUSTOMIZE" })}
       </button>
       <button
@@ -255,12 +255,12 @@ function ShowcaseActions({
         <Icon
           token={isFavourite ? "{icon.action.save}" : "{icon.action.unsave}"}
           aria-hidden
-          className="mx-auto mb-1 h-4 w-4"
+          className="route-showcase__icon"
         />
         {t("saved-route-action-save", { defaultValue: "SAVE ROUTE" })}
       </button>
       <button type="button" className="route-showcase__action-button" onClick={onOffline}>
-        <Icon token="{icon.action.download}" aria-hidden className="mx-auto mb-1 h-4 w-4" />
+        <Icon token="{icon.action.download}" aria-hidden className="route-showcase__icon" />
         {t("saved-route-action-offline", { defaultValue: "OFFLINE" })}
       </button>
     </div>

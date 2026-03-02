@@ -50,9 +50,7 @@ export function RouteActionButtons({ routeId }: RouteActionButtonsProps): JSX.El
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-black/60" />
           <Dialog.Content className="dialog-surface">
-            <Dialog.Title className="font-display font-bold tracking-wider text-lg text-base-content">
-              {shareDialogTitle}
-            </Dialog.Title>
+            <Dialog.Title className="dialog-title">{shareDialogTitle}</Dialog.Title>
             <Dialog.Description className="text-sm text-base-content/70">
               {shareDialogDescription}
             </Dialog.Description>

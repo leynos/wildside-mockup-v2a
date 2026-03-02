@@ -2,15 +2,16 @@
 
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useCallback, useState } from "react";
+import { type JSX, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { MapToolbar } from "../../../components/map/map-toolbar";
+import { useMapToolbarLabels } from "../../../components/map/use-map-toolbar-labels";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { WildsideMap } from "../../../components/wildside-map";
 import { savedRoutes } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
-import { MapToolbar } from "./map-toolbar";
 import { MapTabContent, NotesTabContent, StopsTabContent } from "./saved-screen-tabs";
 import { useSavedRouteData } from "./use-saved-route-data";
 
@@ -41,6 +42,7 @@ type SavedScreenWithRouteProps = {
 function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.Element {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const toolbarLabels = useMapToolbarLabels();
   const [isFavourite, setIsFavourite] = useState(true);
   const [shareOpen, setShareOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("map");
@@ -52,6 +54,16 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
   const handleOffline = useCallback(() => navigate({ to: "/offline" }), [navigate]);
   const handleStartRoute = useCallback(() => navigate({ to: "/map/itinerary" }), [navigate]);
   const handleToggleFavourite = useCallback(() => setIsFavourite((prev) => !prev), []);
+
+  const routeViewLabels = useMemo(
+    () => ({
+      ariaLabel: t("saved-route-views-aria", { defaultValue: "Route views" }),
+      explore: t("quick-walk-tab-map", { defaultValue: "Explore" }),
+      stops: t("quick-walk-tab-stops", { defaultValue: "Stops" }),
+      notes: t("quick-walk-tab-notes", { defaultValue: "Notes" }),
+    }),
+    [t],
+  );
 
   const {
     routeCopy,
@@ -107,23 +119,35 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
                 t={t}
               />
             </MapViewport>
-            <MapToolbar t={t} />
+            <MapToolbar labels={toolbarLabels} />
           </div>
 
-          <Tabs.List className="map-panel__tablist">
-            <Tabs.Trigger value="map" className={tabTriggerClass}>
-              Explore
-            </Tabs.Trigger>
-            <Tabs.Trigger value="stops" className={tabTriggerClass}>
-              Stops
-            </Tabs.Trigger>
-            <Tabs.Trigger value="notes" className={tabTriggerClass}>
-              Notes
-            </Tabs.Trigger>
-          </Tabs.List>
+          <nav className="map-panel__tablist" aria-label={routeViewLabels.ariaLabel}>
+            <button
+              type="button"
+              className={tabTriggerClass}
+              onClick={() => navigate({ to: "/map/quick" })}
+            >
+              {routeViewLabels.explore}
+            </button>
+            <button
+              type="button"
+              className={tabTriggerClass}
+              onClick={() => navigate({ to: "/map/quick", hash: "stops" })}
+            >
+              {routeViewLabels.stops}
+            </button>
+            <button
+              type="button"
+              className={tabTriggerClass}
+              onClick={() => navigate({ to: "/map/quick", hash: "notes" })}
+            >
+              {routeViewLabels.notes}
+            </button>
+          </nav>
         </Tabs.Root>
 
-        <MapBottomNavigation activeId="routes" />
+        <MapBottomNavigation activeId="map" />
       </main>
     </MobileShell>
   );

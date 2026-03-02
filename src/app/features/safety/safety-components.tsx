@@ -125,9 +125,7 @@ export const SavedPreferencesDialog = ({
     <Dialog.Portal>
       <Dialog.Overlay className="fixed inset-0 bg-black/60" />
       <Dialog.Content className="modal-panel">
-        <Dialog.Title className="font-display font-bold tracking-wider text-lg text-base-content">
-          {translations.dialogTitle}
-        </Dialog.Title>
+        <Dialog.Title className="dialog-title">{translations.dialogTitle}</Dialog.Title>
         <Dialog.Description className="text-sm text-base-content/70">
           {translations.dialogDescription}
         </Dialog.Description>

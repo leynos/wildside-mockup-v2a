@@ -4,6 +4,7 @@ import { customizeRoute } from "./customize/route";
 import { discoverRoute } from "./discover/route";
 import { exploreRoute } from "./explore/route";
 import { indexRoute } from "./index-route";
+import { mapIndexRoute } from "./map/index-route";
 import { mapItineraryRoute } from "./map/itinerary-route";
 import { mapLayoutRoute } from "./map/layout-route";
 import { mapQuickRoute } from "./map/quick-route";
@@ -24,7 +25,7 @@ export const routeTree = rootRoute.addChildren([
   discoverRoute,
   exploreRoute,
   customizeRoute,
-  mapLayoutRoute.addChildren([mapQuickRoute, mapItineraryRoute]),
+  mapLayoutRoute.addChildren([mapIndexRoute, mapQuickRoute, mapItineraryRoute]),
   savedRoute,
   wizardIndexRoute,
   wizardStepOneRoute,

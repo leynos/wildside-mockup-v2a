@@ -161,9 +161,7 @@ export function FeaturedRouteCard({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-display font-bold tracking-wider text-base text-base-content">
-              {localization.name}
-            </h3>
+            <h3 className="section-subheading font-sans text-base-content">{localization.name}</h3>
             <p className="text-sm text-base-content/70">{localization.description}</p>
           </div>
           <div className="explore-stat-group">

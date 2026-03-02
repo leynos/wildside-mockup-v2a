@@ -114,10 +114,7 @@ const PointOfInterestItem = ({
               <span aria-hidden>{highlightBadgeLabel}</span>
             </span>
             {tagDescriptors.map((tag) => (
-              <span
-                key={tag.id}
-                className="rounded-full border border-base-300/60 bg-base-100 px-2 py-0.5 text-base-content/70"
-              >
+              <span key={tag.id} className="detail-badge text-base-content/70">
                 {tag.localization.name}
               </span>
             ))}
@@ -126,7 +123,7 @@ const PointOfInterestItem = ({
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-        <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <Dialog.Content className="lightbox-overlay">
           <div className="poi-sheet">
             <div className="poi-list__summary">
               <div>
@@ -149,10 +146,7 @@ const PointOfInterestItem = ({
               {tagDescriptors.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
                   {tagDescriptors.map((tag) => (
-                    <span
-                      key={tag.id}
-                      className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs"
-                    >
+                    <span key={tag.id} className="detail-tag">
                       {tag.localization.name}
                     </span>
                   ))}

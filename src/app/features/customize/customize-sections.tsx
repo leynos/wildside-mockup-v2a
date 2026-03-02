@@ -278,16 +278,13 @@ export function RoutePreview({
           );
         })}
       </div>
-      <div className="mt-3 flex gap-2">
-        <button
-          type="button"
-          className="btn btn-ghost btn-sm flex-1 rounded-xl border border-neutral bg-base-200 text-base-content"
-        >
-          <Icon token="{icon.action.regenerate}" aria-hidden className="me-2 h-4 w-4" />
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <button type="button" className="cta-button cta-button--secondary" disabled>
+          <Icon token="{icon.action.regenerate}" aria-hidden className="me-2 inline" />
           {regenerateLabel}
         </button>
-        <button type="button" className="cta-button cta-button--inverted flex-1 text-base">
-          <Icon token="{icon.action.play}" aria-hidden className="me-2 h-4 w-4" />
+        <button type="button" className="cta-button" disabled>
+          <Icon token="{icon.action.play}" aria-hidden className="me-2 inline" />
           {startLabel}
         </button>
       </div>

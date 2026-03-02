@@ -144,7 +144,7 @@ export function WizardStepThreeView({
                   ? (() => {
                       return (
                         <>
-                          <Dialog.Title className="font-display font-bold tracking-wider text-lg text-base-content">
+                          <Dialog.Title className="section-title mb-0">
                             {t("wizard-step-three-dialog-title", {
                               defaultValue: "Walk saved!",
                             })}
@@ -170,7 +170,7 @@ export function WizardStepThreeView({
                   <button
                     type="button"
                     className="btn btn-accent btn-sm"
-                    onClick={() => navigateTo("/map/quick")}
+                    onClick={() => navigateTo("/saved")}
                   >
                     {t("wizard-step-three-dialog-view-map", {
                       defaultValue: "View on map",
@@ -197,14 +197,14 @@ export function WizardStepThreeView({
           })}
         >
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="font-display font-bold tracking-wider text-xl">{routeTitle}</h3>
+            <h3 className="font-sans font-bold tracking-wider text-xl">{routeTitle}</h3>
             <span className="wizard-badge font-semibold">{badgeTitle}</span>
           </div>
           <div className="grid grid-cols-3 gap-4 text-center">
             {routeStats.map((stat) => (
               <div key={stat.id}>
                 <Icon token={stat.iconToken} className="mx-auto mb-2 text-accent" aria-hidden />
-                <p className="font-display text-lg font-bold text-accent">{stat.value}</p>
+                <p className="font-sans text-lg font-bold text-accent">{stat.value}</p>
                 <p className="text-xs text-base-content/70">{stat.unitLabel}</p>
               </div>
             ))}
@@ -228,7 +228,7 @@ export function WizardStepThreeView({
           defaultValue: "Your preferences applied",
         })}
       >
-        <h3 className="font-display font-bold tracking-wider text-lg">
+        <h3 className="section-title mb-0">
           {t("wizard-step-three-preferences-heading", {
             defaultValue: "Your preferences applied",
           })}
@@ -262,7 +262,7 @@ export function WizardStepThreeView({
           defaultValue: "Featured stops",
         })}
       >
-        <h3 className="font-display font-bold tracking-wider text-lg">
+        <h3 className="section-title mb-0">
           {t("wizard-step-three-stops-heading", {
             defaultValue: "Featured stops",
           })}

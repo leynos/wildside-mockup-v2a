@@ -59,9 +59,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
           </Accordion.Root>
 
           <section className="space-y-3">
-            <h2 className="font-display font-bold tracking-wider text-base text-base-100">
-              {translations.presetsHeading}
-            </h2>
+            <h2 className="section-subheading text-base-100">{translations.presetsHeading}</h2>
             <div className="grid gap-3">
               {resolvedPresets.map((preset) => (
                 <SafetyPresetCard

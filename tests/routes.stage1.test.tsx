@@ -41,6 +41,7 @@ type TestRoute =
   | "/discover"
   | "/explore"
   | "/customize"
+  | "/map"
   | "/map/quick"
   | "/map/itinerary"
   | "/saved"
@@ -594,6 +595,24 @@ describe("Stage 2 routed flows", () => {
     await resetLanguage();
   });
 
+  it("renders the bare map screen with toolbar and save button", async () => {
+    ({ mount, root } = await renderRoute("/map"));
+    const container = requireContainer(mount);
+    const view = within(container);
+
+    const saveLabel = translate("quick-walk-save-aria", "Save quick walk");
+    const saveButton = view.getByRole("button", {
+      name: localizedRegex(saveLabel),
+    });
+    expect(saveButton).toBeTruthy();
+
+    const mapControlsLabel = translate("map-controls", "Map controls");
+    const toolbar = view.getByRole("navigation", {
+      name: localizedRegex(mapControlsLabel),
+    });
+    expect(toolbar).toBeTruthy();
+  });
+
   it("updates quick walk interests and navigates to saved", async () => {
     const route = await renderRoute("/map/quick");
     ({ mount, root } = route);
@@ -670,7 +689,7 @@ describe("Stage 2 routed flows", () => {
     const quickFabButton = view.getByRole("button", {
       name: localizedRegex(saveQuickLabel),
     });
-    expect(quickFabButton.classList.contains("pointer-events-auto")).toBe(true);
+    expect(quickFabButton.classList.contains("map-fab")).toBe(true);
   });
 
   it("launches the wizard from the quick walk magic wand", async () => {
@@ -833,29 +852,16 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
 
-    const tabPanels = view.getAllByRole("tabpanel");
-    expect(tabPanels.length).toBeGreaterThanOrEqual(3);
-
-    const notesTabpanel = view.getByRole("tabpanel", { name: /notes/i });
-    const notesList = within(notesTabpanel).getByRole("list", {
+    const notesList = view.getByRole("list", {
       name: /route notes/i,
     });
     expect(notesList.classList.contains("route-note-list")).toBe(true);
     expect(within(notesList).getAllByRole("listitem").length).toBe(savedRoute.notes.length);
 
-    const stopsTab = view.getByRole("tab", { name: /stops/i });
-    await act(async () => {
-      clickElement(stopsTab);
-      await Promise.resolve();
-    });
-    const stopsTabpanel = view.getByRole("tabpanel", { name: /stops/i });
-    savedRoute.pointsOfInterest.forEach((poi) => {
-      expect(
-        within(stopsTabpanel).getByRole("button", {
-          name: new RegExp(escapeRegExp(resolvePoiName(poi)), "i"),
-        }),
-      ).toBeTruthy();
-    });
+    const nav = view.getByRole("navigation", { name: /route views/i });
+    expect(within(nav).getByRole("button", { name: /explore/i })).toBeTruthy();
+    expect(within(nav).getByRole("button", { name: /stops/i })).toBeTruthy();
+    expect(within(nav).getByRole("button", { name: /notes/i })).toBeTruthy();
 
     const savedRouteName = resolveRouteName(savedRoute.localizations);
     expect(

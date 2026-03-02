@@ -96,10 +96,7 @@ function RouteFlowSegment({
                   <span aria-hidden>{categoryLabel}</span>
                 </span>
                 {tagDescriptors.map((tag) => (
-                  <span
-                    key={tag.id}
-                    className="rounded-full border border-base-300/60 bg-base-100 px-2 py-0.5"
-                  >
+                  <span key={tag.id} className="detail-badge">
                     {tag.localization.name}
                   </span>
                 ))}
@@ -109,7 +106,7 @@ function RouteFlowSegment({
         </div>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-          <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <Dialog.Content className="lightbox-overlay">
             <div className="poi-sheet">
               <div className="poi-list__summary">
                 <div>
@@ -131,10 +128,7 @@ function RouteFlowSegment({
               {tagDescriptors.length > 0 ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {tagDescriptors.map((tag) => (
-                    <span
-                      key={tag.id}
-                      className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs text-base-content/70"
-                    >
+                    <span key={tag.id} className="detail-tag text-base-content/70">
                       {tag.localization.name}
                     </span>
                   ))}

@@ -86,12 +86,18 @@
                                                 "name": "",
                                                 "children": [
                                                   {
-                                                    "role": "none",
+                                                    "role": "generic",
                                                     "name": "",
                                                     "children": [
                                                       {
-                                                        "role": "button",
-                                                        "name": "Dismiss panel"
+                                                        "role": "none",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "button",
+                                                            "name": "Dismiss panel"
+                                                          }
+                                                        ]
                                                       },
                                                       {
                                                         "role": "sectionheader",
@@ -128,11 +134,11 @@
                                                                     "children": [
                                                                       {
                                                                         "role": "InlineTextBox",
-                                                                        "name": "Dial in duration and interests to "
+                                                                        "name": "Dial in duration and interests to refresh "
                                                                       },
                                                                       {
                                                                         "role": "InlineTextBox",
-                                                                        "name": "refresh suggestions."
+                                                                        "name": "suggestions."
                                                                       }
                                                                     ]
                                                                   }
@@ -147,71 +153,77 @@
                                                         ]
                                                       },
                                                       {
-                                                        "role": "generic",
+                                                        "role": "none",
                                                         "name": "",
                                                         "children": [
                                                           {
-                                                            "role": "sectionheader",
+                                                            "role": "generic",
                                                             "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "heading",
-                                                                "name": "Duration",
-                                                                "level": 2,
+                                                                "role": "sectionheader",
+                                                                "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "text",
+                                                                    "role": "heading",
                                                                     "name": "Duration",
+                                                                    "level": 2,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Duration"
+                                                                        "role": "text",
+                                                                        "name": "Duration",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Duration"
+                                                                          }
+                                                                        ]
+                                                                      }
+                                                                    ]
+                                                                  },
+                                                                  {
+                                                                    "role": "none",
+                                                                    "name": "",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "text",
+                                                                        "name": "60 minutes",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "60 minutes"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
                                                                   }
                                                                 ]
                                                               },
                                                               {
-                                                                "role": "none",
-                                                                "name": "",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "text",
-                                                                    "name": "60 minutes",
-                                                                    "children": [
-                                                                      {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "60 minutes"
-                                                                      }
-                                                                    ]
-                                                                  }
-                                                                ]
-                                                              }
-                                                            ]
-                                                          },
-                                                          {
-                                                            "role": "generic",
-                                                            "name": "Walk duration",
-                                                            "children": [
-                                                              {
-                                                                "role": "none",
-                                                                "name": "",
+                                                                "role": "generic",
+                                                                "name": "Walk duration",
                                                                 "children": [
                                                                   {
                                                                     "role": "none",
-                                                                    "name": ""
-                                                                  }
-                                                                ]
-                                                              },
-                                                              {
-                                                                "role": "none",
-                                                                "name": "",
-                                                                "children": [
+                                                                    "name": "",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "none",
+                                                                        "name": ""
+                                                                      }
+                                                                    ]
+                                                                  },
                                                                   {
-                                                                    "role": "slider",
-                                                                    "name": "Walk duration",
-                                                                    "value": 3600,
-                                                                    "valueText": "60 minutes"
+                                                                    "role": "none",
+                                                                    "name": "",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "slider",
+                                                                        "name": "Walk duration",
+                                                                        "value": 3600,
+                                                                        "valueText": "60 minutes"
+                                                                      }
+                                                                    ]
                                                                   }
                                                                 ]
                                                               }
@@ -220,149 +232,155 @@
                                                         ]
                                                       },
                                                       {
-                                                        "role": "generic",
+                                                        "role": "none",
                                                         "name": "",
                                                         "children": [
                                                           {
-                                                            "role": "none",
+                                                            "role": "generic",
                                                             "name": "",
                                                             "children": [
-                                                              {
-                                                                "role": "heading",
-                                                                "name": "Interests",
-                                                                "level": 2,
-                                                                "children": [
-                                                                  {
-                                                                    "role": "text",
-                                                                    "name": "Interests",
-                                                                    "children": [
-                                                                      {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Interests"
-                                                                      }
-                                                                    ]
-                                                                  }
-                                                                ]
-                                                              },
                                                               {
                                                                 "role": "none",
                                                                 "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "text",
-                                                                    "name": "2 selected",
+                                                                    "role": "heading",
+                                                                    "name": "Interests",
+                                                                    "level": 2,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "2 selected"
+                                                                        "role": "text",
+                                                                        "name": "Interests",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Interests"
+                                                                          }
+                                                                        ]
+                                                                      }
+                                                                    ]
+                                                                  },
+                                                                  {
+                                                                    "role": "none",
+                                                                    "name": "",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "text",
+                                                                        "name": "2 selected",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "2 selected"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
                                                                   }
                                                                 ]
-                                                              }
-                                                            ]
-                                                          },
-                                                          {
-                                                            "role": "group",
-                                                            "name": "Select quick walk interests",
-                                                            "children": [
+                                                              },
                                                               {
-                                                                "role": "button",
-                                                                "name": "Parks & Nature",
-                                                                "pressed": false,
+                                                                "role": "group",
+                                                                "name": "Select quick walk interests",
                                                                 "children": [
                                                                   {
-                                                                    "role": "text",
+                                                                    "role": "button",
                                                                     "name": "Parks & Nature",
+                                                                    "pressed": false,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Parks & Nature"
+                                                                        "role": "text",
+                                                                        "name": "Parks & Nature",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Parks & Nature"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
-                                                                  }
-                                                                ]
-                                                              },
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Coffee Spots",
-                                                                "pressed": false,
-                                                                "children": [
+                                                                  },
                                                                   {
-                                                                    "role": "text",
+                                                                    "role": "button",
                                                                     "name": "Coffee Spots",
+                                                                    "pressed": false,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Coffee Spots"
+                                                                        "role": "text",
+                                                                        "name": "Coffee Spots",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Coffee Spots"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
-                                                                  }
-                                                                ]
-                                                              },
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Street Art",
-                                                                "pressed": true,
-                                                                "children": [
+                                                                  },
                                                                   {
-                                                                    "role": "text",
+                                                                    "role": "button",
                                                                     "name": "Street Art",
+                                                                    "pressed": true,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Street Art"
+                                                                        "role": "text",
+                                                                        "name": "Street Art",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Street Art"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
-                                                                  }
-                                                                ]
-                                                              },
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Historic Sites",
-                                                                "pressed": false,
-                                                                "children": [
+                                                                  },
                                                                   {
-                                                                    "role": "text",
+                                                                    "role": "button",
                                                                     "name": "Historic Sites",
+                                                                    "pressed": false,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Historic Sites"
+                                                                        "role": "text",
+                                                                        "name": "Historic Sites",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Historic Sites"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
-                                                                  }
-                                                                ]
-                                                              },
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Waterfront",
-                                                                "pressed": true,
-                                                                "children": [
+                                                                  },
                                                                   {
-                                                                    "role": "text",
+                                                                    "role": "button",
                                                                     "name": "Waterfront",
+                                                                    "pressed": true,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Waterfront"
+                                                                        "role": "text",
+                                                                        "name": "Waterfront",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Waterfront"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
-                                                                  }
-                                                                ]
-                                                              },
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Markets",
-                                                                "pressed": false,
-                                                                "children": [
+                                                                  },
                                                                   {
-                                                                    "role": "text",
+                                                                    "role": "button",
                                                                     "name": "Markets",
+                                                                    "pressed": false,
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "Markets"
+                                                                        "role": "text",
+                                                                        "name": "Markets",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "Markets"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
                                                                   }
@@ -395,6 +413,34 @@
                                               {
                                                 "role": "none",
                                                 "name": ""
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "navigation",
+                                        "name": "Map controls",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "button",
+                                                "name": "Zoom in"
+                                              },
+                                              {
+                                                "role": "button",
+                                                "name": "Zoom out"
+                                              },
+                                              {
+                                                "role": "button",
+                                                "name": "Layers"
+                                              },
+                                              {
+                                                "role": "button",
+                                                "name": "Recentre"
                                               }
                                             ]
                                           }
@@ -471,7 +517,7 @@
                               },
                               {
                                 "role": "navigation",
-                                "name": "",
+                                "name": "Primary navigation",
                                 "children": [
                                   {
                                     "role": "none",
@@ -494,6 +540,10 @@
                                                 "name": "Map"
                                               }
                                             ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": ""
                                           }
                                         ]
                                       },
