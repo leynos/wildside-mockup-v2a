@@ -71,10 +71,7 @@ export function MapViewport({
           aria-hidden="true"
         />
       ) : null}
-      <div
-        className="pointer-events-none relative z-[1] flex h-full flex-col justify-end"
-        role="presentation"
-      >
+      <div className="relative z-[1] flex h-full flex-col justify-end" role="presentation">
         {children}
       </div>
     </div>
