@@ -144,7 +144,7 @@ export function WizardStepThreeView({
                   ? (() => {
                       return (
                         <>
-                          <Dialog.Title className="font-sans font-bold tracking-wider text-lg text-base-content">
+                          <Dialog.Title className="section-title mb-0">
                             {t("wizard-step-three-dialog-title", {
                               defaultValue: "Walk saved!",
                             })}
@@ -228,7 +228,7 @@ export function WizardStepThreeView({
           defaultValue: "Your preferences applied",
         })}
       >
-        <h3 className="font-sans font-bold tracking-wider text-lg">
+        <h3 className="section-title mb-0">
           {t("wizard-step-three-preferences-heading", {
             defaultValue: "Your preferences applied",
           })}
@@ -262,7 +262,7 @@ export function WizardStepThreeView({
           defaultValue: "Featured stops",
         })}
       >
-        <h3 className="font-sans font-bold tracking-wider text-lg">
+        <h3 className="section-title mb-0">
           {t("wizard-step-three-stops-heading", {
             defaultValue: "Featured stops",
           })}
