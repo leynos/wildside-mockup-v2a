@@ -156,7 +156,7 @@ function WalkCompleteRemixSection({
         <div className="inline-action-cluster mb-3 items-start">
           <Icon token="{icon.object.magic}" className="text-accent" aria-hidden />
           <div>
-            <h3 className="font-display font-bold tracking-wider text-base">{remixTitle}</h3>
+            <h3 className="section-subheading">{remixTitle}</h3>
             <p className="text-sm text-base-content/70">{remixDescription}</p>
           </div>
         </div>
@@ -178,7 +178,7 @@ function WalkCompleteShareChannelsSection({
 }: WalkCompleteShareChannelsSectionProps): JSX.Element {
   return (
     <WalkCompleteSection spacing="spacious" className="pb-12">
-      <h3 className="mb-4 text-center font-display font-bold tracking-wider text-base text-base-content">
+      <h3 className="section-subheading mb-4 text-center text-base-content">
         {shareSectionHeading}
       </h3>
       <div className="flex justify-center gap-4">
