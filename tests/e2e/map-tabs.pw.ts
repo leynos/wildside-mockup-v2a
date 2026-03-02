@@ -77,16 +77,20 @@ test.describe("Map tab bar alignment", () => {
     await expect(stopsPanel).toBeVisible();
   });
 
-  test("saved map retains its tab bar across tabs", async ({ page }) => {
+  test("saved map tab buttons navigate to quick-walk tabs", async ({ page }) => {
     await page.goto("/saved");
-    const tablist = page.getByRole("tablist").first();
-    await expect(tablist).toBeVisible();
+    const tabNav = page.getByRole("navigation", { name: /route views/i });
+    await expect(tabNav).toBeVisible();
 
-    await page.getByRole("tab", { name: "Stops" }).click();
-    await expectTablistReachable(tablist);
+    await tabNav.getByRole("button", { name: "Stops" }).click();
+    await expect(page).toHaveURL(/#stops$/);
+    const quickTablist = page.getByRole("tablist").first();
+    await expectTablistReachable(quickTablist);
 
-    await page.getByRole("tab", { name: "Notes" }).click();
-    await expectTablistReachable(tablist);
+    await page.goto("/saved");
+    await tabNav.getByRole("button", { name: "Notes" }).click();
+    await expect(page).toHaveURL(/#notes$/);
+    await expectTablistReachable(quickTablist);
   });
 
   test("bottom navigation aligns between map and explore routes", async ({ page }) => {

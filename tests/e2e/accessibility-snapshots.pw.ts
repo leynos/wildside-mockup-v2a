@@ -56,31 +56,10 @@ const snapshotTargets: SnapshotTarget[] = [
 ];
 
 async function removeMapLibreControls(page: Page): Promise<void> {
-  const controlLabels = [/zoom in/i, /zoom out/i, /reset bearing/i, /pitch/i];
-  for (const label of controlLabels) {
-    const controlButtons = page.getByRole("button", { name: label });
-    const count = await controlButtons.count();
-    for (let index = 0; index < count; index += 1) {
-      await controlButtons.nth(index).evaluate((button) => {
-        button.closest(".maplibregl-ctrl")?.remove();
-      });
-    }
-  }
-
-  const attributionLinks = page.getByRole("link", { name: /maplibre/i });
-  const linkCount = await attributionLinks.count();
-  for (let index = 0; index < linkCount; index += 1) {
-    await attributionLinks.nth(index).evaluate((link) => {
-      link.closest(".maplibregl-ctrl")?.remove();
-    });
-  }
-
-  const attributionControls = page.locator(".maplibregl-ctrl-attrib");
-  const attributionCount = await attributionControls.count();
-  for (let index = attributionCount - 1; index >= 0; index -= 1) {
-    await attributionControls.nth(index).evaluate((control) => {
-      control.remove();
-    });
+  const controls = page.locator(".maplibregl-ctrl");
+  const count = await controls.count();
+  for (let index = count - 1; index >= 0; index -= 1) {
+    await controls.nth(index).evaluate((node) => node.remove());
   }
 }
 

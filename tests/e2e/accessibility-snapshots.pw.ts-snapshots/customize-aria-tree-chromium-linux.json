@@ -55,16 +55,16 @@
                                             "children": [
                                               {
                                                 "role": "heading",
-                                                "name": "Customise Route",
+                                                "name": "CUSTOMISE ROUTE",
                                                 "level": 1,
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "Customise Route",
+                                                    "name": "CUSTOMISE ROUTE",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Customise Route"
+                                                        "name": "CUSTOMISE ROUTE"
                                                       }
                                                     ]
                                                   }
@@ -392,11 +392,7 @@
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Popular "
-                                                      },
-                                                      {
-                                                        "role": "InlineTextBox",
-                                                        "name": "spots"
+                                                        "name": "Popular spots"
                                                       }
                                                     ]
                                                   }
@@ -546,11 +542,7 @@
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Challenge "
-                                                      },
-                                                      {
-                                                        "role": "InlineTextBox",
-                                                        "name": "me"
+                                                        "name": "Challenge me"
                                                       }
                                                     ]
                                                   }
@@ -978,11 +970,7 @@
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Harbour "
-                                                      },
-                                                      {
-                                                        "role": "InlineTextBox",
-                                                        "name": "Lights "
+                                                        "name": "Harbour Lights "
                                                       },
                                                       {
                                                         "role": "InlineTextBox",
@@ -1053,11 +1041,7 @@
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Coffee "
-                                                      },
-                                                      {
-                                                        "role": "InlineTextBox",
-                                                        "name": "Culture "
+                                                        "name": "Coffee Culture "
                                                       },
                                                       {
                                                         "role": "InlineTextBox",
@@ -1128,11 +1112,7 @@
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Hidden "
-                                                      },
-                                                      {
-                                                        "role": "InlineTextBox",
-                                                        "name": "Garden "
+                                                        "name": "Hidden Garden "
                                                       },
                                                       {
                                                         "role": "InlineTextBox",
@@ -1216,7 +1196,11 @@
                                                 "children": [
                                                   {
                                                     "role": "InlineTextBox",
-                                                    "name": "Start Route"
+                                                    "name": "Start "
+                                                  },
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Route"
                                                   }
                                                 ]
                                               }
@@ -1505,6 +1489,10 @@
                                                 "name": "Routes"
                                               }
                                             ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": ""
                                           }
                                         ]
                                       },
@@ -1572,23 +1560,23 @@
     {
       "selector": "[data-segment-id='crowd'] [data-radix-collection-item][data-state='on']",
       "styles": {
-        "background-color": "oklab(0.718903 -0.108213 -0.0557673 / 0.15)",
-        "border-top-color": "rgb(14, 185, 203)",
+        "background-color": "rgb(234, 208, 56)",
+        "border-top-color": "rgb(234, 208, 56)",
         "border-radius": "12px",
-        "box-shadow": "oklab(0.718903 -0.108213 -0.0557673 / 0.2) 0px 1px 3px 0px, oklab(0.718903 -0.108213 -0.0557673 / 0.2) 0px 1px 2px -1px",
+        "box-shadow": "none",
         "padding-top": "16px",
         "padding-left": "16px",
-        "color": "rgb(13, 26, 38)"
+        "color": "rgb(26, 26, 26)"
       },
       "missing": false
     },
     {
       "selector": "[data-segment-id='crowd'] [data-radix-collection-item][data-state='off']",
       "styles": {
-        "background-color": "oklab(0.254477 -0.012388 -0.0328887 / 0.6)",
-        "border-top-color": "oklab(0.31608 -0.0167875 -0.0363289 / 0.7)",
+        "background-color": "rgb(26, 26, 26)",
+        "border-top-color": "rgb(51, 51, 51)",
         "border-radius": "12px",
-        "box-shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.31608 -0.0167875 -0.0363289 / 0.2) 0px 1px 3px 0px, oklab(0.31608 -0.0167875 -0.0363289 / 0.2) 0px 1px 2px -1px",
+        "box-shadow": "none",
         "padding-top": "16px",
         "padding-left": "16px",
         "color": "oklab(0.999994 0.0000455677 0.0000200868 / 0.8)"

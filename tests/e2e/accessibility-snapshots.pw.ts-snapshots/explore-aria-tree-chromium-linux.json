@@ -45,16 +45,16 @@
                                             "children": [
                                               {
                                                 "role": "heading",
-                                                "name": "Discover",
+                                                "name": "DISCOVER",
                                                 "level": 1,
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "Discover",
+                                                    "name": "DISCOVER",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "Discover"
+                                                        "name": "DISCOVER"
                                                       }
                                                     ]
                                                   }
@@ -417,15 +417,15 @@
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Golden hour stroll weaving past "
+                                                                "name": "Golden hour stroll weaving past skyline "
                                                               },
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "skyline overlooks, coffee pit stops, "
+                                                                "name": "overlooks, coffee pit stops, and art "
                                                               },
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "and art installations."
+                                                                "name": "installations."
                                                               }
                                                             ]
                                                           }
@@ -1050,11 +1050,7 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "InlineTextBox",
-                                                                    "name": "Sunday Coffee "
-                                                                  },
-                                                                  {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "Loops"
+                                                                    "name": "Sunday Coffee Loops"
                                                                   }
                                                                 ]
                                                               }
@@ -1070,11 +1066,7 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "InlineTextBox",
-                                                                    "name": "Perfect lazy morning "
-                                                                  },
-                                                                  {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "routes"
+                                                                    "name": "Perfect lazy morning routes"
                                                                   }
                                                                 ]
                                                               }
@@ -1205,11 +1197,7 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "InlineTextBox",
-                                                                    "name": "After Dark "
-                                                                  },
-                                                                  {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "Adventures"
+                                                                    "name": "After Dark Adventures"
                                                                   }
                                                                 ]
                                                               }
@@ -1736,11 +1724,11 @@
                                                 "children": [
                                                   {
                                                     "role": "InlineTextBox",
-                                                    "name": "A blend of literary gems and cosy eateries in "
+                                                    "name": "A blend of literary gems and cosy eateries in the "
                                                   },
                                                   {
                                                     "role": "InlineTextBox",
-                                                    "name": "the cultural district."
+                                                    "name": "cultural district."
                                                   }
                                                 ]
                                               }
@@ -1851,6 +1839,10 @@
                                                 "name": "Discover"
                                               }
                                             ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": ""
                                           }
                                         ]
                                       },

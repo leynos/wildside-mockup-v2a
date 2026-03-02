@@ -15,7 +15,7 @@ const alphaFromColor = (value: string | null): number | null => {
 };
 
 test.describe("Map overlay panels", () => {
-  test("quick walk stops and notes panels retain frosted background", async ({ page }) => {
+  test("quick walk stops and notes panels have opaque map-panel background", async ({ page }) => {
     await page.goto("/map/quick");
 
     await page.getByRole("tab", { name: /stops/i }).click();
@@ -23,31 +23,21 @@ test.describe("Map overlay panels", () => {
     await expect(stopsPanel).toBeVisible();
     const stopsStyle = await stopsPanel.evaluate((node) => {
       const style = window.getComputedStyle(node as HTMLElement);
-      return {
-        backgroundColor: style.backgroundColor,
-        backgroundImage: style.backgroundImage,
-        backdropFilter: style.backdropFilter || style.getPropertyValue("-webkit-backdrop-filter"),
-      };
+      return { backgroundColor: style.backgroundColor };
     });
     const stopsAlpha = alphaFromColor(stopsStyle.backgroundColor);
-    expect(stopsAlpha !== null && stopsAlpha > 0.3 && stopsAlpha < 0.9).toBe(true);
-    expect(stopsStyle.backgroundImage?.toLowerCase()).toContain("linear-gradient");
-    expect(stopsStyle.backdropFilter?.toLowerCase()).not.toBe("none");
+    expect(stopsAlpha).not.toBeNull();
+    expect(stopsAlpha).toBeGreaterThanOrEqual(0.9);
 
     await page.getByRole("tab", { name: /notes/i }).click();
     const notesPanel = page.getByRole("region", { name: /planning notes/i });
     await expect(notesPanel).toBeVisible();
     const notesStyle = await notesPanel.evaluate((node) => {
       const style = window.getComputedStyle(node as HTMLElement);
-      return {
-        backgroundColor: style.backgroundColor,
-        backgroundImage: style.backgroundImage,
-        backdropFilter: style.backdropFilter || style.getPropertyValue("-webkit-backdrop-filter"),
-      };
+      return { backgroundColor: style.backgroundColor };
     });
     const notesAlpha = alphaFromColor(notesStyle.backgroundColor);
-    expect(notesAlpha !== null && notesAlpha > 0.3 && notesAlpha < 0.9).toBe(true);
-    expect(notesStyle.backgroundImage?.toLowerCase()).toContain("linear-gradient");
-    expect(notesStyle.backdropFilter?.toLowerCase()).not.toBe("none");
+    expect(notesAlpha).not.toBeNull();
+    expect(notesAlpha).toBeGreaterThanOrEqual(0.9);
   });
 });
