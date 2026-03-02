@@ -54,6 +54,7 @@ export function WelcomeScreen(): JSX.Element {
             src={HERO_BG_URL}
             className="absolute inset-0 h-full w-full object-cover opacity-30"
             alt=""
+            aria-hidden="true"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-base-100" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(254,234,0,0.08),_transparent_60%)]" />
