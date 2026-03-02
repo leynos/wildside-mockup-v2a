@@ -91,6 +91,11 @@ test.describe("Map tab bar alignment", () => {
     await tabNav.getByRole("button", { name: "Notes" }).click();
     await expect(page).toHaveURL(/#notes$/);
     await expectTablistReachable(quickTablist);
+
+    await page.goto("/saved");
+    await tabNav.getByRole("button", { name: "Explore" }).click();
+    await expect(page).toHaveURL(/\/map\/quick(\?.*)?$/);
+    await expectTablistReachable(quickTablist);
   });
 
   test("bottom navigation aligns between map and explore routes", async ({ page }) => {

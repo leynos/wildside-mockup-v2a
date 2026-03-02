@@ -62,7 +62,12 @@ export function MapScreen(): JSX.Element {
         </div>
 
         <div className="map-fab-layer">
-          <button type="button" className="map-fab" aria-label={saveWalkLabel}>
+          <button
+            type="button"
+            className="map-fab"
+            aria-label={saveWalkLabel}
+            onClick={() => navigate({ to: "/saved" })}
+          >
             <Icon token="{icon.action.save}" aria-hidden />
           </button>
         </div>
