@@ -689,7 +689,7 @@ describe("Stage 2 routed flows", () => {
     const quickFabButton = view.getByRole("button", {
       name: localizedRegex(saveQuickLabel),
     });
-    expect(quickFabButton.classList.contains("pointer-events-auto")).toBe(true);
+    expect(quickFabButton.classList.contains("map-fab")).toBe(true);
   });
 
   it("launches the wizard from the quick walk magic wand", async () => {

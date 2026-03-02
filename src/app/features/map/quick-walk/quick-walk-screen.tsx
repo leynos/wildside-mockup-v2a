@@ -322,7 +322,7 @@ export function QuickWalkScreen(): JSX.Element {
         <div className="map-fab-layer">
           <button
             type="button"
-            className="pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-content shadow-xl shadow-glow transition hover:scale-105 active:bg-neutral active:text-neutral-content"
+            className="map-fab"
             aria-label={saveWalkLabel}
             onClick={() => navigate({ to: "/saved" })}
           >
