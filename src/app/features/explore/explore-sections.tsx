@@ -331,5 +331,5 @@ export function CuratedCollectionsList({
   );
 }
 
-export { CommunityPickPanel, TrendingRoutesList };
 export type { TrendingRouteCard } from "./explore-trending";
+export { CommunityPickPanel, TrendingRoutesList };

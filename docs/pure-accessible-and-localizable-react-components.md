@@ -855,9 +855,9 @@ user settings.
 **Step-by-Step Implementation:**
 
 1. **Foundation (Behavioral Layer):** The component's structure is defined
-    using Radix UI primitives. `AlertDialog.Root` creates the modal context,
-    and `Form.Root` provides the accessible form structure. This initial step
-    produces an unstyled but fully functional and accessible component.
+   using Radix UI primitives. `AlertDialog.Root` creates the modal context,
+   and `Form.Root` provides the accessible form structure. This initial step
+   produces an unstyled but fully functional and accessible component.
 
     ```typescript
     // UserSettingsModal.view.tsx (initial structure)
@@ -881,12 +881,12 @@ user settings.
     ```
 
 2. **Styling (Presentational Layer):** DaisyUI and Tailwind CSS classes are
-    applied to the Radix primitives. `AlertDialog.Content` gets `modal-box`,
-    `Form.Field` gets `form-control`, and so on. Responsive prefixes like `md:`
-    are used to adjust layout for larger screens.
+   applied to the Radix primitives. `AlertDialog.Content` gets `modal-box`,
+   `Form.Field` gets `form-control`, and so on. Responsive prefixes like `md:`
+   are used to adjust layout for larger screens.
 
 3. **State & Logic (Hook Layer):** A `useUserSettingsForm` hook is created to
-    encapsulate all logic.
+   encapsulate all logic.
 
     - **Localization:** The hook begins by calling
       `useTranslation('userProfile')` to get the `t` function. It prepares all
@@ -940,10 +940,10 @@ user settings.
     ```
 
 4. **Connecting the View (Synthesis):** The final `UserSettingsModal.view.tsx`
-    is a pure presentational component. It is wrapped in `React.memo` and
-    receives all its data and callbacks from the `useUserSettingsForm` hook via
-    props. It has no internal logic, no direct calls to state management or
-    data fetching libraries, and no direct knowledge of the i18n system.
+   is a pure presentational component. It is wrapped in `React.memo` and
+   receives all its data and callbacks from the `useUserSettingsForm` hook via
+   props. It has no internal logic, no direct calls to state management or
+   data fetching libraries, and no direct knowledge of the i18n system.
 
 This architecture achieves the ultimate separation of concerns. The view
 component is "language-agnostic"; it simply renders the strings it is given.

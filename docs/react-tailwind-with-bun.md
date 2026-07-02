@@ -136,7 +136,7 @@ Bun bundles HTML, TS/JS, CSS assets. Use `--production` for minification and tre
 bun build ./index.html --production --outdir=dist
 ```
 
-You’ll get a *fully bundled* `dist/` directory ready to host anywhere.
+You’ll get a _fully bundled_ `dist/` directory ready to host anywhere.
 
 ---
 
