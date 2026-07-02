@@ -1352,9 +1352,9 @@ npm list | grep postcss
 ## v3 to v4 Migration Checklist
 
 ### Pre-Migration
-- [ ] Backup your project
-- [ ] Ensure Node.js 20+ is installed
-- [ ] Check browser support requirements (Safari 16.4+, Chrome 111+, Firefox 128+)
+- [] Backup your project
+- [] Ensure Node.js 20+ is installed
+- [] Check browser support requirements (Safari 16.4+, Chrome 111+, Firefox 128+)
 
 ### Automated Migration
 ```bash
@@ -1362,21 +1362,21 @@ npx @tailwindcss/upgrade@next
 ```
 
 ### Manual Verification
-- [ ] Replace `@tailwind` directives with `@import "tailwindcss"`
-- [ ] Move `tailwind.config.js` content to CSS `@theme`
-- [ ] Update deprecated utility classes
-- [ ] Test container queries functionality
-- [ ] Verify custom component styles
-- [ ] Check 3D transform support
-- [ ] Test mask utilities if used
-- [ ] Validate color consistency (OKLCH vs RGB)
+- [] Replace `@tailwind` directives with `@import "tailwindcss"`
+- [] Move `tailwind.config.js` content to CSS `@theme`
+- [] Update deprecated utility classes
+- [] Test container queries functionality
+- [] Verify custom component styles
+- [] Check 3D transform support
+- [] Test mask utilities if used
+- [] Validate color consistency (OKLCH vs RGB)
 
 ### Testing
-- [ ] Test in all target browsers
-- [ ] Verify responsive design still works
-- [ ] Check dark mode functionality
-- [ ] Test custom animations
-- [ ] Validate accessibility features
+- [] Test in all target browsers
+- [] Verify responsive design still works
+- [] Check dark mode functionality
+- [] Test custom animations
+- [] Validate accessibility features
 
 ## Production-Ready Component Patterns
 

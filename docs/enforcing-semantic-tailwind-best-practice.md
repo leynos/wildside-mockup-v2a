@@ -9,7 +9,7 @@
 ## 0) Scope & Philosophy
 
 - **Files:** `.tsx`, `.html`, `.css` (Tailwind v4 + DaisyUI v5).
-- **Primary tool:** **BiomeJS** linter with **GritQL** rules (diagnostics only).  
+- **Primary tool:** **BiomeJS** linter with **GritQL** rules (diagnostics only).
 - **Fallbacks:**
   - **Stylelint** — design‑token enforcement, CSS `@apply` hygiene, units/specificity.
   - **Semgrep** — simple cross‑language regex/AST patterns (HTML/JSX) where easier than GritQL.
@@ -271,13 +271,13 @@ These heuristics focus on **structural intent** rather than raw class similarity
 
 ### 1) “Div/span soup” (utility-only wrapper chains)
 - **Signal**: Two or more nested `<div>`/`<span>` nodes whose only attribute is a utility-heavy `className` (no `role`, `aria-*`, `id`, `data-*`, event handlers).
-- **Meaning**: The wrapper is expressing a *layout concept* (stack, cluster, surface) without naming it.
+- **Meaning**: The wrapper is expressing a _layout concept_ (stack, cluster, surface) without naming it.
 - **Action**: Warn and suggest extracting a named container class (e.g. `.stack`, `.cluster`, `.card__body`) via `@apply`.
 - **Implementation notes**: GritQL rule that walks parent/child utility-only nodes and fires when depth ≥ 2; fallback AST walker if needed.
 
 ### 2) Landmarks and slot semantics
 - **Signal**: Utility-only child elements inside semantic regions such as `<nav>`, `<header>`, `<ul>`, `<form>`.
-- **Meaning**: These are *slots* (navigation links, menu items, form controls) that deserve a named semantic class.
+- **Meaning**: These are _slots_ (navigation links, menu items, form controls) that deserve a named semantic class.
 - **Action**: Suggest contextual names like `.nav__link`, `.nav__link--active`, `.menu__item`, `.form__label`.
 - **Implementation notes**: GritQL ancestor constraint rules that tailor the suggestion to the enclosing landmark.
 
@@ -532,7 +532,7 @@ semantic fixes over ad hoc opt-outs.
 **Q: Will `@apply` bloat CSS?**  
 A: We extract only repeated patterns. Tailwind still tree‑shakes class‑based styles; the few semantic classes you add are minimal and intentionally reused.
 
-**Q: When is it *okay* to keep utilities inline?**  
+**Q: When is it _okay_ to keep utilities inline?**  
 A: One‑offs, quick prototypes, and tiny adjustments local to a component. Once the same chunk appears twice, prefer extracting it.
 
 **Q: How strict are thresholds?**  
@@ -542,8 +542,8 @@ A: Configurable. Start with `repeatMinClasses=4`, `repeatMinOccurrences=2`. Tigh
 
 ## 15) Ready-to-run checklist
 
-1) Add files: `tools/grit/*.grit`, `tools/semantic-lint.config.json`, `tools/stylelint.config.cjs`, `tools/semgrep-semantic.yml`.  
-2) Wire **Biome** plugin or wrapper to execute Grit rules (paths above).  
-3) Add **`semantic.css`** and begin extracting repeated patterns with `@apply`.  
-4) Add **`lint:semantic`** script and the CI workflow.  
+1) Add files: `tools/grit/*.grit`, `tools/semantic-lint.config.json`, `tools/stylelint.config.cjs`, `tools/semgrep-semantic.yml`.
+2) Wire **Biome** plugin or wrapper to execute Grit rules (paths above).
+3) Add **`semantic.css`** and begin extracting repeated patterns with `@apply`.
+4) Add **`lint:semantic`** script and the CI workflow.
 5) Iterate on thresholds, allowlist prefixes, and rule messages as the team gains patterns.

@@ -42,7 +42,7 @@ If you keep your components in unusual places, add explicit sources:
 2. **Headless behaviour**: Radix primitives provide accessibility and state via attributes like `data-state`, `data-disabled`, `aria-expanded`.
 3. **Component classes**: daisyUI gives structural styles (`btn`, `card`, `input`, `menu`, `alert`, …) and colour roles (`btn-primary`, `bg-base-100`, …).
 4. **Utilities**: Tailwind v4 utilities for spacing, layout, visibility, state variants, container queries, etc.
-5. **Semantic wrappers**: project-specific *meaningful* classes (e.g., `.cta`, `.product-card`) implemented using Tailwind’s `@utility` (and selective `@apply`) to encode intent and keep markup tidy where repetition would otherwise explode.
+5. **Semantic wrappers**: project-specific _meaningful_ classes (e.g., `.cta`, `.product-card`) implemented using Tailwind’s `@utility` (and selective `@apply`) to encode intent and keep markup tidy where repetition would otherwise explode.
 
 The cascade should flow so that **inline utilities win** over broad component styles. That keeps local adjustments easy.
 
@@ -98,7 +98,7 @@ Use them in markup where repetition would otherwise get silly:
 <button class="cta/ghost">Learn more</button>
 ```
 
-> **Rule of thumb:** If a class name describes *what the thing is* to the business or user, keep it. If it describes *how it looks* (e.g., `.blue-btn`, `.mt-4`), prefer utilities.
+> **Rule of thumb:** If a class name describes _what the thing is_ to the business or user, keep it. If it describes _how it looks_ (e.g., `.blue-btn`, `.mt-4`), prefer utilities.
 
 ---
 
@@ -193,7 +193,7 @@ Example for a menu item:
 ## 6) `@apply` vs `@utility` (v4 reality)
 
 - Use **`@apply`** to inline Tailwind **utilities** into CSS when you must style third‑party DOM, author CSS Modules / Vue `<style>` blocks, or reduce repetition inside a semantic wrapper. Pair it with `@reference` when applying inside component‑scoped styles.
-- Use **`@utility`** to register a **custom utility** (or a small family of them) that participates in Tailwind’s variant system (`hover:`, `md:`, `data-[state=…]:`, etc.). Prefer this for *project‑specific shorthands* that you want to behave like first‑class utilities.
+- Use **`@utility`** to register a **custom utility** (or a small family of them) that participates in Tailwind’s variant system (`hover:`, `md:`, `data-[state=…]:`, etc.). Prefer this for _project‑specific shorthands_ that you want to behave like first‑class utilities.
 
 Examples:
 
@@ -215,7 +215,7 @@ Examples:
 ### 6.1 Encode state with selectors, not variant `@apply`
 
 Tailwind v4 only inlines **plain utilities** when you call `@apply`. Variant
-helpers such as `hover:`, `group-…`, or `data-[state=…]:…` are *not* expanded,
+helpers such as `hover:`, `group-…`, or `data-[state=…]:…` are _not_ expanded,
 which means the rule below will quietly drop the interactive parts:
 
 ```css
@@ -226,7 +226,7 @@ which means the rule below will quietly drop the interactive parts:
 ```
 
 Instead, combine `@apply` (for the static bits) with explicit selectors for
-stateful styles. This keeps the markup clean *and* ensures Radix data attributes
+stateful styles. This keeps the markup clean _and_ ensures Radix data attributes
 toggle the look correctly:
 
 ```css
@@ -258,7 +258,7 @@ Markup stays semantic:
 >
 > **Ordering hint:** When your markup keeps Tailwind utilities (e.g. `bg-base-200/60`
 > or `text-base-content/70`) alongside a semantic class, place the stateful
-> selectors in the `@layer utilities` block so they compile *after* the inline
+> selectors in the `@layer utilities` block so they compile _after_ the inline
 > utilities. Otherwise those utilities will win the cascade and your state
 > styles will never show up.
 
@@ -311,12 +311,12 @@ export function PlanCard() {
 
 ## 9) Checklist (fast sanity)
 
-- [ ] Semantic element first; ARIA as clarifier.
-- [ ] Prefer daisyUI tokens (`bg-primary`, `rounded-box`, `text-base-content`) for theme‑aware styles.
-- [ ] Use Tailwind utilities for per‑instance polish and state.
-- [ ] Create semantic wrappers only for reused intent; implement with `@utility`/`@apply` (utilities only).
-- [ ] Target Radix state via `data-[state=…]`, `data-[highlighted]`, `data-[disabled]`.
-- [ ] Keep specificity low; let utilities win locally.
+- [] Semantic element first; ARIA as clarifier.
+- [] Prefer daisyUI tokens (`bg-primary`, `rounded-box`, `text-base-content`) for theme‑aware styles.
+- [] Use Tailwind utilities for per‑instance polish and state.
+- [] Create semantic wrappers only for reused intent; implement with `@utility`/`@apply` (utilities only).
+- [] Target Radix state via `data-[state=…]`, `data-[highlighted]`, `data-[disabled]`.
+- [] Keep specificity low; let utilities win locally.
 
 ---
 
@@ -428,9 +428,9 @@ Tailwind v4 lets you reference custom properties in arbitrary values without wri
 <button class="ring-(--color-primary) ring-2 outline-(--color-primary)">Focus</button>
 ```
 
-### 11.5 Project utilities that *feel* first‑class
+### 11.5 Project utilities that _feel_ first‑class
 
-Where you need semantic *wrappers*, register them as **custom utilities** so they inherit variants (`hover:`, `md:`, `data-[state=...]`) like any Tailwind class.
+Where you need semantic _wrappers_, register them as **custom utilities** so they inherit variants (`hover:`, `md:`, `data-[state=...]`) like any Tailwind class.
 
 ```css
 /* A semantic CTA built from tokens (no component class @apply) */
@@ -534,4 +534,4 @@ If you want matching Tailwind utilities, back them with `@theme`:
 - In component‑scoped styles, add `@reference "../app.css";` before using `@apply` so Tailwind can resolve your tokens.
 - Don’t `@apply` plugin component classes (`btn`, `card`); compose them in markup or rebuild with tokens.
 
-**Bottom line:** put *values* in `@theme`, map *roles* to daisyUI tokens, and style *states* with Radix data‑attrs + utility variants. One vocabulary, zero fights.
+**Bottom line:** put _values_ in `@theme`, map _roles_ to daisyUI tokens, and style _states_ with Radix data‑attrs + utility variants. One vocabulary, zero fights.

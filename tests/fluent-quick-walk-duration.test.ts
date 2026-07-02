@@ -40,7 +40,7 @@ describe("quick walk duration Fluent message", () => {
     const bundle = new FluentBundle("it");
     bundle.addResource(new FluentResource(source));
     const message = bundle.getMessage("quick-walk-duration-format");
-    if (!message || !message.value) throw new Error("missing message");
+    if (!message?.value) throw new Error("missing message");
     const pattern = message.value;
     expect(() => bundle.formatPattern(pattern)).toThrow();
   });

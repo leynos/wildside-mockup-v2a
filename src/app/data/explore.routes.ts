@@ -249,5 +249,5 @@ export const curatedRouteMaps: Record<string, string> = {
   "after-dark": walkRouteMap3,
 };
 
-export type { Route, RouteCollection, CommunityPick, TrendingRouteHighlight };
+export type { CommunityPick, Route, RouteCollection, TrendingRouteHighlight };
 export type ExploreRouteBadgeId = BadgeId;

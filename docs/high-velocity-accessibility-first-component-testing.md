@@ -20,7 +20,7 @@ Unfortunately, Bun’s test runner **does not yet support** the more standards-c
 
 - The only viable alternative (JSDOM) isn’t supported in Bun’s native runner.
 
-In summary, **Bun alone cannot run component-level accessibility scans** today. This impasse is not a matter of configuration or minor bug; it’s a fundamental limitation of the current Bun + Happy DOM pairing. We must therefore adjust our strategy to retain Bun’s performance benefits *and* enable `axe-core` scans through other means. The solution is a **hybrid testing approach**: run most tests in Bun for speed, but outsource accessibility-specific tests to a Node.js environment that supports JSDOM.
+In summary, **Bun alone cannot run component-level accessibility scans** today. This impasse is not a matter of configuration or minor bug; it’s a fundamental limitation of the current Bun + Happy DOM pairing. We must therefore adjust our strategy to retain Bun’s performance benefits _and_ enable `axe-core` scans through other means. The solution is a **hybrid testing approach**: run most tests in Bun for speed, but outsource accessibility-specific tests to a Node.js environment that supports JSDOM.
 
 ### 1.2 A Hybrid Solution: Node.js + JSDOM for A11y Scans
 
@@ -159,7 +159,7 @@ test('Button has no accessibility violations and is properly labelled', async ()
 `
 ```
 
-In this example, when run in a Node+JSDOM environment, the `Button` component is rendered off-screen and scanned. The test will fail if, for instance, the `<Button>` component is missing an accessible name or has ARIA attributes misused. By including a Testing Library query (`getByRole('button', { name: /click me/i })`), we double-verify that the component is not only *free of axe-detectable violations* but also that it adheres to expected accessibility APIs (here, that a button with text "Click Me" indeed yields an element with role `button` and that label).
+In this example, when run in a Node+JSDOM environment, the `Button` component is rendered off-screen and scanned. The test will fail if, for instance, the `<Button>` component is missing an accessible name or has ARIA attributes misused. By including a Testing Library query (`getByRole('button', { name: /click me/i })`), we double-verify that the component is not only _free of axe-detectable violations_ but also that it adheres to expected accessibility APIs (here, that a button with text "Click Me" indeed yields an element with role `button` and that label).
 
 We apply this pattern to all interactive components. A more complex example is a **Modal** component which might be hidden or shown based on props:
 
@@ -204,9 +204,9 @@ Having the right tools is only half the battle. We also enforce **strict convent
 
 - **Use of Accessible Queries:** Tests must interact with the rendered DOM the same way a user or assistive technology would – i.e. by using accessible labels, roles, and text content. We forbid selecting elements by obscure hooks or internal IDs whenever a semantic alternative exists. In practice, this means favoring Testing Library queries like `getByRole`, `getByLabelText`, or `getByText` over queries like `querySelector('[data-testid="..."]')`. If our tests cannot find an element by a meaningful label or role, that’s a red flag that the component might not be accessible.
 
-*Policy:* The use of `data-testid` (or similar testing-only attributes) is considered a last resort. In code review, any test that uses a test ID must justify why a role or label could not be used instead. Often, the remedy is to improve the component (e.g. add an `aria-label` or proper text) such that a more user-centric query becomes possible. This policy creates a virtuous cycle: it pushes developers to build components with accessibility in mind (so they are easily testable), and it makes the tests more robust by tying them to user-visible strings and roles.
+_Policy:_ The use of `data-testid` (or similar testing-only attributes) is considered a last resort. In code review, any test that uses a test ID must justify why a role or label could not be used instead. Often, the remedy is to improve the component (e.g. add an `aria-label` or proper text) such that a more user-centric query becomes possible. This policy creates a virtuous cycle: it pushes developers to build components with accessibility in mind (so they are easily testable), and it makes the tests more robust by tying them to user-visible strings and roles.
 
-*Automation:* Biome loads the `tools/grit/rule-testing-*.grit` patterns, which emit the
+_Automation:_ Biome loads the `tools/grit/rule-testing-*.grit` patterns, which emit the
 `test/no-testid-selectors`, `test/no-queryselector`,
 `test/prefer-byrole-for-actions`, and `test/no-raw-dom-lookup` diagnostics for
 test files. These rules error on any `*ByTestId` lookup (or raw
@@ -217,7 +217,7 @@ Playwright. If a semantic selector is genuinely impossible, add an
 `// biome-ignore lint/test/no-testid-selectors` suppression so reviewers can
 see the trade-off.
 
-*Example:* In the `GlobalControls` component test, instead of selecting a toggle button by an ID or class, we query it by its accessible name:
+_Example:_ In the `GlobalControls` component test, instead of selecting a toggle button by an ID or class, we query it by its accessible name:
 
 ```
 tsxCopy code`const displayToggle = mountNode.querySelector("button[aria-label='Switch to Full View']");
@@ -290,7 +290,7 @@ However, we must be strategic to avoid slowing down the suite. Running a full ax
 
 - **After major UI transitions:** For example, after opening a modal, after navigating to a new page, after triggering a form validation that reveals errors, etc. These are points where new content appears or state significantly changes, warranting a re-check.
 
-- **Scope the scan to changed regions:** Using `AxeBuilder.include(selector)` we can limit analysis to specific parts of the DOM. For instance, after opening a modal, we can scan *only* the modal dialog element instead of the entire page (which saves time and focuses results).
+- **Scope the scan to changed regions:** Using `AxeBuilder.include(selector)` we can limit analysis to specific parts of the DOM. For instance, after opening a modal, we can scan _only_ the modal dialog element instead of the entire page (which saves time and focuses results).
 
 **Example – Modal Workflow:** Consider a test of an e-commerce flow where clicking "Add to Cart" opens a dialog. We can write:
 
@@ -369,7 +369,7 @@ We do similar tests for menus, dialogs, and other composite components:
 
 - Ensuring **Escape** closes dialogs or dropdowns when focused inside them.
 
-- Verifying there are no **keyboard traps**: focus should never get stuck in a loop or lost off-screen. For modals, we *want* focus trap within the modal while it’s open (so Tab doesn’t go behind the modal), but when the modal closes, focus should return to a sensible place (often the button that opened it).
+- Verifying there are no **keyboard traps**: focus should never get stuck in a loop or lost off-screen. For modals, we _want_ focus trap within the modal while it’s open (so Tab doesn’t go behind the modal), but when the modal closes, focus should return to a sensible place (often the button that opened it).
 
 These tests give us confidence that a sighted keyboard user or a visually impaired user using keyboard + screen reader can navigate and operate the app fully.
 
@@ -618,7 +618,7 @@ We use Playwright and our Node tests’ reporting capabilities to output machine
 
 Our team’s workflow is then: if a test fails, especially an accessibility one, the engineer can download the report artifact and see exactly what failed – for example, a Playwright trace showing that after clicking a button, the focus did not move as expected, or an axe report highlighting a missing form label.
 
-Finally, we maintain a **culture of accessibility ownership**. Failing tests are not just turned green by updating the tests – the expectation is to *fix the underlying issue*. Because the tests are designed to catch real problems, the correct response to a failure is usually to correct the component or page (e.g., add the missing `aria-label`, adjust the color contrast in CSS, fix the focus logic in JavaScript).
+Finally, we maintain a **culture of accessibility ownership**. Failing tests are not just turned green by updating the tests – the expectation is to _fix the underlying issue_. Because the tests are designed to catch real problems, the correct response to a failure is usually to correct the component or page (e.g., add the missing `aria-label`, adjust the color contrast in CSS, fix the focus logic in JavaScript).
 
 To help manage this, we integrate severity tagging:
 
@@ -722,8 +722,8 @@ By modernizing the original design to use **Bun for speed** and a **Node assist 
 
 ## Footnotes
 
-- *Happy DOM issue tracker – documented incompatibility of `Node.isConnected` implementation with axe-core’s expectations.* ↩
+- _Happy DOM issue tracker – documented incompatibility of `Node.isConnected` implementation with axe-core’s expectations._ ↩
 
-- *Bun GitHub issue #3554 – tracking request for JSDOM support in Bun’s test runner (unresolved as of 2025).* ↩
+- _Bun GitHub issue #3554 – tracking request for JSDOM support in Bun’s test runner (unresolved as of 2025)._ ↩
 
-- *Deque `axe-core` documentation – notes on JSDOM support and rules like color-contrast being inapplicable in headless DOM.* ↩
+- _Deque `axe-core` documentation – notes on JSDOM support and rules like color-contrast being inapplicable in headless DOM._ ↩
