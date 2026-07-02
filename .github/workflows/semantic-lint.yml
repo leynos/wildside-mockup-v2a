@@ -13,6 +13,7 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: "latest"
+      # uv provides uvx, which `bun semantic` uses to run semgrep.
+      - uses: astral-sh/setup-uv@v7
       - run: bun install --frozen-lockfile
-      # Temporarily disabled until the semantic-class migration is complete.
-      # - run: bun semantic
+      - run: bun semantic
