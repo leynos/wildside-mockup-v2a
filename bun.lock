@@ -30,7 +30,7 @@
         "i18next": "^26.3.1",
         "i18next-browser-languagedetector": "^8.2.0",
         "i18next-fluent": "^2.0.0",
-        "i18next-fluent-backend": "^1.0.0",
+        "i18next-fluent-backend": "^1.0.1",
         "maplibre-gl": "^5.24.0",
         "react": "^19.2.7",
         "react-dom": "^19.2.7",
@@ -811,7 +811,7 @@
 
     "i18next-fluent": ["i18next-fluent@2.0.0", "", { "dependencies": { "@fluent/bundle": "^0.13.0", "fluent_conv": "^3.1.0" } }, "sha512-k69kvftj02YNMtls1oy5TkbsjEDUlkfXcApBIv3gCnQTTDPTNVekweIGC6V5m/yC2ce6SNqkzlPpdB24OgEEgg=="],
 
-    "i18next-fluent-backend": ["i18next-fluent-backend@1.0.0", "", { "dependencies": { "fluent_conv": "^3.1.0" } }, "sha512-/7Bnx8nWodDz5hnwrLR/ycScz3VCgZ/JS6lv4TLaZCNupnMS3fSLvFaMfkhJ7YmQ5NadalYmVLAvSR9JqVWYCw=="],
+    "i18next-fluent-backend": ["i18next-fluent-backend@1.0.1", "", { "dependencies": { "fluent_conv": "^3.1.0" } }, "sha512-kyVtbPOEy29QCLH93aVUgi1U8cWMzKgDKSd8XtneVD5OcJyrXBXKhwgH9HovKwkew/Q//TmxkZLf0a7opOuhLg=="],
 
     "iconv-lite": ["iconv-lite@0.6.3", "", { "dependencies": { "safer-buffer": ">= 2.1.2 < 3.0.0" } }, "sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw=="],
 
