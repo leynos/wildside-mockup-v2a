@@ -83,7 +83,7 @@
     "postcss": "^8.5.15",
     "semgrep": "^0.0.1",
     "style-dictionary": "^5.5.0",
-    "stylelint": "^16.25.0",
+    "stylelint": "^17.14.0",
     "stylelint-declaration-strict-value": "^1.11.1",
     "tsx": "^4.23.0",
     "typescript": "^6.0.3",
