@@ -1,4 +1,4 @@
-/** @file Wizard route detail row localisation maps. */
+/** @file Wizard route detail row localization maps. */
 
 import type { EntityLocalizations } from "../domain/entities/localization";
 import { localisation } from "./fixture-localization";

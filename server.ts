@@ -2,7 +2,7 @@
 
 import { serve } from "bun";
 
-function normaliseBasePath(input: string | undefined): string {
+function normalizeBasePath(input: string | undefined): string {
   if (!input || input === "/") {
     return "/";
   }
@@ -14,7 +14,7 @@ function normaliseBasePath(input: string | undefined): string {
 const port = Number(process.env["PORT"] ?? 3000);
 const dist = new URL("./dist", import.meta.url).pathname;
 // biome-ignore lint/complexity/useLiteralKeys: process.env exposes string index keys at runtime.
-const basePath = normaliseBasePath(process.env["APP_BASE_PATH"]);
+const basePath = normalizeBasePath(process.env["APP_BASE_PATH"]);
 
 serve({
   port,

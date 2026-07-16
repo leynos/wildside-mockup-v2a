@@ -117,7 +117,7 @@ export const applyDocumentLocale = (language: string | undefined): void => {
   }
 };
 
-// Initialise immediately so that React components can rely on Suspense to wait for .ftl bundles.
+// Initialize immediately so that React components can rely on Suspense to wait for .ftl bundles.
 export const i18nReady = i18n
   .use(FluentBackend)
   .use(LanguageDetector)

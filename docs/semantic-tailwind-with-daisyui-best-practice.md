@@ -457,7 +457,7 @@ Usage:
 
 ### 11.6 Tokens × Radix state
 
-Radix sets `data-state`, `data-disabled`, `data-highlighted`, etc. Pair those with tokenised utilities for consistent theming and good contrast.
+Radix sets `data-state`, `data-disabled`, `data-highlighted`, etc. Pair those with tokenized utilities for consistent theming and good contrast.
 
 ```tsx
 <Toggle.Root
@@ -517,7 +517,7 @@ If you want matching Tailwind utilities, back them with `@theme`:
 .card-2 {@apply shadow-surface-2 rounded-box;}
 ```
 
-**b) Tokenised prose**
+**b) Tokenized prose**
 ```css
 @utility prose-muted { color: color-mix(in oklab, var(--color-base-content) 65%, transparent); }
 ```

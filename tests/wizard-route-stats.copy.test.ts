@@ -3,7 +3,7 @@ import { buildWizardRouteStats } from "../src/app/features/wizard/step-three/bui
 import { createStubT } from "./i18n-stub";
 
 describe("buildWizardRouteStats", () => {
-  it("localises wizard route stat units", () => {
+  it("localizes wizard route stat units", () => {
     const { t: stubT, calls } = createStubT();
 
     const stats = buildWizardRouteStats(stubT, "en-GB", "metric");

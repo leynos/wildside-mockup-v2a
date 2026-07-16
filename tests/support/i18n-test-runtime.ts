@@ -11,7 +11,7 @@ type FetchInput = Parameters<GlobalFetch>[0];
 const projectRoot = resolve(process.cwd());
 const publicDir = resolve(projectRoot, "public");
 
-const normaliseUrl = (input: FetchInput): string => {
+const normalizeUrl = (input: FetchInput): string => {
   if (typeof input === "string") {
     return input;
   }
@@ -44,7 +44,7 @@ const createFetchProxy = (target: typeof globalThis): GlobalFetch => {
   const fallbackFetch = target.fetch?.bind(target);
 
   const proxy = (async (input, init) => {
-    const url = stripOrigin(normaliseUrl(input));
+    const url = stripOrigin(normalizeUrl(input));
 
     if (url.startsWith("/locales/")) {
       const payload = await readLocaleAsset(url);
@@ -75,7 +75,7 @@ export async function setupI18nTestHarness(target: typeof globalThis = globalThi
     target.window.fetch = patchedFetch;
   }
 
-  const initialiseLocalStorage = (storageTarget: typeof globalThis | Window | undefined | null) => {
+  const initializeLocalStorage = (storageTarget: typeof globalThis | Window | undefined | null) => {
     if (
       storageTarget &&
       typeof storageTarget.localStorage !== "undefined" &&
@@ -85,8 +85,8 @@ export async function setupI18nTestHarness(target: typeof globalThis = globalThi
     }
   };
 
-  initialiseLocalStorage(target);
-  initialiseLocalStorage(target.window);
+  initializeLocalStorage(target);
+  initializeLocalStorage(target.window);
 
   const { i18nReady } = await import("../../src/i18n");
   await i18nReady;

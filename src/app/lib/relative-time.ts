@@ -15,7 +15,7 @@ const UNIT_THRESHOLDS: Array<{ unit: SupportedUnit; seconds: number }> = [
   { unit: "second", seconds: 1 },
 ];
 
-const normaliseInstant = (input: Date | number | string): number => {
+const normalizeInstant = (input: Date | number | string): number => {
   if (input instanceof Date) {
     return input.getTime();
   }
@@ -39,7 +39,7 @@ export const formatRelativeTime = (
   locale: string,
   now: number,
 ): string => {
-  const targetMs = normaliseInstant(input);
+  const targetMs = normalizeInstant(input);
   if (!Number.isFinite(targetMs)) return "";
 
   const deltaSeconds = Math.round((targetMs - now) / MILLISECONDS_PER_SECOND);

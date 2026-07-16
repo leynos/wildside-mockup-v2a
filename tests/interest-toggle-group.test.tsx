@@ -14,7 +14,7 @@ const renderWithI18n = (ui: JSX.Element) =>
   render(<I18nextProvider i18n={i18n}>{ui}</I18nextProvider>);
 
 describe("InterestToggleGroup", () => {
-  it("renders localised interest labels and toggles selection", async () => {
+  it("renders localized interest labels and toggles selection", async () => {
     await changeLanguage("es");
 
     let selected: string[] = ["street-art"];

@@ -18,7 +18,7 @@ const loadMessage = (minutes: number, locale = "en-US") => {
 };
 
 describe("quick walk duration Fluent message", () => {
-  it("pluralises minutes using the term with count", () => {
+  it("pluralizes minutes using the term with count", () => {
     expect(loadMessage(1)).toBe("1 minute");
     expect(loadMessage(2)).toBe("2 minutes");
   });
@@ -29,7 +29,7 @@ describe("quick walk duration Fluent message", () => {
     expect(loadMessage(0, "it")).toBe("0 minuti");
   });
 
-  it("pluralises Vietnamese minute labels correctly", () => {
+  it("pluralizes Vietnamese minute labels correctly", () => {
     expect(loadMessage(1, "vi")).toBe("1 phút");
     expect(loadMessage(3, "vi")).toBe("3 phút");
   });

@@ -37,7 +37,7 @@ describe("Interest-driven UI", () => {
     expect(screen.getByText("Comida callejera")).toBeInTheDocument();
   });
 
-  it("uses registry localisations in DiscoverScreen interest chips", async () => {
+  it("uses registry localizations in DiscoverScreen interest chips", async () => {
     await changeLanguage("es");
 
     renderWithI18n(

@@ -21,7 +21,7 @@ const getWrappedCustomize = () => (
 
 const renderWithI18n = () => render(getWrappedCustomize());
 
-describe("CustomizeScreen localisation", () => {
+describe("CustomizeScreen localization", () => {
   it("swaps route preview labels when the language changes", async () => {
     await changeLanguage("es");
     const { rerender } = renderWithI18n();

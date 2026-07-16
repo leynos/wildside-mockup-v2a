@@ -1,4 +1,4 @@
-/** @file Hook to prepare formatted and localised data for a saved route. */
+/** @file Hook to prepare formatted and localized data for a saved route. */
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,10 +18,10 @@ export type SavedRouteData = RouteFormatters &
   };
 
 /**
- * Prepare formatted and localised data for presenting a saved route.
+ * Prepare formatted and localized data for presenting a saved route.
  *
  * @param route - The walk route summary to format.
- * @returns Localised route copy, formatted metrics, and route-related labels.
+ * @returns Localized route copy, formatted metrics, and route-related labels.
  *
  * @example
  * ```tsx

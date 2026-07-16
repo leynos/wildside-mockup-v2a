@@ -32,7 +32,7 @@ describe("WizardStepOne duration markers", () => {
     localStorage.clear();
   });
 
-  it("renders pluralised markers in en-GB", async () => {
+  it("renders pluralized markers in en-GB", async () => {
     await renderStepOne("en-GB");
 
     expect(screen.getByText("15 minutes")).toBeInTheDocument();

@@ -7,7 +7,7 @@
  * prefer redacted values, salted hashes, or opaque IDs that cannot be reversed
  * into the original secret. When in doubt, omit the field entirely.
  *
- * This module centralises structured logging so that UI components do not call
+ * This module centralizes structured logging so that UI components do not call
  * console methods directly. In a real deployment, these helpers would be wired
  * to an observability stack (e.g., Sentry, Datadog, or a custom endpoint).
  */
@@ -34,12 +34,12 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   value !== null &&
   (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
 
-const sanitiseContext = (context?: LogContext): LogContext | undefined => {
+const sanitizeContext = (context?: LogContext): LogContext | undefined => {
   if (!context) return context;
 
   const seen = new WeakMap<object, object>();
 
-  const cloneAndSanitise = (value: unknown, key?: string): unknown => {
+  const cloneAndSanitize = (value: unknown, key?: string): unknown => {
     if (typeof key === "string" && sensitiveKeyPattern.test(key)) {
       return REPLACEMENT;
     }
@@ -51,7 +51,7 @@ const sanitiseContext = (context?: LogContext): LogContext | undefined => {
       const result: unknown[] = [];
       seen.set(value, result);
       value.forEach((item, index) => {
-        result[index] = cloneAndSanitise(item);
+        result[index] = cloneAndSanitize(item);
       });
       return result;
     }
@@ -63,7 +63,7 @@ const sanitiseContext = (context?: LogContext): LogContext | undefined => {
       const result: Record<string, unknown> = {};
       seen.set(value, result);
       Object.entries(value).forEach(([nestedKey, nestedValue]) => {
-        result[nestedKey] = cloneAndSanitise(nestedValue, nestedKey);
+        result[nestedKey] = cloneAndSanitize(nestedValue, nestedKey);
       });
       return result;
     }
@@ -71,13 +71,13 @@ const sanitiseContext = (context?: LogContext): LogContext | undefined => {
     return value;
   };
 
-  return cloneAndSanitise(context) as LogContext;
+  return cloneAndSanitize(context) as LogContext;
 };
 
 const redactText = (text: string): string =>
   text.replace(emailLikePattern, REPLACEMENT).replace(tokenLikePattern, REPLACEMENT);
 
-const normaliseError = (err: unknown): unknown => {
+const normalizeError = (err: unknown): unknown => {
   if (err instanceof Error) {
     return {
       name: err.name,
@@ -107,13 +107,13 @@ const logToConsole = (
 
   const hasContext = context && Object.keys(context).length > 0;
   const hasError = typeof error !== "undefined";
-  const sanitisedContext = hasContext ? sanitiseContext(context) : undefined;
+  const sanitizedContext = hasContext ? sanitizeContext(context) : undefined;
   const payload =
-    sanitisedContext || hasError
-      ? { ...(sanitisedContext ?? {}), ...(hasError ? { error: normaliseError(error) } : {}) }
+    sanitizedContext || hasError
+      ? { ...(sanitizedContext ?? {}), ...(hasError ? { error: normalizeError(error) } : {}) }
       : undefined;
 
-  // Centralise console usage so lint rules remain quiet in UI components.
+  // Centralize console usage so lint rules remain quiet in UI components.
   // eslint-disable-next-line no-console
   if (payload) {
     console[level](message, payload);

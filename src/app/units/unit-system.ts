@@ -14,8 +14,8 @@ export const detectUnitSystem = (localeCode?: string): UnitSystem => {
     return "metric";
   }
 
-  const normalised = localeCode.toLowerCase();
-  return IMPERIAL_LOCALE_PREFIXES.some((prefix) => normalised.startsWith(prefix))
+  const normalized = localeCode.toLowerCase();
+  return IMPERIAL_LOCALE_PREFIXES.some((prefix) => normalized.startsWith(prefix))
     ? "imperial"
     : "metric";
 };

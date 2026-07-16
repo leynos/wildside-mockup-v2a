@@ -1,4 +1,4 @@
-/** @file Hook providing memoised route metrics (distance, duration, stops). */
+/** @file Hook providing memoized route metrics (distance, duration, stops). */
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,10 +14,10 @@ export type RouteMetrics = {
 };
 
 /**
- * Provides memoised, formatted route metrics for distance, duration, and stops.
+ * Provides memoized, formatted route metrics for distance, duration, and stops.
  *
  * @param route - The walk route summary containing raw metric values.
- * @returns Formatted metrics with localised values and unit labels.
+ * @returns Formatted metrics with localized values and unit labels.
  *
  * @example
  * ```tsx

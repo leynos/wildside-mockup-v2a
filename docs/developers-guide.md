@@ -32,3 +32,18 @@ upgrade traceability.
 When changing the workflow, keep `tests/semantic-lint-workflow.test.ts` in sync.
 That smoke test verifies that CI still installs `uvx` support before invoking
 the semantic gate and that the third-party action remains pinned.
+
+## Spelling and diagram gates
+
+Run `make spelling` to enforce en-GB-oxendict spelling across tracked files.
+The gate pins Typos 1.48.0 and checks exact phrase corrections that Typos cannot
+represent, including the required `hand-written` to `handwritten` correction.
+
+The generated `typos.toml` combines the shared estate dictionary with the
+repository-specific `typos.local.toml` overlay. Do not edit the generated file
+directly. Use `make spelling-config-write` to refresh the untracked shared
+dictionary cache when its authority is newer and regenerate the tracked file.
+The quality gate uses `make spelling-config` to detect generated drift.
+
+Run `make nixie` to validate Mermaid diagrams. CI installs Nixie CLI 1.1.0 and
+its Merman CLI 0.7.0 dependency before invoking the target.

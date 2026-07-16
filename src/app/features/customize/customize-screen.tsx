@@ -1,4 +1,4 @@
-/** @file Route customiser translating slider-heavy mockups to Radix UI. */
+/** @file Route customizer translating slider-heavy mockups to Radix UI. */
 import { useNavigate } from "@tanstack/react-router";
 import type { JSX } from "react";
 import { useCallback } from "react";

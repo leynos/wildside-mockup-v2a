@@ -193,7 +193,7 @@ describe("MapStateStore", () => {
     expect(map.jumpToCalls.at(-1)?.zoom).toBe(10);
   });
 
-  it("clears previous highlights when new points are emphasised", () => {
+  it("clears previous highlights when new points are emphasized", () => {
     store.actions.highlightPois(["blue-bottle-coffee"]);
     store.actions.registerMap(map as unknown as MapLibreMap);
 

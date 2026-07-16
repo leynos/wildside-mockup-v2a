@@ -4,7 +4,7 @@
  * Responsibilities:
  * - Render the walk completion hero (title and description).
  * - Show a map preview and completion badge.
- * - Display a localised avatar stack for favourite moments.
+ * - Display a localized avatar stack for favourite moments.
  *
  * Usage:
  * - `<WalkCompleteHero heroTitle="…" heroDescription="…" locale="en-GB" />`

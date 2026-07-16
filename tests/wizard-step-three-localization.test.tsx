@@ -1,5 +1,5 @@
 /**
- * @file Tests for wizard step-three localisation, covering stop note interpolation, badge labels,
+ * @file Tests for wizard step-three localization, covering stop note interpolation, badge labels,
  * and route description copy.
  */
 

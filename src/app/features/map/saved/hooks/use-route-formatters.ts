@@ -1,4 +1,4 @@
-/** @file Hook providing memoised formatters and lookups for route display. */
+/** @file Hook providing memoized formatters and lookups for route display. */
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ export type RouteFormatters = {
 };
 
 /**
- * Provides memoised number formatters and difficulty lookup for route display.
+ * Provides memoized number formatters and difficulty lookup for route display.
  *
  * @returns Formatters for numbers, ratings, and a difficulty label lookup map.
  *

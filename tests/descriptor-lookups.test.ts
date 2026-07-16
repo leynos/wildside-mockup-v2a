@@ -6,7 +6,7 @@ import type { LocaleCode } from "../src/app/domain/entities/localization";
 
 describe("descriptor lookup helpers", () => {
   describe("getTagDescriptor", () => {
-    it("returns a resolved descriptor with localisation applied", () => {
+    it("returns a resolved descriptor with localization applied", () => {
       const resolved = getTagDescriptor("coffee", "es-MX");
       expect(resolved).toBeDefined();
       expect(resolved?.localization.name).toBe("Café");
@@ -18,7 +18,7 @@ describe("descriptor lookup helpers", () => {
   });
 
   describe("getBadgeDescriptor", () => {
-    it("returns a resolved descriptor with localisation applied", () => {
+    it("returns a resolved descriptor with localization applied", () => {
       const resolved = getBadgeDescriptor("sunset-pick", "en-GB" satisfies LocaleCode);
       expect(resolved?.localization.shortLabel).toBe("Sunset");
     });

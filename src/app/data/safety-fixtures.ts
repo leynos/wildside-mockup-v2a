@@ -78,7 +78,7 @@ export const safetyToggles: SafetyToggle[] = [
     localizations: localisation(
       {
         name: "Prefer wider paths",
-        description: "Optimised for chairs, buggies, or group walking",
+        description: "Optimized for chairs, buggies, or group walking",
       },
       {
         fr: {
@@ -103,7 +103,7 @@ export const safetyToggles: SafetyToggle[] = [
   {
     id: safetyToggleId("well-lit"),
     localizations: localisation(
-      { name: "Well-lit paths", description: "Prioritise brightly lit evening routes" },
+      { name: "Well-lit paths", description: "Prioritize brightly lit evening routes" },
       {
         fr: {
           name: "Itinéraires bien éclairés",
@@ -199,7 +199,7 @@ export const safetyToggles: SafetyToggle[] = [
   {
     id: safetyToggleId("shade"),
     localizations: localisation(
-      { name: "Prioritise shade", description: "Choose tree-lined paths" },
+      { name: "Prioritize shade", description: "Choose tree-lined paths" },
       {
         fr: {
           name: "Priorité à l’ombre",
@@ -247,7 +247,7 @@ export const safetyToggles: SafetyToggle[] = [
   {
     id: safetyToggleId("quiet-routes"),
     localizations: localisation(
-      { name: "Prefer quiet routes", description: "Minimise traffic noise" },
+      { name: "Prefer quiet routes", description: "Minimize traffic noise" },
       {
         fr: {
           name: "Préférer les zones calmes",
@@ -331,7 +331,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
   {
     id: "comfort",
     localizations: localisation(
-      { name: "Comfort Settings", description: "Personalise your walking experience" },
+      { name: "Comfort Settings", description: "Personalize your walking experience" },
       {
         fr: {
           name: "Paramètres de confort",

@@ -3,7 +3,7 @@
  *
  * Note: callers formatting the quick-walk duration messages
  * (`quick-walk-duration-*`) must always pass a numeric `count`
- * to the Fluent bundle so minute pluralisation remains correct
+ * to the Fluent bundle so minute pluralization remains correct
  * across locales such as Italian.
  */
 

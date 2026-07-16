@@ -37,7 +37,7 @@ export interface WildsideMapProps {
 
 /**
  * Embeds a MapLibre GL JS map using the OpenMapTiles bright demo style.
- * The map initialises lazily so tests and non-WebGL environments can opt out
+ * The map initializes lazily so tests and non-WebGL environments can opt out
  * without throwing. When a MapStateProvider is present, the map registers with
  * the shared store so viewport changes persist between screens.
  */
@@ -78,14 +78,14 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
     const containerElement: HTMLElement = container;
     if (typeof window === "undefined") return;
     if (!(window as typeof window & { WebGLRenderingContext?: unknown }).WebGLRenderingContext) {
-      // Skip initialisation when WebGL is unavailable (e.g., unit tests).
+      // Skip initialization when WebGL is unavailable (e.g., unit tests).
       return;
     }
 
     let isCancelled = false;
     let mapInstance: MapLibreMap | null = null;
 
-    const initialiseMap = async (): Promise<void> => {
+    const initializeMap = async (): Promise<void> => {
       const [maplibreModule] = await Promise.all([
         import("maplibre-gl"),
         import("maplibre-gl/dist/maplibre-gl.css"),
@@ -124,11 +124,11 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
           }
         });
       } catch (error) {
-        console.warn("Wildside map failed to initialise", error);
+        console.warn("Wildside map failed to initialize", error);
       }
     };
 
-    initialiseMap().catch((error) => {
+    initializeMap().catch((error) => {
       console.warn("Wildside map encountered an error", error);
     });
 

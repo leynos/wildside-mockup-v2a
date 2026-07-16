@@ -85,7 +85,7 @@ export const useCustomizeTranslations = () => {
   const { t } = useTranslation();
 
   return {
-    headerTitle: t("customize-header-title", { defaultValue: "Customise Route" }),
+    headerTitle: t("customize-header-title", { defaultValue: "Customize Route" }),
     headerSubtitle: t("customize-header-subtitle", {
       defaultValue: "Fine-tune your walking adventure",
     }),

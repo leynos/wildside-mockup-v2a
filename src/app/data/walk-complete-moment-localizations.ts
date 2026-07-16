@@ -1,4 +1,4 @@
-/** @file Localisation maps for walk completion moments. */
+/** @file Localization maps for walk completion moments. */
 
 import type { EntityLocalizations } from "../domain/entities/localization";
 import { fillLocalizations } from "./fixture-localization";

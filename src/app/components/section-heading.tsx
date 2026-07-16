@@ -1,4 +1,4 @@
-/** @file Standardised section heading with optional icon. */
+/** @file Standardized section heading with optional icon. */
 
 import type { JSX, ReactNode } from "react";
 

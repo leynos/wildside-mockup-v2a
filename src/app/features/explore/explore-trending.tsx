@@ -36,7 +36,7 @@ const safePickLocalization = (
   } catch (error) {
     if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
-      console.warn("Missing localisation for trending route card", {
+      console.warn("Missing localization for trending route card", {
         locale,
         fallbackName,
         error,
@@ -47,10 +47,10 @@ const safePickLocalization = (
 };
 
 /**
- * Map a trending route card to a view model with resolved localisation.
+ * Map a trending route card to a view model with resolved localization.
  *
  * @param card - Trending route data containing a route and its highlight meta.
- * @param locale - Locale code to resolve localised strings.
+ * @param locale - Locale code to resolve localized strings.
  * @returns A view model ready for rendering.
  *
  * @example

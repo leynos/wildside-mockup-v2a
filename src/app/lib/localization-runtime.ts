@@ -1,4 +1,4 @@
-/** @file Runtime localisation helpers shared across feature screens. */
+/** @file Runtime localization helpers shared across feature screens. */
 
 import type {
   EntityLocalizations,
@@ -13,7 +13,7 @@ type ResolutionOptions = {
 };
 
 /**
- * Provide a safe localisation fallback when resolution fails or data is sparse.
+ * Provide a safe localization fallback when resolution fails or data is sparse.
  *
  * @example
  * const fallback = fallbackLocalization(entity.localizations, entity.id);
@@ -27,7 +27,7 @@ export const fallbackLocalization = (
 };
 
 /**
- * Resolve an entity localisation with predictable fallbacks and safe logging.
+ * Resolve an entity localization with predictable fallbacks and safe logging.
  *
  * @example
  * const title = resolveLocalization(route.localizations, "fr", route.id).name;
@@ -44,14 +44,14 @@ export const resolveLocalization = (
   } catch (error) {
     if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
-      console.warn("Falling back to default localisation", { locale, fallbackName, error });
+      console.warn("Falling back to default localization", { locale, fallbackName, error });
     }
     return fallback;
   }
 };
 
 /**
- * Normalise an incoming language tag to a supported LocaleCode.
+ * Normalize an incoming language tag to a supported LocaleCode.
  *
  * @example
  * const locale = coerceLocaleCode(i18n.language); // e.g. "en-GB" for "en"
@@ -61,11 +61,11 @@ export const coerceLocaleCode = (
   fallback: LocaleCode = DEFAULT_LOCALE as LocaleCode,
 ): LocaleCode => {
   if (!language) return fallback;
-  const normalised = language.trim().toLowerCase();
-  const direct = SUPPORTED_LOCALES.find((locale) => locale.code.toLowerCase() === normalised);
+  const normalized = language.trim().toLowerCase();
+  const direct = SUPPORTED_LOCALES.find((locale) => locale.code.toLowerCase() === normalized);
   if (direct) return direct.code as LocaleCode;
 
-  const [languagePart] = normalised.split("-");
+  const [languagePart] = normalized.split("-");
   const languageMatch = SUPPORTED_LOCALES.find(
     (locale) => locale.code.split("-")[0]?.toLowerCase() === languagePart,
   );

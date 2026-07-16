@@ -9,7 +9,7 @@ export type { OfflineSuggestion } from "./offline-models";
  * Prefix an asset path with the Vite `BASE_URL` so fixtures resolve correctly
  * when the app is hosted under a sub-path.
  *
- * The URL normalisation collapses duplicate slashes whilst preserving protocol
+ * The URL normalization collapses duplicate slashes whilst preserving protocol
  * separators (so `https://example.com//foo` remains a valid absolute URL).
  *
  * Absolute URLs (including protocol-relative ones) are returned unchanged so
@@ -26,14 +26,14 @@ const withBasePath = (path: string, alt: string): ImageAsset => {
   }
 
   const base = import.meta.env.BASE_URL ?? "/";
-  const normalisedBase = base.endsWith("/") ? base : `${base}/`;
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
   const cleanedPath = path.replace(/^\/+/, "");
   // Collapse duplicate slashes but preserve protocol separators (://).
-  const url = `${normalisedBase}${cleanedPath}`.replace(/([^:]\/)\/+/g, "$1");
+  const url = `${normalizedBase}${cleanedPath}`.replace(/([^:]\/)\/+/g, "$1");
   return { url, alt };
 };
 
-const localise = (
+const localize = (
   base: Parameters<typeof localizeAcrossLocales>[0],
   overrides: Parameters<typeof localizeAcrossLocales>[1] = {},
   context?: string,
@@ -44,7 +44,7 @@ const localise = (
  * A downloaded offline map area with progress and status metadata.
  *
  * @property id - Unique identifier for the map area.
- * @property localizations - Localised name and description for display.
+ * @property localizations - Localized name and description for display.
  * @property image - Thumbnail image asset for the area.
  * @property sizeBytes - Total download size in bytes.
  * @property progress - Download progress as a decimal (0 to 1).
@@ -65,7 +65,7 @@ export interface OfflineMapArea {
  * Configuration option for automatic offline map management.
  *
  * @property id - Unique identifier for the option.
- * @property localizations - Localised name and description for display.
+ * @property localizations - Localized name and description for display.
  * @property iconToken - Design token for the option icon.
  * @property iconClassName - Tailwind classes for icon styling.
  * @property defaultEnabled - Whether the option is enabled by default.
@@ -87,7 +87,7 @@ export { offlineSuggestions } from "./offline-fixtures";
 export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
   {
     id: "nyc",
-    localizations: localise(
+    localizations: localize(
       { name: "New York, NY", description: "Downtown and Brooklyn offline pack" },
       { es: { name: "Nueva York, NY", description: "Paquete offline de Downtown y Brooklyn" } },
       "offline-area: nyc",
@@ -100,7 +100,7 @@ export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
   },
   {
     id: "sf",
-    localizations: localise(
+    localizations: localize(
       { name: "San Francisco, CA", description: "Waterfront and downtown core" },
       { es: { name: "San Francisco, CA", description: "Embarcadero y centro de la ciudad" } },
       "offline-area: sf",
@@ -113,7 +113,7 @@ export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
   },
   {
     id: "london",
-    localizations: localise(
+    localizations: localize(
       { name: "London, UK", description: "Central London with Thames overlays" },
       { es: { name: "Londres, Reino Unido", description: "Centro de Londres y el Támesis" } },
       "offline-area: london",
@@ -129,7 +129,7 @@ export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
 export const autoManagementOptions: ReadonlyArray<AutoManagementOption> = [
   {
     id: "auto-delete",
-    localizations: localise(
+    localizations: localize(
       { name: "Auto-delete old maps", description: "Remove maps after a retention window" },
       {},
       "offline-auto: auto-delete",
@@ -141,7 +141,7 @@ export const autoManagementOptions: ReadonlyArray<AutoManagementOption> = [
   },
   {
     id: "wifi-only",
-    localizations: localise(
+    localizations: localize(
       { name: "Wi-Fi-only downloads", description: "Download maps only on trusted networks" },
       {},
       "offline-auto: wifi-only",
@@ -152,7 +152,7 @@ export const autoManagementOptions: ReadonlyArray<AutoManagementOption> = [
   },
   {
     id: "auto-update",
-    localizations: localise(
+    localizations: localize(
       { name: "Auto-update maps", description: "Keep offline areas fresh in the background" },
       {},
       "offline-auto: auto-update",

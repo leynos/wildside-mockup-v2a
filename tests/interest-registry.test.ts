@@ -17,7 +17,7 @@ describe("interest descriptor registry", () => {
     expect(markets?.localization.name).toBe("Mercados");
   });
 
-  it("falls back to default locales when localisation is missing", () => {
+  it("falls back to default locales when localization is missing", () => {
     const descriptor = getInterestDescriptor("parks", "fr");
     expect(descriptor?.localization.name).toBe("Parks & Nature");
   });

@@ -118,7 +118,7 @@ const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
 
 /**
  * Generic helper to resolve labels from Fluent translations or fixture
- * localisations. Tries translation first, then falls back to fixture data.
+ * localizations. Tries translation first, then falls back to fixture data.
  */
 const resolveEntityLabel = <
   T extends { id: string; localizations: Parameters<typeof resolveLocalizationNameForTest>[0] },
@@ -142,14 +142,14 @@ const resolveEntityLabel = <
 
 /**
  * Prefer Fluent translations for user-overridable labels; fall back to fixture
- * localisations when translations are absent to keep defaults stable.
+ * localizations when translations are absent to keep defaults stable.
  */
 const resolveAdvancedLabel = (id: string, fallback: string) =>
   resolveEntityLabel(`advanced-${id}-label`, advancedOptions, "advanced option", id, fallback);
 
 /**
  * Prefer Fluent translations for user-overridable labels; fall back to fixture
- * localisations when translations are absent to keep defaults stable.
+ * localizations when translations are absent to keep defaults stable.
  */
 const resolveSafetySectionTitle = (id: string, fallback: string) =>
   resolveEntityLabel(
@@ -162,7 +162,7 @@ const resolveSafetySectionTitle = (id: string, fallback: string) =>
 
 /**
  * Prefer Fluent translations for user-overridable labels; fall back to fixture
- * localisations when translations are absent to keep defaults stable.
+ * localizations when translations are absent to keep defaults stable.
  */
 const resolveSafetyToggleLabel = (id: string, fallback: string) =>
   resolveEntityLabel(`safety-toggle-${id}-label`, safetyToggles, "safety toggle", id, fallback);
@@ -448,7 +448,7 @@ describe("Stage 1 routed flows", () => {
     ).toBeTruthy();
   });
 
-  it("renders explore stats using Fluent pluralisation", async () => {
+  it("renders explore stats using Fluent pluralization", async () => {
     ({ mount, root } = await renderRoute("/explore"));
     const container = requireContainer(mount);
     const view = within(container);
@@ -504,7 +504,7 @@ describe("Stage 1 routed flows", () => {
     expect(pluralRoute).toContain("3");
   });
 
-  it("localises curated difficulty labels for alternate locales", async () => {
+  it("localizes curated difficulty labels for alternate locales", async () => {
     await i18nReady;
     await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/explore"));
@@ -543,7 +543,7 @@ describe("Stage 1 routed flows", () => {
     expect(screen.getAllByRole("slider").length).toBeGreaterThan(0);
   });
 
-  it("localises customize copy for alternate locales", async () => {
+  it("localizes customize copy for alternate locales", async () => {
     await i18nReady;
     await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/customize"));
@@ -751,7 +751,7 @@ describe("Stage 2 routed flows", () => {
     expect(within(notesList).getAllByRole("listitem").length).toBeGreaterThanOrEqual(3);
   });
 
-  it("localises quick walk copy for alternate locales", async () => {
+  it("localizes quick walk copy for alternate locales", async () => {
     await i18nReady;
     await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/map/quick"));
@@ -990,7 +990,7 @@ describe("Stage 3 wizard flows", () => {
     expect(route.router.state.location.pathname).toBe("/wizard/step-2");
   });
 
-  it("localises wizard step one copy and interpolations for Spanish", async () => {
+  it("localizes wizard step one copy and interpolations for Spanish", async () => {
     await i18nReady;
     await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/wizard/step-1"));
@@ -1061,7 +1061,7 @@ describe("Stage 3 wizard flows", () => {
     });
   });
 
-  it("localises wizard step two discovery and accessibility copy for Spanish", async () => {
+  it("localizes wizard step two discovery and accessibility copy for Spanish", async () => {
     await i18nReady;
     await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/wizard/step-2"));
@@ -1127,7 +1127,7 @@ describe("Stage 3 wizard flows", () => {
     });
   });
 
-  it("localises wizard step three route summary for Spanish", async () => {
+  it("localizes wizard step three route summary for Spanish", async () => {
     await runWizardStepThreeSpanish(async ({ view, routeTitle }) => {
       expect(view.getByRole("heading", { name: localizedRegex(routeTitle) })).toBeTruthy();
 
@@ -1152,7 +1152,7 @@ describe("Stage 3 wizard flows", () => {
     });
   });
 
-  it("localises wizard step three preferences panel for Spanish", async () => {
+  it("localizes wizard step three preferences panel for Spanish", async () => {
     await runWizardStepThreeSpanish(async ({ view }) => {
       const preferencesHeading =
         translate("wizard-step-three-preferences-heading", "Your preferences applied") ??
@@ -1173,7 +1173,7 @@ describe("Stage 3 wizard flows", () => {
     });
   });
 
-  it("localises wizard step three stops panel for Spanish", async () => {
+  it("localizes wizard step three stops panel for Spanish", async () => {
     await runWizardStepThreeSpanish(async ({ view }) => {
       const stopsHeading =
         translate("wizard-step-three-stops-heading", "Featured stops") ?? "Featured stops";
@@ -1195,7 +1195,7 @@ describe("Stage 3 wizard flows", () => {
     });
   });
 
-  it("localises wizard step three weather panel for Spanish", async () => {
+  it("localizes wizard step three weather panel for Spanish", async () => {
     await runWizardStepThreeSpanish(async ({ view }) => {
       const weatherHeading = pickLocalization(wizardWeatherSummary.localizations, "es").name;
       expect(view.getByRole("heading", { name: localizedRegex(weatherHeading) })).toBeTruthy();
@@ -1212,7 +1212,7 @@ describe("Stage 3 wizard flows", () => {
     });
   });
 
-  it("localises wizard step three save dialog for Spanish", async () => {
+  it("localizes wizard step three save dialog for Spanish", async () => {
     await runWizardStepThreeSpanish(async ({ view, routeTitle }) => {
       const goLabel = translate("wizard-step-three-go-label", "Go") ?? "Go";
       const saveButton = view.getByRole("button", {
@@ -1717,7 +1717,7 @@ describe("Stage 4 completion flows", () => {
     expect(await screen.findByRole("dialog", { name: /preferences saved/i })).toBeTruthy();
   });
 
-  it("localises the safety & accessibility screen for Spanish", async () => {
+  it("localizes the safety & accessibility screen for Spanish", async () => {
     await i18nReady;
     await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/safety-accessibility"));
@@ -1728,8 +1728,8 @@ describe("Stage 4 completion flows", () => {
       const headerDescription =
         translate(
           "safety-header-description",
-          "Customise your walking routes for comfort and safety",
-        ) ?? "Customise your walking routes for comfort and safety";
+          "Customize your walking routes for comfort and safety",
+        ) ?? "Customize your walking routes for comfort and safety";
       const saveLabel = translate("safety-save-button", "Save preferences") ?? "Save preferences";
       expect(view.getByRole("heading", { name: localizedRegex(headerTitle) })).toBeTruthy();
       expect(view.getByText(localizedRegex(headerDescription))).toBeTruthy();
@@ -1776,7 +1776,7 @@ describe("Stage 4 completion flows", () => {
     });
   });
 
-  it("localises the safety & accessibility screen for Portuguese", async () => {
+  it("localizes the safety & accessibility screen for Portuguese", async () => {
     await i18nReady;
     await withI18nLanguage("pt", async () => {
       ({ mount, root } = await renderRoute("/safety-accessibility"));
@@ -1787,8 +1787,8 @@ describe("Stage 4 completion flows", () => {
       const headerDescription =
         translate(
           "safety-header-description",
-          "Customise your walking routes for comfort and safety",
-        ) ?? "Customise your walking routes for comfort and safety";
+          "Customize your walking routes for comfort and safety",
+        ) ?? "Customize your walking routes for comfort and safety";
       const saveLabel = translate("safety-save-button", "Save preferences") ?? "Save preferences";
       expect(view.getByRole("heading", { name: localizedRegex(headerTitle) })).toBeTruthy();
       expect(view.getByText(localizedRegex(headerDescription))).toBeTruthy();

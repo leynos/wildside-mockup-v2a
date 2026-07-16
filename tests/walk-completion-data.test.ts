@@ -1,4 +1,4 @@
-/** @file Walk completion stage-four localisation fixtures tests. */
+/** @file Walk completion stage-four localization fixtures tests. */
 
 import { describe, expect, it } from "bun:test";
 
@@ -90,7 +90,7 @@ describe("walkCompletionMoments localizations", () => {
     });
   });
 
-  it("moments provide localised name and description across all supported locales", () => {
+  it("moments provide localized name and description across all supported locales", () => {
     expect(walkCompletionMoments.length).toBeGreaterThan(0);
 
     for (const locale of SUPPORTED_LOCALES) {
@@ -112,7 +112,7 @@ describe("walkCompletionMoments localizations", () => {
     expect(localized.description).toBe("Perfect cortado & friendly barista");
   });
 
-  it("coffee moment has non-English localisations", () => {
+  it("coffee moment has non-English localizations", () => {
     const coffeeMoment = walkCompletionMoments.find((m) => m.id === "coffee");
     expect(coffeeMoment).toBeDefined();
     if (!coffeeMoment) throw new Error("Missing moment: coffee");
