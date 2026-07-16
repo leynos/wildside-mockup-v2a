@@ -89,13 +89,15 @@ npm install tailwindcss@next @tailwindcss/vite@next
 - `flex-shrink-*` → Use `shrink-*`
 - `decoration-slice` → Use `box-decoration-slice`
 
-### Renamed Utilities
+### Renamed utilities
+
 - `shadow-sm` → `shadow-xs`
 - `rounded-sm` → `rounded-xs`
 - `blur-sm` → `blur-xs`
 - `bg-gradient-*` → `bg-linear-*`
 
-### Default Behaviour Changes
+### Default behaviour changes
+
 - **Border**: No longer defaults to gray-200, uses `currentColor`
 - **Ring**: Changed from 3px blue to 1px `currentColor`
 - **Outline**: Now 1px by default for consistency
@@ -236,7 +238,8 @@ Use the `@utility` directive instead of `@layer utilities`:
 </article>
 ```
 
-### Modern Colour System
+### Modern colour system
+
 v4 uses OKLCH colour space for wider gamut support:
 
 ```css
@@ -271,14 +274,16 @@ v4 uses OKLCH colour space for wider gamut support:
 
 ## Best Practices
 
-### 1. Use CSS Variables for Dynamic Values
+### 1. Use CSS variables for dynamic values
+
 ```html
 <div class="bg-[var(--dynamic-color)] text-[var(--dynamic-size)]">
   Dynamic styling
 </div>
 ```
 
-### 2. Leverage the New Colour System
+### 2. Leverage the new colour system
+
 ```html
 <!-- Better contrast and vibrancy with OKLCH -->
 <div class="bg-blue-500 text-white">
@@ -286,7 +291,8 @@ v4 uses OKLCH colour space for wider gamut support:
 </div>
 ```
 
-### 3. Container Queries for True Responsive Design
+### 3. Container queries for true responsive design
+
 ```html
 <div class="@container">
   <div class="p-4 @lg:p-8 @xl:p-12">
@@ -585,7 +591,8 @@ list-none, list-disc, list-decimal, list-inside, list-outside
 text-left, text-center, text-right, text-justify, text-start, text-end
 ```
 
-#### Text Colour
+#### Text colour
+
 ```text
 text-inherit, text-current, text-transparent, text-black, text-white
 text-slate-50, text-slate-100, text-slate-200, text-slate-300, text-slate-400, text-slate-500, text-slate-600, text-slate-700, text-slate-800, text-slate-900, text-slate-950
@@ -677,7 +684,8 @@ bg-fixed, bg-local, bg-scroll
 bg-clip-border, bg-clip-padding, bg-clip-content, bg-clip-text
 ```
 
-#### Background Colour
+#### Background colour
+
 All colour utilities work with `bg-` prefix (same as text colours above)
 
 #### Background Origin
@@ -713,7 +721,8 @@ bg-radial, bg-radial-at-t, bg-radial-at-tr, bg-radial-at-r, bg-radial-at-br, bg-
 bg-conic, bg-conic-at-t, bg-conic-at-tr, bg-conic-at-r, bg-conic-at-br, bg-conic-at-b, bg-conic-at-bl, bg-conic-at-l, bg-conic-at-tl, bg-conic-at-c
 ```
 
-#### Gradient Colour Stops
+#### Gradient colour stops
+
 ```text
 from-inherit, from-current, from-transparent, from-black, from-white, from-{color}
 via-inherit, via-current, via-transparent, via-black, via-white, via-{color}
@@ -746,7 +755,8 @@ rounded-bl-none, rounded-bl-xs, rounded-bl-sm, rounded-bl, rounded-bl-md, rounde
 border-0, border-2, border-4, border-8, border, border-x, border-y, border-s, border-e, border-t, border-r, border-b, border-l
 ```
 
-#### Border Colour
+#### Border colour
+
 All colour utilities work with `border-` prefix (same as text/bg colours)
 
 #### Border Style
@@ -759,7 +769,8 @@ border-solid, border-dashed, border-dotted, border-double, border-hidden, border
 divide-x-0, divide-x-2, divide-x-4, divide-x-8, divide-x, divide-y-0, divide-y-2, divide-y-4, divide-y-8, divide-y, divide-x-reverse, divide-y-reverse
 ```
 
-#### Divide Colour
+#### Divide colour
+
 All colour utilities work with `divide-` prefix
 
 #### Divide Style
@@ -772,7 +783,8 @@ divide-solid, divide-dashed, divide-dotted, divide-double, divide-none
 outline-0, outline-1, outline-2, outline-4, outline-8
 ```
 
-#### Outline Colour
+#### Outline colour
+
 All colour utilities work with `outline-` prefix
 
 #### Outline Style
@@ -790,15 +802,18 @@ outline-offset-0, outline-offset-1, outline-offset-2, outline-offset-4, outline-
 ring-0, ring-1, ring-2, ring, ring-4, ring-8, ring-inset
 ```
 
-#### Ring Colour
+#### Ring colour
+
 All colour utilities work with `ring-` prefix
 
-#### Ring Offset Width
+#### Ring offset width
+
 ```text
 ring-offset-0, ring-offset-1, ring-offset-2, ring-offset-4, ring-offset-8
 ```
 
-#### Ring Offset Colour
+#### Ring offset colour
+
 All colour utilities work with `ring-offset-` prefix
 
 ### Effects
@@ -808,10 +823,12 @@ All colour utilities work with `ring-offset-` prefix
 shadow-xs, shadow-sm, shadow, shadow-md, shadow-lg, shadow-xl, shadow-2xl, shadow-inner, shadow-none
 ```
 
-#### Box Shadow Colour
+#### Box shadow colour
+
 All colour utilities work with `shadow-` prefix
 
-#### Drop Shadow (NEW coloured support in v4)
+#### Drop shadow (new coloured support in v4)
+
 ```text
 drop-shadow-sm, drop-shadow, drop-shadow-md, drop-shadow-lg, drop-shadow-xl, drop-shadow-2xl, drop-shadow-none
 ```
@@ -1047,7 +1064,8 @@ perspective-origin-center, perspective-origin-top, perspective-origin-top-right,
 
 ### Interactivity
 
-#### Accent Colour
+#### Accent colour
+
 ```text
 accent-auto, accent-inherit, accent-current, accent-transparent, accent-black, accent-white
 accent-{color} (all color utilities work with accent- prefix)
@@ -1063,7 +1081,8 @@ appearance-none, appearance-auto
 cursor-auto, cursor-default, cursor-pointer, cursor-wait, cursor-text, cursor-move, cursor-help, cursor-not-allowed, cursor-none, cursor-context-menu, cursor-progress, cursor-cell, cursor-crosshair, cursor-vertical-text, cursor-alias, cursor-copy, cursor-no-drop, cursor-grab, cursor-grabbing, cursor-all-scroll, cursor-col-resize, cursor-row-resize, cursor-n-resize, cursor-e-resize, cursor-s-resize, cursor-w-resize, cursor-ne-resize, cursor-nw-resize, cursor-se-resize, cursor-sw-resize, cursor-ew-resize, cursor-ns-resize, cursor-nesw-resize, cursor-nwse-resize, cursor-zoom-in, cursor-zoom-out
 ```
 
-#### Caret Colour
+#### Caret colour
+
 All colour utilities work with `caret-` prefix
 
 #### Pointer Events
@@ -1076,7 +1095,8 @@ pointer-events-none, pointer-events-auto
 resize-none, resize, resize-y, resize-x
 ```
 
-#### Scroll Behaviour
+#### Scroll behaviour
+
 ```text
 scroll-auto, scroll-smooth
 ```
@@ -1149,7 +1169,8 @@ stroke-0, stroke-1, stroke-2
 sr-only, not-sr-only
 ```
 
-#### Forced Colour Adjust
+#### Forced colour adjust
+
 ```text
 forced-color-adjust-auto, forced-color-adjust-none
 ```

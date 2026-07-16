@@ -1,4 +1,4 @@
-/** @file Re-exports all wizard localization maps. */
+/** @file Re-exports wizard localization maps for consumers to import from one barrel. */
 
 export * from "./wizard-detail-localizations";
 export * from "./wizard-highlight-localizations";

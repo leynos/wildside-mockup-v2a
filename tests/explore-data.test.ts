@@ -18,7 +18,7 @@ const localeCodes = SUPPORTED_LOCALES.map((locale) => locale.code);
 
 const expectHasLocalizations = (localizations: EntityLocalizations, label: string) => {
   localeCodes.forEach((code) => {
-    expect(localizations[code], `${label} missing localisation for ${code}`).toBeDefined();
+    expect(localizations[code], `${label} missing localization for ${code}`).toBeDefined();
   });
 };
 

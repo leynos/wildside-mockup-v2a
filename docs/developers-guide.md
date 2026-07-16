@@ -45,5 +45,6 @@ directly. Use `make spelling-config-write` to refresh the untracked shared
 dictionary cache when its authority is newer and regenerate the tracked file.
 The quality gate uses `make spelling-config` to detect generated drift.
 
-Run `make nixie` to validate Mermaid diagrams. CI installs Nixie CLI 1.1.0 and
-its Merman CLI 0.7.0 dependency before invoking the target.
+Run `make nixie` to validate Mermaid diagrams. The target installs the Merman
+CLI 0.7.0 dependency before invoking Nixie CLI 1.1.0. CI provisions the same
+versions.

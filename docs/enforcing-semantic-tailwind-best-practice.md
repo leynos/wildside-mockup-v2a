@@ -243,7 +243,7 @@ The duplication keeps messages targeted whilst Biome’s current Grit plugin lim
 - `scripts/check-classlist-length.ts`
 - `scripts/find-near-duplicate-classes.ts`
 
-We rely on lightweight TypeScript checkers (run as part of `bun run semantic`) to flag class strings that exceed the configured threshold **and** to warn about near-duplicate utility sets. The scripts read thresholds from `tools/semantic-lint.config.json`, normalize whitespace, and report literals that violate the agreed limits.
+Lightweight TypeScript checkers (run as part of `bun run semantic`) flag class strings that exceed the configured threshold **and** warn about near-duplicate utility sets. The scripts read thresholds from `tools/semantic-lint.config.json`, normalize whitespace, and report literals that violate the agreed limits.
 
 > Adjust `maxClasslistLength` **and** the `nearDuplicateClasses` block and re-run `bun run semantic` to enforce different ceilings.
 

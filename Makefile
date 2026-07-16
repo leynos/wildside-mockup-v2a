@@ -4,6 +4,7 @@
 .PHONY: test
 
 NIXIE_VERSION ?= 1.1.0
+MERMAN_CLI_VERSION ?= 0.7.0
 PATHSPEC_VERSION ?= 1.1.1
 RUFF_VERSION ?= 0.15.12
 TYPOS_VERSION ?= 1.48.0
@@ -60,4 +61,5 @@ spelling-helper-test: ## Validate the spelling phrase helper
 	@$(SPELLING_HELPER_PYTEST) scripts/tests/test_typos_rollout_check.py -c /dev/null --rootdir=. -p no:cacheprovider --cov=typos_rollout_check --cov-fail-under=90
 
 nixie: ## Validate Mermaid diagrams
+	cargo install merman-cli --version "=$(MERMAN_CLI_VERSION)" --locked
 	$(NIXIE) --no-sandbox

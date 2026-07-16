@@ -660,7 +660,7 @@ This checklist provides a structured framework for conducting a comprehensive qu
 | Page provides a custom offline fallback experience. | Manual | DevTools Offline Mode |
 | **Perceivable** | All non-decorative images have descriptive `alt` text. | Manual | Code Review, Screen Reader |
 |\
-| Colour contrast for text and UI components meets WCAG AA levels. | Automated | Lighthouse, DevTools Inspector |
+| | Colour contrast for text and UI components meets WCAG AA levels. | Automated | Lighthouse, DevTools Inspector |
 |\
 | Content reflows to a single column at 320px width without horizontal scroll. | Manual | Browser Resizing |
 | **Operable** | All interactive functionality is operable with a keyboard. | Manual | Keyboard-Only Testing |

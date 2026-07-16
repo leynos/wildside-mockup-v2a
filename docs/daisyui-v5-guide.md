@@ -36,7 +36,7 @@ daisyUI 5 provides class names for common UI components
 ## daisyUI 5 usage rules
 1. We can give styles to a HTML element by adding daisyUI class names to it. By adding a component class name, part class names (if there's any available for that component), and modifier class names (if there's any available for that component)
 2. Components can be customized using Tailwind CSS utility classes if the customization is not possible using the existing daisyUI classes. For example `btn px-10` sets a custom horizontal padding to a `btn`
-3. If customization of daisyUI styles using Tailwind CSS utility classes didn't work because of CSS specificity issues, you can use the `!` at the end of the Tailwind CSS utility class to override the existing styles. For example `btn bg-red-500!` sets a custom background colour to a `btn` forcefully. This is a last resort solution and should be used sparingly
+3. If customization of daisyUI styles using Tailwind CSS utility classes didn't work because of CSS specificity issues, you can use the `!` at the end of the Tailwind CSS utility class to override the existing styles. For example, `btn bg-red-500!` sets a custom background colour on a `btn` with higher specificity. This is a last resort solution and should be used sparingly
 4. If a specific component or something similar to it doesn't exist in daisyUI, you can create your own component using Tailwind CSS utility
 5. when using Tailwind CSS `flex` and `grid` for layout, it should be responsive using Tailwind CSS responsive utility prefixes.
 6. Only allowed class names are existing daisyUI class names or Tailwind CSS utility classes.
@@ -95,9 +95,11 @@ root scrollbar gutter is excluded. `daisy-` prefix is used for all daisyUI class
   logs: false;
 }
 ```
+
 ## daisyUI 5 colours
 
 ### daisyUI colour names
+
 - `primary`: Primary brand colour, The main colour of your brand
 - `primary-content`: Foreground content colour to use on primary colour
 - `secondary`: Secondary brand colour, The optional, secondary colour of your brand
@@ -106,9 +108,9 @@ root scrollbar gutter is excluded. `daisy-` prefix is used for all daisyUI class
 - `accent-content`: Foreground content colour to use on accent colour
 - `neutral`: Neutral dark colour, For not-saturated parts of UI
 - `neutral-content`: Foreground content colour to use on neutral colour
-- `base-100`:-100 Base surface colour of page, used for blank backgrounds
-- `base-200`:-200 Base colour, darker shade, to create elevations
-- `base-300`:-300 Base colour, even more darker shade, to create elevations
+- `base-100`: Base surface colour of the page, used for blank backgrounds
+- `base-200`: Base colour, a darker shade used to create elevations
+- `base-300`: Base colour, an even darker shade used to create elevations
 - `base-content`: Foreground content colour to use on base colour
 - `info`: Info colour, For informative/helpful messages
 - `info-content`: Foreground content colour to use on info colour
@@ -120,6 +122,7 @@ root scrollbar gutter is excluded. `daisy-` prefix is used for all daisyUI class
 - `error-content`: Foreground content colour to use on error colour
 
 ### daisyUI colour rules
+
 1. daisyUI adds semantic colour names to Tailwind CSS colours
 2. daisyUI colour names can be used in utility classes, like other Tailwind CSS colour names. for example, `bg-primary` will use the primary colour for the background
 3. daisyUI colour names include variables as value so they can change based the theme
@@ -129,9 +132,10 @@ root scrollbar gutter is excluded. `daisy-` prefix is used for all daisyUI class
 7. If a daisyUI colour name (like `primary`) is used, it will change colour based on the theme
 8. Using Tailwind CSS colour names for text colours should be avoided because Tailwind CSS colour `text-gray-800` on `bg-base-100` would be unreadable on a dark theme - because on dark theme, `bg-base-100` is a dark colour
 9. `*-content` colours should have a good contrast compared to their associated colours
-10. suggestion - when designing a page use `base-*` colours for majority of the page. use `primary` colour for important elements
+10. Suggestion: when designing a page, use `base-*` colours for the majority of the page and use `primary` colour for important elements.
 
 ### daisyUI custom theme with custom colours
+
 A CSS file with Tailwind CSS, daisyUI and a custom daisyUI theme looks like this:
 ```css
 @import "tailwindcss";
@@ -306,9 +310,9 @@ Buttons allow the user to take actions
 
 #### Class names
 - component: `btn`
-- colour: `btn-neutral`, `btn-primary`, `btn-secondary`, `btn-accent`, `btn-info`, `btn-success`, `btn-warning`, `btn-error`
+- `color`: `btn-neutral`, `btn-primary`, `btn-secondary`, `btn-accent`, `btn-info`, `btn-success`, `btn-warning`, `btn-error`
 - style: `btn-outline`, `btn-dash`, `btn-soft`, `btn-ghost`, `btn-link`
-- behaviour: `btn-active`, `btn-disabled`
+- `behavior`: `btn-active`, `btn-disabled`
 - size: `btn-xs`, `btn-sm`, `btn-md`, `btn-lg`, `btn-xl`
 - modifier: `btn-wide`, `btn-block`, `btn-square`, `btn-circle`
 
@@ -424,7 +428,7 @@ Chat bubbles are used to show one line of conversation and all its data, includi
 
 #### Rules
 - {PLACEMENT} is required and must be either `chat-start` or `chat-end`
-- {COLOUR} is optional and can have one of the colour class names
+- `{COLOR}` is optional and can have one of the colour class names
 - To add an avatar, use `<div class="chat-image avatar">` and nest the avatar content inside
 
 ### checkbox
@@ -456,6 +460,7 @@ Collapse is used for showing and hiding content
 - modifier: `collapse-arrow`, `collapse-plus`, `collapse-open`, `collapse-close`
 
 #### Syntax
+
 ```html
 <div tabindex="0" class="collapse {MODIFIER}">
   <div class="collapse-title">{title}</div>
@@ -1328,6 +1333,7 @@ Progress bar can be used to show the progress of a task or to show the passing o
 ```
 
 #### Rules
+
 - {MODIFIER} is optional and can have one of the colour class names
 - You must specify value and max attributes
 
