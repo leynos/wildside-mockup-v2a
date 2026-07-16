@@ -1,4 +1,4 @@
-/** @file Semantic card wrapper for customise segment toggles. */
+/** @file Semantic card wrapper for customize segment toggles. */
 
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import type { JSX } from "react";

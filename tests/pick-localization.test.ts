@@ -24,13 +24,13 @@ describe("pickLocalization", () => {
     expect(resolved.name).toBe("Harbour Walk");
   });
 
-  it("falls back to the first available localisation as a last resort", () => {
+  it("falls back to the first available localization as a last resort", () => {
     const singleLocale: EntityLocalizations = { "en-GB": { name: "Single" } };
     const resolved = pickLocalization(singleLocale, "de", []);
     expect(resolved.name).toBe("Single");
   });
 
-  it("throws when no localisations are available", () => {
+  it("throws when no localizations are available", () => {
     expect(() => pickLocalization({}, "en-GB", defaultFallbackLocales)).toThrow();
   });
 });

@@ -48,7 +48,7 @@ export const accessibilityOptions: DiscoveryPreferenceOption[] = [
     id: "well-lit",
     label: "Well-lit paths",
     iconToken: "{icon.object.guidance}",
-    description: "Prioritise brightly lit evening routes",
+    description: "Prioritize brightly lit evening routes",
   },
   {
     id: "wheelchair",

@@ -1,4 +1,4 @@
-/** @file Tests for WalkComplete screen energy stats, localised labels, moments, and ARIA accessibility. */
+/** @file Tests for WalkComplete screen energy stats, localized labels, moments, and ARIA accessibility. */
 
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "bun:test";
 import * as router from "@tanstack/react-router";

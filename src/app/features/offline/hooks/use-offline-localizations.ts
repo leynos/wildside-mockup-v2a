@@ -1,4 +1,4 @@
-/** @file Aggregates localisation hooks for the offline screen. */
+/** @file Aggregates localization hooks for the offline screen. */
 
 import { useOfflineDialogCopy } from "./use-offline-dialog-copy";
 import { useOfflineDownloadsCopy } from "./use-offline-downloads-copy";

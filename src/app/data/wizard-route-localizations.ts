@@ -1,4 +1,4 @@
-/** @file Wizard route summary localisation maps. */
+/** @file Wizard route summary localization maps. */
 
 import type { EntityLocalizations } from "../domain/entities/localization";
 import { localisation } from "./fixture-localization";
@@ -10,7 +10,7 @@ export const routeTitleLocalizations: EntityLocalizations = localisation(
   {
     name: "Hidden Gems Loop",
     description:
-      "A personalised walk blending street-art alleyways, independent cafés, and serene waterfront views.",
+      "A personalized walk blending street-art alleyways, independent cafés, and serene waterfront views.",
   },
   {
     ar: {

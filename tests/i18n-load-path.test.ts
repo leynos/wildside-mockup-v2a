@@ -8,7 +8,7 @@ describe("i18n load path", () => {
     expect(loadPath).toBe("/example-app/locales/{{lng}}/{{ns}}.ftl");
   });
 
-  it("normalises missing slashes on base paths", () => {
+  it("normalizes missing slashes on base paths", () => {
     expect(normaliseBasePath("wildside")).toBe("/wildside/");
     expect(normaliseBasePath("/wildside")).toBe("/wildside/");
     expect(normaliseBasePath(undefined)).toBe("/");

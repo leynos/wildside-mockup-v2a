@@ -10,8 +10,8 @@ import { MobileShell } from "../../layout/mobile-shell";
 /** Resolves a public-directory asset path with the Vite base URL. */
 function publicUrl(path: string): string {
   const base = import.meta.env.BASE_URL ?? "/";
-  const normalisedBase = base.endsWith("/") ? base : `${base}/`;
-  return `${normalisedBase}${path.replace(/^\/+/, "")}`;
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  return `${normalizedBase}${path.replace(/^\/+/, "")}`;
 }
 
 const LOGO_URL = publicUrl("images/wildside-logo.svg");
@@ -98,7 +98,7 @@ export function WelcomeScreen(): JSX.Element {
             heading={t("welcome-prop-routes-heading", { defaultValue: "CUSTOM ROUTES" })}
             description={t("welcome-prop-routes-description", {
               defaultValue:
-                "Generate personalised walking paths based on your preferences and exploration style.",
+                "Generate personalized walking paths based on your preferences and exploration style.",
             })}
           />
           <ValueProp

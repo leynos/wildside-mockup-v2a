@@ -18,10 +18,10 @@ Here is what you need to know about Tailwind CSS v4 (May 2025)
         }
         ```
     -   Theme values are defined as CSS custom properties (variables). Tailwind uses these to generate corresponding utility classes (e.g., `font-sans`, `bg-brand-500`, `lg:p-(--spacing-4)`) and also makes these variables globally available for use in custom CSS or arbitrary values (e.g., `var(--color-brand-500)`).
-    -   The default theme is still provided but can be extended, overridden, or entirely replaced using this CSS-native approach. For instance, `--color-*: initial;` within `@theme` will remove all default color utilities, allowing a fully custom palette.
+    -   The default theme is still provided but can be extended, overridden, or entirely replaced using this CSS-native approach. For instance, `--color-*: initial;` within `@theme` will remove all default colour utilities, allowing a fully custom palette.
 3.  **Modern CSS Baseline:**
     -   Targets **Safari 16.4+, Chrome 111+, Firefox 128+**. This is non-negotiable as v4 relies on features like `@property`, `color-mix()`, and modern cascade layers. Older browser support requires sticking to v3.4.
-    -   The default color palette leverages OKLCH for more vibrant, perceptually uniform colors out-of-the-box.
+    -   The default colour palette leverages OKLCH for more vibrant, perceptually uniform colours out-of-the-box.
 
 ### II. Build & Integration
 
@@ -37,7 +37,7 @@ Here is what you need to know about Tailwind CSS v4 (May 2025)
 ### III. Key Migration Considerations & API Changes (v3 -> v4)
 
 1.  **Configuration File Shift:**
-    -   While `tailwind.config.js` can still be used for plugin definitions or complex setups (loaded via `@config "path/to/config.js";`), theme customization (colors, spacing, fonts, breakpoints) should primarily occur in CSS via `@theme`.
+    -   While `tailwind.config.js` can still be used for plugin definitions or complex setups (loaded via `@config "path/to/config.js";`), theme customization (colours, spacing, fonts, breakpoints) should primarily occur in CSS via `@theme`.
     -   The `content` array for source file scanning is still primarily configured via JS config if used, or Tailwind attempts automatic detection. Use `@source` in CSS for explicit path additions/exclusions.
 2.  **Utility Deprecations & Renames:**
     -   The `npx @tailwindcss/upgrade` tool is highly recommended and automates most of this.
@@ -45,8 +45,8 @@ Here is what you need to know about Tailwind CSS v4 (May 2025)
     -   Scales for `shadow`, `rounded`, and `blur` have been normalized (e.g., `shadow` -> `shadow-sm`, `shadow-sm` -> `shadow-xs`).
     -   `ring` default width is now `1px` (was `3px`); use `ring-3` for the old default.
 3.  **Default Value Adjustments:**
-    -   Default border color is now `currentColor`. Explicitly add color classes like `border-gray-200` if you relied on the v3 default gray.
-    -   Default ring color is `currentColor` (was `blue-500`).
+    -   Default border colour is now `currentColor`. Explicitly add colour classes like `border-gray-200` if you relied on the v3 default gray.
+    -   Default ring colour is `currentColor` (was `blue-500`).
 4.  **Selector Modifications:**
     -   `space-x-*`/`space-y-*` utilities now use `margin-bottom`/`margin-right` on `:not(:last-child)` for performance. This might affect inline elements or layouts with existing tweaked margins. Flex/grid `gap` is often a better alternative.
     -   Variant stacking order is now left-to-right (e.g., `dark:md:hover:bg-red-500`) for CSS-like consistency.
@@ -87,7 +87,7 @@ Here is what you need to know about Tailwind CSS v4 (May 2025)
 ### V. Workflow Adjustments & Deprecations
 
 1.  **Preprocessors (Sass/Less/Stylus):**
-    -   Not designed for use with Tailwind v4. Tailwind itself, with its CSS-native features and internal processing via Lightning CSS, fulfills most preprocessor roles.
+    -   Not designed for use with Tailwind v4. Tailwind itself, with its CSS-native features and internal processing via Lightning CSS, fulfils most preprocessor roles.
 2.  **`theme()` Function in CSS:**
     -   Deprecated. Use `var(--css-variable-name)` instead. For media queries where `var()` isn't supported, `theme(--breakpoint-xl)` (using the CSS variable name) can be used.
 3.  **`corePlugins` in JS Config:**

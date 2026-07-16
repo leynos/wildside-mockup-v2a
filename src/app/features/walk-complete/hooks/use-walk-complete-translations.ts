@@ -3,7 +3,7 @@
  *
  * Responsibilities:
  * - Expose all localized strings for the walk-complete UI.
- * - Compute share-channel labels by resolving localisation entries for each
+ * - Compute share-channel labels by resolving localization entries for each
  *   configured share option.
  * - Memoize translations and derived labels to avoid unnecessary recomputation.
  *

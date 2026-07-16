@@ -1,5 +1,5 @@
 /** @file Unit tests for Explore presentational components.
- * Validates localisation, imagery, and badge rendering via the i18n test
+ * Validates localization, imagery, and badge rendering via the i18n test
  * harness.
  */
 import { beforeAll, describe, expect, it } from "bun:test";
@@ -41,14 +41,14 @@ beforeAll(async () => {
 });
 
 describe("Explore presentational components", () => {
-  it("renders categories using localisation", async () => {
+  it("renders categories using localization", async () => {
     await changeLanguage("es");
     renderWithI18n(<CategoryScroller categories={exploreCategories} />);
 
     expect(screen.getByText("Arte urbano")).toBeInTheDocument();
   });
 
-  it("renders the featured route with badge localisation", async () => {
+  it("renders the featured route with badge localization", async () => {
     await changeLanguage("en-GB");
     renderWithI18n(
       <FeaturedRouteCard
@@ -62,7 +62,7 @@ describe("Explore presentational components", () => {
     expect(screen.getByText("Sunset")).toBeInTheDocument();
   });
 
-  it("renders themes and collections with entity localisation", async () => {
+  it("renders themes and collections with entity localization", async () => {
     await changeLanguage("es");
     const difficultyLookup = buildDifficultyLookup(i18n.t.bind(i18n));
 
@@ -82,7 +82,7 @@ describe("Explore presentational components", () => {
     expect(screen.getByText("Circuitos cafeteros")).toBeInTheDocument();
   });
 
-  it("renders trending routes and community pick from localisation maps", async () => {
+  it("renders trending routes and community pick from localization maps", async () => {
     await changeLanguage("es");
     const routesById = new Map(exploreRoutes.map((route) => [route.id, route]));
     const cards: TrendingRouteCard[] = trendingRoutes

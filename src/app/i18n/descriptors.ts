@@ -1,4 +1,4 @@
-/** @file Helpers for resolving localised descriptors via Fluent. */
+/** @file Helpers for resolving localized descriptors via Fluent. */
 
 import type { TFunction } from "i18next";
 

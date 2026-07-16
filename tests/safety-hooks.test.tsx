@@ -1,4 +1,4 @@
-/** @file Tests for safety hooks behaviour and localisation */
+/** @file Tests for safety hooks behaviour and localization */
 import { beforeEach, describe, expect, it } from "bun:test";
 import { renderHook } from "@testing-library/react";
 import { act, type FC, type ReactNode } from "react";
@@ -21,7 +21,7 @@ describe("safety hooks", () => {
     await changeLanguage("es");
   });
 
-  it("initialises toggle state from fixture defaults and updates on toggle", () => {
+  it("initializes toggle state from fixture defaults and updates on toggle", () => {
     const { result } = renderHook(() => useSafetyToggles());
 
     safetyToggles.forEach((toggle) => {

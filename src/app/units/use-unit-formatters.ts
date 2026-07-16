@@ -1,4 +1,4 @@
-/** @file React hook exposing memoised unit formatting helpers. */
+/** @file Exposes a hook that consumers call to obtain memoized unit-formatting helpers. */
 
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";

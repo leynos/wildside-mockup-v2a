@@ -1,4 +1,4 @@
-/** @file Configurable values powering the route customiser screen. */
+/** @file Configurable values powering the route customizer screen. */
 
 import type { TFunction } from "i18next";
 

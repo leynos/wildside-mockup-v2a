@@ -1,4 +1,4 @@
-/** @file Route for the walk customiser flow. */
+/** @file Route for the walk customizer flow. */
 
 import { createRoute } from "@tanstack/react-router";
 

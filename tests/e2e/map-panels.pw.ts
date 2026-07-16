@@ -2,7 +2,7 @@
 
 import { expect, test } from "@playwright/test";
 
-const alphaFromColor = (value: string | null): number | null => {
+const alphaFromColour = (value: string | null): number | null => {
   if (!value) return null;
   const match = value.match(/rgba?\(([^)]+)\)/i);
   if (!match) return 1;
@@ -25,7 +25,7 @@ test.describe("Map overlay panels", () => {
       const style = window.getComputedStyle(node as HTMLElement);
       return { backgroundColor: style.backgroundColor };
     });
-    const stopsAlpha = alphaFromColor(stopsStyle.backgroundColor);
+    const stopsAlpha = alphaFromColour(stopsStyle.backgroundColor);
     expect(stopsAlpha).not.toBeNull();
     expect(stopsAlpha).toBeGreaterThanOrEqual(0.9);
 
@@ -36,7 +36,7 @@ test.describe("Map overlay panels", () => {
       const style = window.getComputedStyle(node as HTMLElement);
       return { backgroundColor: style.backgroundColor };
     });
-    const notesAlpha = alphaFromColor(notesStyle.backgroundColor);
+    const notesAlpha = alphaFromColour(notesStyle.backgroundColor);
     expect(notesAlpha).not.toBeNull();
     expect(notesAlpha).toBeGreaterThanOrEqual(0.9);
   });

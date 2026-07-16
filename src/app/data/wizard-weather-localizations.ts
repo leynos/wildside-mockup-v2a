@@ -1,4 +1,4 @@
-/** @file Wizard step-three weather localisation maps. */
+/** @file Wizard step-three weather localization maps. */
 
 import type { EntityLocalizations } from "../domain/entities/localization";
 import { localisation } from "./fixture-localization";

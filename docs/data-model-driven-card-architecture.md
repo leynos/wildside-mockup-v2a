@@ -219,7 +219,7 @@ erDiagram
   COMMUNITY_PICK ||--|| ROUTE : is_based_on_optional
 ```
 
-Figure 2 sketches the class-level model with localisation-aware fields and
+Figure 2 sketches the class-level model with localization-aware fields and
 asset references that underpin the card architecture.
 
 ```mermaid
@@ -422,7 +422,7 @@ classDiagram
   - Reshape `WalkPointOfInterest` and saved routes; ensure tags use registries
     and unit formatting covers all numerical values.
 - Status (6 Dec 2025): Offline suggestions/downloads now expose
-  localisation maps with SI sizes and relative timestamps; saved routes/POIs
+  localization maps with SI sizes and relative timestamps; saved routes/POIs
   resolve tags via registries and route metrics render through the unit
   formatters.
 - **Phase 4: wizard & completion**

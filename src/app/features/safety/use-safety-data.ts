@@ -147,7 +147,7 @@ export const useSafetyTranslations = (): SafetyTranslations => {
     backLabel: t("wizard-header-back-label", { defaultValue: "Back" }),
     headerTitle: t("safety-header-title", { defaultValue: "Safety & Accessibility" }),
     headerDescription: t("safety-header-description", {
-      defaultValue: "Customise your walking routes for comfort and safety",
+      defaultValue: "Customize your walking routes for comfort and safety",
     }),
     presetsHeading: t("safety-presets-heading", { defaultValue: "Preset profiles" }),
     saveButtonLabel: t("safety-save-button", { defaultValue: "Save preferences" }),

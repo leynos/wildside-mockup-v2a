@@ -1,4 +1,4 @@
-/** @file Localised interest descriptors resolved without Fluent. */
+/** @file Localized interest descriptors resolved without Fluent. */
 
 import type {
   EntityLocalizations,

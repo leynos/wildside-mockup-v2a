@@ -32,7 +32,7 @@ describe("Explore entity fixtures", () => {
     expect(missing).toHaveLength(0);
   });
 
-  it("provides localisation for the community pick and curator", () => {
+  it("provides localization for the community pick and curator", () => {
     expect(communityPick.localizations["en-GB"]?.name).toBeDefined();
     expect(communityPick.curator.localizations["en-GB"]?.name).toBeDefined();
   });

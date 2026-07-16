@@ -1,4 +1,4 @@
-/** @file Tag descriptor registry with embedded localisations. */
+/** @file Tag descriptor registry with embedded localizations. */
 
 import type {
   EntityLocalizations,

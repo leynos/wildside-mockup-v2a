@@ -48,7 +48,7 @@ interface RawAccessibilityNode {
   children?: RawAccessibilityNode[];
 }
 
-function normaliseNode(
+function normalizeNode(
   node: RawAccessibilityNode | null | undefined,
 ): AccessibilityNodeSummary | null {
   if (!node) return null;
@@ -72,10 +72,10 @@ function normaliseNode(
   if (typeof node.level === "number") summary.level = node.level;
 
   if (Array.isArray(node.children) && node.children.length > 0) {
-    const normalisedChildren = node.children
-      .map((child: RawAccessibilityNode | null | undefined) => normaliseNode(child))
+    const normalizedChildren = node.children
+      .map((child: RawAccessibilityNode | null | undefined) => normalizeNode(child))
       .filter((child): child is AccessibilityNodeSummary => child !== null);
-    if (normalisedChildren.length > 0) summary.children = normalisedChildren;
+    if (normalizedChildren.length > 0) summary.children = normalizedChildren;
   }
 
   return summary;
@@ -87,7 +87,7 @@ export async function captureAccessibilityTree(
   const rawTree = (await page.accessibility.snapshot({
     interestingOnly: false,
   })) as RawAccessibilityNode | null;
-  return normaliseNode(rawTree);
+  return normalizeNode(rawTree);
 }
 
 /**

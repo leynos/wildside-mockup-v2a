@@ -1,4 +1,4 @@
-/** @file Presentational helpers for the customise route screen. */
+/** @file Presentational helpers for the customize route screen. */
 
 import * as Slider from "@radix-ui/react-slider";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";

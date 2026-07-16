@@ -4,7 +4,7 @@ import ts from "typescript";
 
 type Location = { line: number; column: number };
 
-type NormalisedClass = {
+type NormalizedClass = {
   filePath: string;
   location: Location;
   raw: string;
@@ -193,7 +193,7 @@ function shouldSuppress(tokens: string[], prefixes: string[]): boolean {
   return tokens.every((token) => prefixes.some((prefix) => token.startsWith(prefix)));
 }
 
-function normaliseToken(token: string): string {
+function normalizeToken(token: string): string {
   return token.trim().toLowerCase();
 }
 
@@ -337,14 +337,14 @@ function collectElementContext(attribute: ts.JsxAttribute): ElementContext {
   };
 }
 
-function normaliseClassString(
+function normalizeClassString(
   raw: string,
   filePath: string,
   loc: Location,
   suppressPrefixes: string[],
   context: ElementContext,
-): NormalisedClass | null {
-  const tokens = raw.split(/\s+/).map(normaliseToken).filter(Boolean);
+): NormalizedClass | null {
+  const tokens = raw.split(/\s+/).map(normalizeToken).filter(Boolean);
   if (tokens.length === 0) return null;
   const uniqueTokens = Array.from(new Set(tokens)).sort((a, b) => a.localeCompare(b));
   if (shouldSuppress(uniqueTokens, suppressPrefixes)) {
@@ -361,12 +361,12 @@ function normaliseClassString(
   };
 }
 
-function extractStringLiteral(initialiser: ts.JsxAttributeValue): string | null {
-  if (ts.isStringLiteral(initialiser)) {
-    return initialiser.text;
+function extractStringLiteral(initializer: ts.JsxAttributeValue): string | null {
+  if (ts.isStringLiteral(initializer)) {
+    return initializer.text;
   }
-  if (ts.isJsxExpression(initialiser) && initialiser.expression) {
-    const expr = initialiser.expression;
+  if (ts.isJsxExpression(initializer) && initializer.expression) {
+    const expr = initializer.expression;
     if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
       return expr.text;
     }
@@ -424,7 +424,7 @@ function extractStringLiteral(initialiser: ts.JsxAttributeValue): string | null 
   return null;
 }
 
-function extractClassesFromTsx(filePath: string, suppressPrefixes: string[]): NormalisedClass[] {
+function extractClassesFromTsx(filePath: string, suppressPrefixes: string[]): NormalizedClass[] {
   const sourceText = readFileSync(filePath, "utf8");
   const sourceFile = ts.createSourceFile(
     filePath,
@@ -433,14 +433,14 @@ function extractClassesFromTsx(filePath: string, suppressPrefixes: string[]): No
     true,
     ts.ScriptKind.TSX,
   );
-  const results: NormalisedClass[] = [];
+  const results: NormalizedClass[] = [];
 
   const visit = (node: ts.Node) => {
     if (ts.isJsxAttribute(node) && node.name.text === "className" && node.initializer) {
       const raw = extractStringLiteral(node.initializer);
       if (raw) {
         const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-        const norm = normaliseClassString(
+        const norm = normalizeClassString(
           raw,
           filePath,
           { line: line + 1, column: character + 1 },
@@ -467,7 +467,7 @@ function jaccardDistance(a: Set<string>, b: Set<string>): number {
   return 1 - intersection / union;
 }
 
-function buildIndex(entries: NormalisedClass[], sample: number): Map<string, number[]> {
+function buildIndex(entries: NormalizedClass[], sample: number): Map<string, number[]> {
   const map = new Map<string, number[]>();
   entries.forEach((entry, index) => {
     const baseTokens = entry.tokens.slice(0, sample);
@@ -486,7 +486,7 @@ function buildIndex(entries: NormalisedClass[], sample: number): Map<string, num
 
 function uniqueCandidates(
   index: Map<string, number[]>,
-  entry: NormalisedClass,
+  entry: NormalizedClass,
   sample: number,
   selfIndex: number,
 ): number[] {
@@ -503,7 +503,7 @@ function uniqueCandidates(
   return Array.from(candidateSet);
 }
 
-function selectAnchor(entries: NormalisedClass[]): NormalisedClass {
+function selectAnchor(entries: NormalizedClass[]): NormalizedClass {
   return entries.reduce((current, candidate) => {
     if (!current) return candidate;
     if (candidate.filePath < current.filePath) return candidate;
@@ -521,7 +521,7 @@ function average(values: number[]): number {
 }
 
 function createNearDuplicateDiagnostics(
-  entries: NormalisedClass[],
+  entries: NormalizedClass[],
   config: NearDuplicateOptions,
 ): Diagnostic[] {
   const filtered = entries.filter((entry) => entry.tokens.length >= config.minTokenCount);
@@ -589,7 +589,7 @@ function createNearDuplicateDiagnostics(
   return results;
 }
 
-function normaliseNameForSuggestion(source: string | undefined): string {
+function normalizeNameForSuggestion(source: string | undefined): string {
   if (!source) return "slot";
   const cleaned = source
     .toLowerCase()
@@ -599,11 +599,11 @@ function normaliseNameForSuggestion(source: string | undefined): string {
 }
 
 function createLoopSiblingDiagnostics(
-  entries: NormalisedClass[],
+  entries: NormalizedClass[],
   config: LoopSiblingOptions,
 ): Diagnostic[] {
   const results: Diagnostic[] = [];
-  const loopGroups = new Map<string, NormalisedClass[]>();
+  const loopGroups = new Map<string, NormalizedClass[]>();
 
   entries.forEach((entry) => {
     if (entry.context.mapKey === undefined) return;
@@ -620,14 +620,14 @@ function createLoopSiblingDiagnostics(
     if (list.length < config.loopMinOccurrences) return;
     const anchor = selectAnchor(list);
     const file = relative(PROJECT_ROOT, anchor.filePath);
-    const parentTag = normaliseNameForSuggestion(list[0].context.parentTagName ?? "loop");
+    const parentTag = normalizeNameForSuggestion(list[0].context.parentTagName ?? "loop");
     const utilities = list[0].tokens.join(" ");
     const message = `${file}:${anchor.location.line}:${anchor.location.column} map()-generated elements share identical utility stack (${list.length} items)\n  • parent: ${parentTag}\n  • utilities: ${utilities}\nSuggestion: Extract a semantic child class (e.g. .${parentTag}__item) or lift shared layout into the container.`;
     const score = list.length * list[0].tokens.length;
     results.push({ score, message });
   });
 
-  const siblingGroups = new Map<string, NormalisedClass[]>();
+  const siblingGroups = new Map<string, NormalizedClass[]>();
   entries.forEach((entry) => {
     if (entry.context.mapKey !== undefined) return;
     if (entry.context.parentKey === undefined) return;
@@ -644,7 +644,7 @@ function createLoopSiblingDiagnostics(
     if (list.length < config.siblingMinOccurrences) return;
     const anchor = selectAnchor(list);
     const file = relative(PROJECT_ROOT, anchor.filePath);
-    const parentTag = normaliseNameForSuggestion(list[0].context.parentTagName ?? "fragment");
+    const parentTag = normalizeNameForSuggestion(list[0].context.parentTagName ?? "fragment");
     const utilities = list[0].tokens.join(" ");
     const message = `${file}:${anchor.location.line}:${anchor.location.column} sibling elements reuse the same utility stack (${list.length} matches)\n  • parent: ${parentTag}\n  • utilities: ${utilities}\nSuggestion: Extract a named slot class (e.g. .${parentTag}__item) with @apply and reuse it.`;
     const score = list.length * list[0].tokens.length;
@@ -670,7 +670,7 @@ function countTokenMatches(tokens: string[], specs: string[] | undefined): numbe
   return specs.reduce((count, spec) => (tokenSetHas(tokens, spec) ? count + 1 : count), 0);
 }
 
-function conceptMatches(entry: NormalisedClass, concept: ConceptDefinition): boolean {
+function conceptMatches(entry: NormalizedClass, concept: ConceptDefinition): boolean {
   const tokens = entry.tokens;
   if (!concept.requiredTokens.every((spec) => tokenSetHas(tokens, spec))) {
     return false;
@@ -709,7 +709,7 @@ function conceptMatches(entry: NormalisedClass, concept: ConceptDefinition): boo
 }
 
 function createConceptDiagnostics(
-  entries: NormalisedClass[],
+  entries: NormalizedClass[],
   disabledConcepts: Set<string>,
 ): Diagnostic[] {
   const results: Diagnostic[] = [];
@@ -755,7 +755,7 @@ function computeSemanticSignals(context: ElementContext): number {
 }
 
 function createUtilityScoringDiagnostics(
-  entries: NormalisedClass[],
+  entries: NormalizedClass[],
   config: UtilityScoringOptions,
 ): Diagnostic[] {
   const results: Diagnostic[] = [];
@@ -767,7 +767,7 @@ function createUtilityScoringDiagnostics(
     const score = utilityTokens - adjustedSemantics;
     if (score < config.scoreThreshold) return;
     const file = relative(PROJECT_ROOT, entry.filePath);
-    const tagSuggestion = normaliseNameForSuggestion(entry.context.tagName);
+    const tagSuggestion = normalizeNameForSuggestion(entry.context.tagName);
     const message = `${file}:${entry.location.line}:${entry.location.column} heavy utility stack with limited semantics\n  • utilities: ${utilityTokens}\n  • semantic signals: ${semanticSignals} (weight ${config.semanticWeight})\nSuggestion: Name this element (e.g. .${tagSuggestion}-slot) or add role/aria landmarks before layering utilities.`;
     results.push({ score, message });
   });
@@ -777,7 +777,7 @@ function createUtilityScoringDiagnostics(
 function main(): void {
   const config = loadConfig();
   const tsxFiles = globPaths("src/**/*.tsx");
-  const entries: NormalisedClass[] = [];
+  const entries: NormalizedClass[] = [];
   for (const file of tsxFiles) {
     entries.push(...extractClassesFromTsx(file, config.nearDuplicate.suppressPrefixes));
   }

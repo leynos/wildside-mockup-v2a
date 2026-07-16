@@ -1,4 +1,4 @@
-/** @file Hook to prepare formatted and localised data for an itinerary route. */
+/** @file Hook to prepare formatted and localized data for an itinerary route. */
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";

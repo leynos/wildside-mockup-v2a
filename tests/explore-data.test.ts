@@ -1,4 +1,4 @@
-/** @file Unit tests validating Explore fixture integrity and localisation coverage. */
+/** @file Unit tests validating Explore fixture integrity and localization coverage. */
 
 import { describe, expect, it } from "bun:test";
 
@@ -16,31 +16,31 @@ import { SUPPORTED_LOCALES } from "../src/app/i18n/supported-locales";
 
 const localeCodes = SUPPORTED_LOCALES.map((locale) => locale.code);
 
-const expectHasLocalisations = (localizations: EntityLocalizations, label: string) => {
+const expectHasLocalizations = (localizations: EntityLocalizations, label: string) => {
   localeCodes.forEach((code) => {
-    expect(localizations[code], `${label} missing localisation for ${code}`).toBeDefined();
+    expect(localizations[code], `${label} missing localization for ${code}`).toBeDefined();
   });
 };
 
 describe("Explore fixtures", () => {
-  it("expose localisation entries for all supported locales", () => {
+  it("expose localization entries for all supported locales", () => {
     for (const route of exploreRoutes) {
-      expectHasLocalisations(route.localizations, route.id);
+      expectHasLocalizations(route.localizations, route.id);
     }
     for (const category of exploreCategories) {
-      expectHasLocalisations(category.localizations, category.id);
+      expectHasLocalizations(category.localizations, category.id);
     }
     for (const theme of popularThemes) {
-      expectHasLocalisations(theme.localizations, theme.id);
+      expectHasLocalizations(theme.localizations, theme.id);
     }
     for (const collection of curatedCollections) {
-      expectHasLocalisations(collection.localizations, collection.id);
+      expectHasLocalizations(collection.localizations, collection.id);
     }
     for (const highlight of trendingRoutes) {
-      expectHasLocalisations(highlight.subtitleLocalizations, highlight.routeId);
+      expectHasLocalizations(highlight.subtitleLocalizations, highlight.routeId);
     }
-    expectHasLocalisations(communityPick.localizations, communityPick.id);
-    expectHasLocalisations(communityPick.curator.localizations, `${communityPick.id}-curator`);
+    expectHasLocalizations(communityPick.localizations, communityPick.id);
+    expectHasLocalizations(communityPick.curator.localizations, `${communityPick.id}-curator`);
   });
 
   it("keeps route references consistent across highlights and collections", () => {

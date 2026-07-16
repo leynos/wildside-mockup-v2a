@@ -16,14 +16,14 @@ type CommunityPickPanelProps = {
   formatSaveCount: (count: number) => string;
 };
 
-type CommunityPickLocalisation = {
+type CommunityPickLocalization = {
   readonly heading: string;
   readonly subtitle: string;
   readonly pickLocalization: { readonly name: string; readonly description?: string };
   readonly curatorLocalization: { readonly name: string; readonly description?: string };
 };
 
-const useCommunityPickLocalisation = (pick: CommunityPick): CommunityPickLocalisation => {
+const useCommunityPickLocalization = (pick: CommunityPick): CommunityPickLocalization => {
   const { t, i18n } = useTranslation();
   const locale = i18n.language;
   const heading = t("explore-community-heading", { defaultValue: "Community Favourite" });
@@ -37,7 +37,7 @@ const useCommunityPickLocalisation = (pick: CommunityPick): CommunityPickLocalis
       return pickLocalization(localizations, locale);
     } catch (error) {
       if (import.meta.env.DEV) {
-        appLogger.warn("Missing community pick localisation", { locale, fallbackName }, error);
+        appLogger.warn("Missing community pick localization", { locale, fallbackName }, error);
       }
       return { name: fallbackName, description: "" };
     }
@@ -58,7 +58,7 @@ export function CommunityPickPanel({
   formatSaveCount,
 }: CommunityPickPanelProps): JSX.Element {
   const { heading, subtitle, pickLocalization, curatorLocalization } =
-    useCommunityPickLocalisation(pick);
+    useCommunityPickLocalization(pick);
   const headingId = useId();
   return (
     <section className="explore-info__panel" aria-labelledby={headingId}>

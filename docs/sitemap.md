@@ -8,7 +8,7 @@
 | `/welcome` | `WelcomeScreen` | Landing page with branding and value propositions |
 | `/discover` | `DiscoverScreen` | Interest selection onboarding |
 | `/explore` | `ExploreScreen` | Route catalogue and discovery |
-| `/customize` | `CustomizeScreen` | Walk customiser with preferences |
+| `/customize` | `CustomizeScreen` | Walk customizer with preferences |
 | `/wizard` | Redirect | Redirects to `/wizard/step-1` |
 | `/wizard/step-1` | `WizardStepOne` | Route preferences wizard (step 1) |
 | `/wizard/step-2` | `WizardStepTwo` | Route preferences wizard (step 2) |
@@ -29,7 +29,7 @@ The map-related screens share a common bottom navigation:
 
 - **Map** (`/map/quick`) - Quick walk generation
 - **Discover** (`/explore`) - Route catalogue
-- **Routes** (`/customize`) - Walk customiser
+- **Routes** (`/customize`) - Walk customizer
 - **Profile** (`/offline`) - Offline settings
 
 ### Nested Routes

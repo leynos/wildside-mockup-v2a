@@ -24,12 +24,12 @@ describe("localization runtime helpers", () => {
     expect(coerceLocaleCode("en" as string)).toBe("en-GB");
   });
 
-  it("returns the first available localisation when none match", () => {
+  it("returns the first available localization when none match", () => {
     const fallback = fallbackLocalization({}, "Fallback");
     expect(fallback.name).toBe("Fallback");
   });
 
-  it("resolves a localisation for the requested locale", () => {
+  it("resolves a localization for the requested locale", () => {
     const resolved = resolveLocalization(localizations, "fr", "Harbour Loop");
     expect(resolved.name).toBe("Boucle du port");
   });

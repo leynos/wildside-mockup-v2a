@@ -3,8 +3,8 @@
  *
  * Responsibilities:
  * - Render the "Favourite moments" section heading and list.
- * - Localise moment names and descriptions for the current locale.
- * - Fail safely if a localisation entry is missing for a moment.
+ * - Localize moment names and descriptions for the current locale.
+ * - Fail safely if a localization entry is missing for a moment.
  *
  * Usage:
  * - `<WalkCompleteMoments heading="Favourite moments" locale="en-GB" />`

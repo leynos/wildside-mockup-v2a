@@ -1,4 +1,4 @@
-/** @file Unit tests for formatSliderValue covering localisation-driven output and units; relies on i18n test helpers for language setup. */
+/** @file Unit tests for formatSliderValue covering localization-driven output and units; relies on i18n test helpers for language setup. */
 
 import { describe, expect, it } from "bun:test";
 

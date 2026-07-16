@@ -1,4 +1,4 @@
-/** @file Wizard stop name and note localisation maps. */
+/** @file Wizard stop name and note localization maps. */
 
 import type { EntityLocalizations } from "../domain/entities/localization";
 import { fillLocalizations, localizeAcrossLocales } from "./fixture-localization";

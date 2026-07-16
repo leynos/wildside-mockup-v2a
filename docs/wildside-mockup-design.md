@@ -129,8 +129,8 @@ Mapping guidance:
   implementation.
 - Have the Style Dictionary build emit `@plugin "daisyui"` metadata that
   excludes the `properties` base block and `radialprogress` component because
-  Vite's Lightning CSS optimiser still warns on the Houdini `@property` rule it
-  injects. Re-enable once the optimiser accepts `@property` or a project
+  Vite's Lightning CSS optimizer still warns on the Houdini `@property` rule it
+  injects. Re-enable once the optimizer accepts `@property` or a project
   requirement introduces the component.
 - Implementation checklist:
   1. Extend the Style Dictionary build to output:
@@ -175,7 +175,7 @@ Mapping guidance:
 - `src/app/providers`
   - `theme-provider.tsx`: wraps children, reads generated DaisyUI themes, and
     exposes helpers for toggling `data-theme` (reusing `applyTheme` + context).
-  - `query-client.tsx`: initialises TanStack Query for future data wiring, even
+  - `query-client.tsx`: initializes TanStack Query for future data wiring, even
     if mock data is static today.
 - `src/app/layout`
   - `mobile-shell.tsx`: renders the 390 x 844 device frame, optional background
@@ -292,9 +292,9 @@ Mapping guidance:
   camera, selected stops, and layer visibility persist when navigating
   between tabs or into `/saved` and back.
 - Refactor `MapViewport` to consume the provider for derived UI state
-  (e.g., active POI, hover state) while memoising overlay components to
+  (e.g., active POI, hover state) while memoizing overlay components to
   avoid unnecessary React diffs.
-- Defer expensive GeoJSON loading until the provider initialises the map,
+- Defer expensive GeoJSON loading until the provider initializes the map,
   then stream updates through the shared instance rather than passing data
   via props on every render.
 - Add regression tests that simulate interest toggles and favourite
@@ -467,7 +467,7 @@ Mapping guidance:
 ### Stage 2 implementation notes (27 October 2025)
 
 - Replace static map placeholders with a reusable `WildsideMap` component that
-  lazily initialises MapLibre against the OpenMapTiles Bright demo style. The
+  lazily initializes MapLibre against the OpenMapTiles Bright demo style. The
   loader guards against non-WebGL environments, so unit tests continue to run.
 - Update `MapViewport` to accept either a live map or fallback imagery while
   keeping overlay positioning consistent across flows.
@@ -539,7 +539,7 @@ Mapping guidance:
 
 ### Stage 3 implementation notes (27 October 2025)
 
-- Introduce a `WizardLayout` that centralises header actions (back/help), the
+- Introduce a `WizardLayout` that centralizes header actions (back/help), the
   three-step progress indicator, and sticky action bar. Each step screen plugs
   in content via slots to keep transitions lightweight.
 - Build a `WizardStepper` component that can render active, completed, and
@@ -565,7 +565,7 @@ Mapping guidance:
     track outstanding suppressions in this log.
   - `bun run check:types` to ensure TS stays strict as components are migrated.
   - `bun run test` to execute Vitest suites. Add coverage thresholds once the
-    component set stabilises.
+    component set stabilizes.
   - `bun run test:e2e` for Playwright smoke coverage over high-risk flows.
   - `bun run tokens:build` (to be added) ahead of `bun run dev`/`bun run build`
     so generated CSS/JS reflect current token definitions.
@@ -635,7 +635,7 @@ tokens:build`) and ensure documentation reflects the expected workflow.
    - Replace the existing floating button with the combined control stack and
      drawer, validating accessibility (focus traps, labelling) via tests and
      Playwright axe scans.
-3. Stabilisation (0.75 day)
+3. Stabilization (0.75 day)
    - Expand unit/interaction tests (Happy DOM) to cover mode toggling and
      persistence.
    - Extend documentation (this file, plus any user-facing guides) and rerun
@@ -651,7 +651,7 @@ tokens:build`) and ensure documentation reflects the expected workflow.
   subtle label and maintain keyboard focus outlines so the tab remains obvious,
   and document any follow-up usability findings.
 - Default detection flash: initial hydration might briefly show the wrong
-  mode. Handle by initialising state in an effect based on device heuristics,
+  mode. Handle by initializing state in an effect based on device heuristics,
   and gate rendering until the mode resolves.
 
 #### Progress (29 October 2025)

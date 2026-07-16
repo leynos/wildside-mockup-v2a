@@ -1,9 +1,9 @@
-/** @file Centralised time adapter for testability and consistency. */
+/** @file Centralized time adapter for testability and consistency. */
 
 /**
  * Return the current Unix timestamp in milliseconds.
  *
- * Centralising `Date.now()` calls enables deterministic testing and ensures
+ * Centralizing `Date.now()` calls enables deterministic testing and ensures
  * consistent time sources across the application.
  *
  * @example

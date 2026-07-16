@@ -1,4 +1,4 @@
-/** @file Helper to resolve localisations in tests with safe fallbacks and minimal boilerplate. */
+/** @file Helper to resolve localizations in tests with safe fallbacks and minimal boilerplate. */
 import { pickLocalization } from "../../src/app/domain/entities/localization";
 
 export const resolveLocalizationNameForTest = (

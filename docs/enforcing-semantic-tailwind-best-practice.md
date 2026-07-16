@@ -30,7 +30,7 @@ wildside-mockup/
 │  ├─ app/...                 # TSX
 │  └─ styles/
 │     ├─ app.css             # @import "tailwindcss" + @plugin "daisyui"
-│     ├─ tokens.css          # (generated or hand-written tokens)
+│     ├─ tokens.css          # (generated or handwritten tokens)
 │     ├─ semantic.css        # project semantic classes using @apply
 │     └─ utilities.css       # optional @utility shorthands (Tailwind v4)
 ├─ tools/
@@ -243,13 +243,13 @@ The duplication keeps messages targeted whilst Biome’s current Grit plugin lim
 - `scripts/check-classlist-length.ts`
 - `scripts/find-near-duplicate-classes.ts`
 
-We rely on lightweight TypeScript checkers (run as part of `bun run semantic`) to flag class strings that exceed the configured threshold **and** to warn about near-duplicate utility sets. The scripts read thresholds from `tools/semantic-lint.config.json`, normalise whitespace, and report literals that violate the agreed limits.
+Lightweight TypeScript checkers (run as part of `bun run semantic`) flag class strings that exceed the configured threshold **and** warn about near-duplicate utility sets. The scripts read thresholds from `tools/semantic-lint.config.json`, normalize whitespace, and report literals that violate the agreed limits.
 
 > Adjust `maxClasslistLength` **and** the `nearDuplicateClasses` block and re-run `bun run semantic` to enforce different ceilings.
 
 ### E) Near duplicate detection
 
-The near-duplicate checker tokenises each literal, deduplicates utilities, and compares token sets using Jaccard similarity. Any pair (or group) whose similarity exceeds the configured threshold produces a single diagnostic summarising the overlap and paths. Suggested defaults are bundled in `tools/semantic-lint.config.json`:
+The near-duplicate checker tokenizes each literal, deduplicates utilities, and compares token sets using Jaccard similarity. Any pair (or group) whose similarity exceeds the configured threshold produces a single diagnostic summarizing the overlap and paths. Suggested defaults are bundled in `tools/semantic-lint.config.json`:
 
 ```jsonc
 "nearDuplicateClasses": {
@@ -303,7 +303,7 @@ These heuristics focus on **structural intent** rather than raw class similarity
 - **Signal**: Elements using only layout utilities (flex/grid/gap/justify/space) without semantics.
 - **Meaning**: These are layout patterns (stack/cluster/switcher) that deserve named abstractions.
 - **Action**: Suggest layout semantics (e.g. `.stack`, `.cluster`, `.sidebar`).
-- **Implementation notes**: Token classifier that recognises layout-only sets; fire in GritQL or the script.
+- **Implementation notes**: Token classifier that recognizes layout-only sets; fire in GritQL or the script.
 
 ### 7) Heading/title repetition
 - **Signal**: The same utility bundle repeated across multiple headings (`<h1>`-`<h4>`) or section titles.
@@ -314,7 +314,7 @@ These heuristics focus on **structural intent** rather than raw class similarity
 ### 8) Utility load vs. semantic signal score
 - **Signal**: Elements with heavy utility usage but little semantic metadata (no role/id/aria/data).
 - **Meaning**: Frequent offender list for “this should have a name”.
-- **Action**: Soft warning nudging authors to introduce a semantic class summarising intent.
+- **Action**: Soft warning nudging authors to introduce a semantic class summarizing intent.
 - **Implementation notes**: Extend the companion script to compute a heuristic score `(tokenCount - semanticSignals)` and warn above a configurable threshold.
 
 Each proposal will ship with a concrete class name suggestion and will reference `src/styles/semantic.css` (or `@utility` helpers) so fixes are straightforward.
@@ -486,7 +486,7 @@ semantic fixes over ad hoc opt-outs.
 **Naming guidance:**
 - Mirror DaisyUI where it fits: `.btn`, `.btn-primary`, `.card`, `.card-title`.
 - For bespoke patterns: BEM‑ish and role‑based, e.g. `.walk-card`, `.walk-card__title`; or `.nav__link--active`.
-- Prefer **role tokens** (`primary`, `secondary`, `accent`, `success`, `error`) to color words.
+- Prefer **role tokens** (`primary`, `secondary`, `accent`, `success`, `error`) to colour words.
 
 ---
 
@@ -495,15 +495,15 @@ semantic fixes over ad hoc opt-outs.
 - **Semantic & a11y**
   - No clickable `div/span` without role+keyboard; prefer `<button>/<a>`.
   - Use `<nav>/<main>/<header>/<footer>` over `div[role=...]`.
-  - Inputs must be labeled (`<label for=...>` or `aria-label`).
+  - Inputs must be labelled (`<label for=...>` or `aria-label`).
 
 - **DaisyUI composition**
   - `btn` belongs on interactive elements.
   - `input`/`select`/`textarea` use matching DaisyUI classes.
 
 - **Design tokens**
-  - No hex/named colors in CSS.
-  - Prefer role utilities (`bg-primary`, `text-base-content`) over raw Tailwind color scales.
+  - No hex/named colours in CSS.
+  - Prefer role utilities (`bg-primary`, `text-base-content`) over raw Tailwind colour scales.
 
 - **Repetition & readability**
   - Warn on long/repeated class chunks → extract with `@apply` into `semantic.css`.

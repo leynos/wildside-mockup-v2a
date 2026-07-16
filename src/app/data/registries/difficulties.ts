@@ -1,4 +1,4 @@
-/** @file Localised difficulty descriptor registry shared across flows. */
+/** @file Localized difficulty descriptor registry shared across flows. */
 
 import type { TFunction } from "i18next";
 
