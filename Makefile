@@ -5,6 +5,7 @@
 
 NIXIE_VERSION ?= 1.1.0
 MERMAN_CLI_VERSION ?= 0.7.0
+HYPOTHESIS_VERSION ?= 6.156.6
 PATHSPEC_VERSION ?= 1.1.1
 RUFF_VERSION ?= 0.15.12
 TYPOS_VERSION ?= 1.48.0
@@ -23,7 +24,7 @@ SPELLING_COVERAGE_FILE ?= /tmp/wildside-mockup-v2a-spelling-helper.coverage
 SPELLING_HELPER_PYTEST = PYTHONPATH=scripts $(SPELLING_PY_ENV) \
 	COVERAGE_FILE=$(SPELLING_COVERAGE_FILE) $(UV_ENV) $(UV) run --no-project \
 	--python 3.14 --with pathspec==$(PATHSPEC_VERSION) --with pytest==9.0.2 \
-	--with pytest-cov==7.0.0 python -m pytest
+	--with hypothesis==$(HYPOTHESIS_VERSION) --with pytest-cov==7.0.0 python -m pytest
 
 check-fmt:
 	bunx biome ci --linter-enabled=false --assist-enabled=false src tests tools docs package.json biome.jsonc bunfig.toml

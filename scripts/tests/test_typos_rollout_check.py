@@ -3,8 +3,10 @@
 import importlib
 from pathlib import Path
 import subprocess
+import sys
 import types
 
+from hypothesis import HealthCheck, given, settings, strategies as st
 import pytest
 
 SCRIPTS = Path(__file__).resolve().parents[1]
@@ -119,3 +121,88 @@ class TestPhrasePolicyChecker:
         assert capsys.readouterr().out == (
             f"README.md:1:8: {PROHIBITED} -> handwritten\n"
         ), "the diagnostic omitted its source location or correction"
+
+    def test_command_reports_findings_across_the_process_boundary(
+        self, tmp_path: Path
+    ) -> None:
+        """Exercise argument parsing, policy loading, scanning, and diagnostics."""
+        initialize(
+            tmp_path,
+            {"README.md": f"Prefer {PROHIBITED}.\n", **policy_files()},
+        )
+
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPTS / "typos_rollout_check.py"),
+                "--repository",
+                str(tmp_path),
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode == 2, "the command accepted a prohibited phrase"
+        assert result.stdout == (f"README.md:1:8: {PROHIBITED} -> handwritten\n"), (
+            "the command omitted its source diagnostic"
+        )
+        assert result.stderr == "", "the successful scan wrote an error diagnostic"
+
+
+BOUNDARY_CHARACTERS = st.sampled_from(("", " ", "\n", ".", "a", "_", "-"))
+
+
+@given(left=BOUNDARY_CHARACTERS, right=BOUNDARY_CHARACTERS)
+# Each example uses the same immutable imported module, so fixture reuse is safe.
+@settings(suppress_health_check=[HealthCheck.function_scoped_fixture])
+def test_phrase_boundaries_hold_for_generated_neighbours(
+    checker: types.ModuleType, left: str, right: str
+) -> None:
+    """Recognize a prohibited phrase exactly when both boundaries permit it."""
+    text = f"{left}{PROHIBITED}{right}"
+    findings = tuple(
+        checker._phrase_findings(
+            Path("README.md"),
+            text,
+            checker._masked(text, ()),
+            ((PROHIBITED, "handwritten"),),
+        )
+    )
+    has_valid_boundaries = left not in {"a", "_", "-"} and right not in {
+        "a",
+        "_",
+        "-",
+    }
+
+    assert bool(findings) is has_valid_boundaries
+    if findings:
+        finding = findings[0]
+        assert (finding.line, finding.column) == (
+            text.count("\n", 0, len(left)) + 1,
+            len(left.rsplit("\n", maxsplit=1)[-1]) + 1,
+        )
+
+
+@given(content=st.text(alphabet=" abcdefghijklmnopqrstuvwxyz-", max_size=40))
+# Each example uses the same immutable imported module, so fixture reuse is safe.
+@settings(suppress_health_check=[HealthCheck.function_scoped_fixture])
+def test_generated_ignored_spans_remain_masked(
+    checker: types.ModuleType, content: str
+) -> None:
+    """Prevent prohibited phrases inside generated ignored spans from leaking."""
+    text = f"`{content}{PROHIBITED}{content}`"
+    masked = checker._masked(text, (r"`[^`\n]+`",))
+
+    assert len(masked) == len(text), "masking changed source offsets"
+    assert (
+        tuple(
+            checker._phrase_findings(
+                Path("README.md"),
+                text,
+                masked,
+                ((PROHIBITED, "handwritten"),),
+            )
+        )
+        == ()
+    ), "an ignored phrase escaped masking"
