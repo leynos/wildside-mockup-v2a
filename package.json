@@ -54,7 +54,7 @@
     "maplibre-gl": "^5.24.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-i18next": "^17.0.8",
+    "react-i18next": "^17.0.9",
     "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
