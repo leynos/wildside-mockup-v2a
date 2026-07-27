@@ -29,16 +29,17 @@ available on `PATH`. The CI workflow installs that dependency with
 full commit SHA, with the upstream release tag retained in a comment for
 upgrade traceability.
 
-When changing the workflow, keep `tests/semantic-lint-workflow.test.ts` in sync.
-That smoke test verifies that CI installs each dependency before invoking the
-semantic, spelling, and diagram gates, and that the third-party action remains
-pinned.
+When changing the workflow, keep `tests/semantic-lint-workflow.test.ts` in
+sync. That smoke test verifies that CI installs each dependency before invoking
+the semantic, spelling, and diagram gates, and that the third-party action
+remains pinned.
 
 ## Spelling and diagram gates
 
 Run `make spelling` to enforce en-GB-oxendict spelling across tracked files.
-The gate pins Typos 1.48.0 and checks exact phrase corrections that Typos cannot
-represent, including the required `hand-written` to `handwritten` correction.
+The gate pins Typos 1.48.0 and checks exact phrase corrections that Typos
+cannot represent, including the required `hand-written` to `handwritten`
+correction.
 
 The generated `typos.toml` combines the shared estate dictionary with the
 repository-specific `typos.local.toml` overlay. Do not edit the generated file

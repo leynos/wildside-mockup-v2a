@@ -286,11 +286,8 @@ describe.serial("WalkComplete screen", () => {
       ["Spanish", "es"],
       ["Arabic", "ar"],
       ["Korean", "ko"],
-    ] as const)(
-      "share channel buttons have localized aria-labels in %s",
-      async (_label, locale) => {
-        await testShareChannelAriaLabels(locale);
-      },
-    );
+    ] as const)("share channel buttons have localized aria-labels in %s", async (_label, locale) => {
+      await testShareChannelAriaLabels(locale);
+    });
   });
 });

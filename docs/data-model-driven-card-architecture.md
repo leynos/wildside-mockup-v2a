@@ -6,10 +6,9 @@ Last updated: 25 November 2025
 
 Every card in the mockup must render from a concrete entity data model that
 already contains its localized strings and International System of Units
-(SI)-based measurements.
-Locale bundles should keep only UI chrome and formatting scaffolding. This
-document audits current card usages and defines the schemas, localization
-rules, and migration steps to align the codebase.
+(SI)-based measurements. Locale bundles should keep only UI chrome and
+formatting scaffolding. This document audits current card usages and defines
+the schemas, localization rules, and migration steps to align the codebase.
 
 For a backend-compatible perspective (hexagonal domain boundaries, ports, and
 offline-first persistence), see `docs/wildside-mockup-data-model.md`.
@@ -132,7 +131,8 @@ available locale. Components must not construct names from translation keys.
   - `OfflineMapArea`: `id`, `localizations`, `sizeBytes: number`,
     `progress: number`, `status: "complete" | "updating" | "downloading"`,
     `image: ImageAsset`, `lastUpdated: Instant`
-  - `OfflineSuggestion`: `id`, `localizations`, `ctaLocalizations` (call-to-action,
+  - `OfflineSuggestion`: `id`, `localizations`, `ctaLocalizations`
+    (call-to-action,
     CTA),
     `accentClass`, `iconToken`
   - `AutoManagementOption`: `id`, `localizations`, `iconToken`,

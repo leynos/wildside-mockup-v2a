@@ -32,27 +32,29 @@ Last updated: 29 October 2025
   `unit-distance-kilometre`, `unit-distance-mile`, `unit-duration-minute`, and
   temperature/count counterparts, so all screens interpolate consistent unit
   names per locale.
-- Presentational helpers (`formatDistance`, `formatDuration`, `formatTemperature`)
-  convert SI values and inject translated unit names, ensuring wizard, explore,
-  customize, and map flows respect both locale and user preferences.
+- Presentational helpers (`formatDistance`, `formatDuration`,
+  `formatTemperature`) convert SI values and inject translated unit names,
+  ensuring wizard, explore, customize, and map flows respect both locale and
+  user preferences.
 
 ## Current assets
 
 - `public/mockups/` contains 12 HTML screens preserved from the original
   prototype. They hand-roll Tailwind config through inline `<script>` blocks
-  and rely on Font Awesome. Each file hints at the intended palette for its flow
-  (for example, `discover.html` uses the dark teal gradient). Keeping them in a
-  nested folder prevents GitHub Pages from serving them over the new SPA routes.
+  and rely on Font Awesome. Each file hints at the intended palette for its
+  flow (for example, `discover.html` uses the dark teal gradient). Keeping them
+  in a nested folder prevents GitHub Pages from serving them over the new SPA
+  routes.
 - `src/index.tsx` demonstrates Radix UI primitives already wired to DaisyUI,
   confirming the dependency set and basic theme switching functions.
 - `tailwind.config.cjs` is minimal: it scans `./index.html` and `./src/**` and
   registers DaisyUI. No custom theme or token linkage is in place yet.
 - `tokens/` is a Style Dictionary project. `tokens/src/tokens.json` exposes a
-  neutral palette plus primary/secondary accents, fonts, radii, and spacing.
-  No theme variants exist yet.
+  neutral palette plus primary/secondary accents, fonts, radii, and spacing. No
+  theme variants exist yet.
 - `df12-www/` provides an example Tailwind v4 theme implementation that can
-  serve as reference for advanced theming patterns (custom theme config, DaisyUI
-  theme exports).
+  serve as reference for advanced theming patterns (custom theme config,
+  DaisyUI theme exports).
 - `docs/` includes guidance on Tailwind v4 migration and DaisyUI v5 usage,
   which we must observe when shaping new configuration and documentation.
 
@@ -92,12 +94,12 @@ Mapping guidance:
   highlights as secondary accents or contextual layers. Mirror these decisions
   in a light variant to support theme switching.
 - Encode the palette in `tokens/src/themes/<theme>.json`, referencing semantic
-  token names from `tokens/src/tokens.json`. Ensure Style Dictionary outputs CSS
-  custom properties targeting both DaisyUI v5 token names (for example,
+  token names from `tokens/src/tokens.json`. Ensure Style Dictionary outputs
+  CSS custom properties targeting both DaisyUI v5 token names (for example,
   `--color-primary`) and legacy aliases (`--p`) to preserve compatibility.
 - Enhance the token build to emit a Tailwind consumable file (likely under
-  `tokens/dist/`), exporting a JS object with colour aliases and spacing scales.
-  Plan to import that object inside `tailwind.config.cjs`.
+  `tokens/dist/`), exporting a JS object with colour aliases and spacing
+  scales. Plan to import that object inside `tailwind.config.cjs`.
 - Keep the repository free of generated assets. Document the GitHub Action step
   responsible for building and publishing tokens alongside the site bundle.
 - Define a deterministic light theme by inverting the neutral ladder:
@@ -110,8 +112,9 @@ Mapping guidance:
   contrast). Add placeholders now and refine once we build concrete UI states.
 - Track the feedback palette directly in `tokens.json` (`color.info`,
   `color.success`, `color.warning`, `color.error`) so Style Dictionary can emit
-  consistent values for both themes. Current picks mirror Tailwind Sky, Emerald,
-  Amber, and Rose scales tuned for ≥4.5:1 contrast on the chosen foregrounds.
+  consistent values for both themes. Current picks mirror Tailwind Sky,
+  Emerald, Amber, and Rose scales tuned for ≥4.5:1 contrast on the chosen
+  foregrounds.
 
 ## Tailwind and DaisyUI integration
 
@@ -120,8 +123,8 @@ Mapping guidance:
   config only needs to expose Tailwind primitives. Ensure content paths include
   the forthcoming component directories.
 - Validate whether PostCSS needs additional plugins (for example,
-  `@tailwindcss/typography`). If so, record rationale and update `postcss.config.cjs`
-  accordingly.
+  `@tailwindcss/typography`). If so, record rationale and update
+  `postcss.config.cjs` accordingly.
 - Align DaisyUI theme names with token files (for example, `"wildside-night"`),
   ensuring Radix UI theme switching utilities (`applyTheme`) can target them.
 - Confirm that Tailwind v4 JIT features (colour functions, arbitrary values)
@@ -214,9 +217,9 @@ Mapping guidance:
 ## Localized descriptor registries
 
 - Add a shared `LocalizedDescriptor` type in `src/app/i18n/descriptors.ts`
-  capturing the minimal metadata needed to render any label via Fluent:
-  `id`, `labelKey`, optional `descriptionKey`, and presentational fields such
-  as `iconToken` or `emoji`. Keep the module text-free so it can be imported on
+  capturing the minimal metadata needed to render any label via Fluent: `id`,
+  `labelKey`, optional `descriptionKey`, and presentational fields such as
+  `iconToken` or `emoji`. Keep the module text-free so it can be imported on
   both client and server without loading the translation runtime.
 - Runtime localization now lives in
   `src/app/lib/localization-runtime.ts` with `resolveLocalization`,
@@ -255,13 +258,12 @@ Mapping guidance:
 - Roll out a dual-harness test stack that keeps Bun + Happy DOM for fast unit
   and integration checks whilst introducing a Node + JSDOM harness for
   `*.a11y.test.tsx` suites so `axe-core` can analyse rendered output without
-  fighting Happy DOM limitations. Surface both entry points via
-  `bun test:a11y`, `bun test:a11y --watch`, and document usage in the testing
-  guide.
+  fighting Happy DOM limitations. Surface both entry points via `bun test:a11y`,
+  `bun test:a11y --watch`, and document usage in the testing guide.
 - Refactor component tests to rely on Testing Library helpers and accessible
   queries only. Create shared assertions for ARIA, focus management, and
-  `data-theme` expectations to make accessibility verification cheap across
-  the Bun suites.
+  `data-theme` expectations to make accessibility verification cheap across the
+  Bun suites.
 - Enforce accessible-first habits with linting: extend Biome/Semgrep/GritQL to
   warn when tests reach for `data-testid`, manual `querySelector`, or low-level
   DOM events where an accessible query or `userEvent` style action applies.
@@ -280,26 +282,26 @@ Mapping guidance:
 ## Map state persistence plan
 
 - Preserve a single MapLibre instance per page view by letting
-  `WildsideMap` cache the map handle in a ref, defaulting to shared
-  constants for `center`/`zoom`. This prevents React re-renders from
-  tearing the canvas down when chips, sliders, or dialogs toggle state.
+  `WildsideMap` cache the map handle in a ref, defaulting to shared constants
+  for `center`/`zoom`. This prevents React re-renders from tearing the canvas
+  down when chips, sliders, or dialogs toggle state.
 - Create a lightweight `MapStateProvider` (React context backed by
-  `useSyncExternalStore`) so overlays can read and mutate viewport data
-  without causing the map canvas to re-render. The provider should expose
-  imperative helpers (`setViewport`, `highlightPois`, `toggleLayer`) that
-  translate to MapLibre API calls.
+  `useSyncExternalStore`) so overlays can read and mutate viewport data without
+  causing the map canvas to re-render. The provider should expose imperative
+  helpers (`setViewport`, `highlightPois`, `toggleLayer`) that translate to
+  MapLibre API calls.
 - Mount the provider at the route root for `/map/*` screens so the map’s
-  camera, selected stops, and layer visibility persist when navigating
-  between tabs or into `/saved` and back.
+  camera, selected stops, and layer visibility persist when navigating between
+  tabs or into `/saved` and back.
 - Refactor `MapViewport` to consume the provider for derived UI state
-  (e.g., active POI, hover state) while memoizing overlay components to
-  avoid unnecessary React diffs.
+  (e.g., active POI, hover state) while memoizing overlay components to avoid
+  unnecessary React diffs.
 - Defer expensive GeoJSON loading until the provider initializes the map,
-  then stream updates through the shared instance rather than passing data
-  via props on every render.
+  then stream updates through the shared instance rather than passing data via
+  props on every render.
 - Add regression tests that simulate interest toggles and favourite
-  switches, asserting that the map ref remains stable and layers stay
-  attached, ensuring future UI tweaks do not reintroduce canvas churn.
+  switches, asserting that the map ref remains stable and layers stay attached,
+  ensuring future UI tweaks do not reintroduce canvas churn.
 
 ## Migration workflow
 
@@ -360,9 +362,9 @@ Mapping guidance:
 #### `/customize` localization strategy (entity-first)
 
 - Fixture objects for sliders, segmented options, surface chips, interest
-  weights, advanced toggles, and route previews now ship localization
-  maps. Components call `pickLocalization` with `i18n.language` once per
-  render; no per-option Fluent messages remain.
+  weights, advanced toggles, and route previews now ship localization maps.
+  Components call `pickLocalization` with `i18n.language` once per render; no
+  per-option Fluent messages remain.
 - Fluent remains responsible for screen chrome and aria scaffolding only
   (header copy, section headings, regenerate/start CTAs, and the
   `customize-interest-thumb-aria` message). This keeps user-facing options
@@ -377,8 +379,8 @@ Mapping guidance:
   tab naming consistent whilst falling back to the fixture text in default
   locales.
 - Safety & accessibility mirrors this approach: accordion sections and
-  toggles resolve labels from `safetyToggles` localization maps, presets map
-  to toggle IDs, and Fluent keeps only the header, CTA, and dialog chrome.
+  toggles resolve labels from `safetyToggles` localization maps, presets map to
+  toggle IDs, and Fluent keeps only the header, CTA, and dialog chrome.
 
 #### `/wizard` localization strategy (step scaffolding + Fluent)
 
@@ -391,11 +393,10 @@ Mapping guidance:
   across all wizard steps.
 - Step-specific controls follow the same prefix strategy as `/customize`. For
   example, `/wizard/step-1` exposes slider copy through
-  `wizard-step-one-duration-*` keys and reuses
-  `wizard-step-one-interests-*` for chip headings, aria labels, and plural
-  counters. The React components pass English `defaultValue` strings to
-  `t(...)`, keeping Vitest snapshots deterministic until translators provide
-  locale-specific copy.
+  `wizard-step-one-duration-*` keys and reuses `wizard-step-one-interests-*`
+  for chip headings, aria labels, and plural counters. The React components
+  pass English `defaultValue` strings to `t(...)`, keeping Vitest snapshots
+  deterministic until translators provide locale-specific copy.
 - Future wizard steps should continue deriving Fluent keys from control IDs to
   ensure accessibility labels, headings, and summary strings remain localizable
   without reshaping fixtures.
@@ -411,17 +412,17 @@ Mapping guidance:
   single `wizard-step-two-review` key for “Review walk”, keeping repeated copy
   deduplicated for translators.
 - A Spanish Vitest now renders `/wizard/step-2` to guard the new keys and prove
-  the route survives when `i18n` switches language, mirroring the
-  `/customize` precedent for regression coverage.
+  the route survives when `i18n` switches language, mirroring the `/customize`
+  precedent for regression coverage.
 - `/wizard/step-3` lifts route stats, highlight fixtures, generated stops, and
-  weather copy into data structures with Fluent key metadata. Components
-  resolve `wizard-step-three-*` keys at render time, so panel headings, aria
-  labels, dialog copy, stats units, and stop notes all follow the same fallback
-  pattern as earlier steps.
+  weather copy into data structures with Fluent key metadata. Components resolve
+  `wizard-step-three-*` keys at render time, so panel headings, aria labels,
+  dialog copy, stats units, and stop notes all follow the same fallback pattern
+  as earlier steps.
 - Highlight descriptors reuse existing keys where possible (for example,
-  `wizard-step-two-accessibility-well-lit-label`) and introduce `*-detail`
-  keys for supporting text, so translators can keep tone consistent without
-  touching TypeScript.
+  `wizard-step-two-accessibility-well-lit-label`) and introduce `*-detail` keys
+  for supporting text, so translators can keep tone consistent without touching
+  TypeScript.
 - The review CTA dialog translates via shared keys and mirrors the reusable
   pattern from Step 2, ensuring wizard footer actions stay consistent across
   languages.
@@ -439,12 +440,12 @@ Mapping guidance:
 
 - The i18n runtime calls `applyDocumentLocale` whenever a language change
   resolves. This helper looks up metadata in `SUPPORTED_LOCALES`, updates
-  `lang`, `dir`, and `data-direction` on both `html` and `body`, and becomes the
-  single source of truth for layout direction.
+  `lang`, `dir`, and `data-direction` on both `html` and `body`, and becomes
+  the single source of truth for layout direction.
 - UI components switched from `text-left`/`text-right` to logical utilities:
   `.text-start`, `.text-end`, and logical inset properties (for example,
-  `.discover-screen__skip` uses `inset-inline-end`). These rules deliver LTR and
-  RTL parity without duplicating markup.
+  `.discover-screen__skip` uses `inset-inline-end`). These rules deliver LTR
+  and RTL parity without duplicating markup.
 - `WildsideMap` now registers the MapLibre RTL text plugin via
   `ensureRtlTextPlugin`, so glyphs render correctly for Arabic/Hebrew locales
   and fallback symbol layers always expose `text-field` definitions.
@@ -507,14 +508,14 @@ Mapping guidance:
   generator card no longer overlaps when switching tabs.
 - Bottom navigation styling is now shared between explore and map flows,
   with end-to-end coverage confirming the handset baseline stays consistent.
-- Updated the Explore screen bottom navigation ordering to emphasize the map-first
-  journey while retaining parity with the map screens.
+- Updated the Explore screen bottom navigation ordering to emphasize the
+  map-first journey while retaining parity with the map screens.
 - Added Playwright + axe accessibility smoke tests for `/explore`, `/map/quick`,
-  and `/wizard/step-1`, applying targeted slider labelling and landmark fixes to
-  keep results clean.
+  and `/wizard/step-1`, applying targeted slider labelling and landmark fixes
+  to keep results clean.
 - Added a `MapStateProvider` so `/map/*` routes and `/saved` share a single
-  MapLibre instance. `WildsideMap` now registers with the provider to reuse
-  the active viewport and avoid canvas churn when overlays update.
+  MapLibre instance. `WildsideMap` now registers with the provider to reuse the
+  active viewport and avoid canvas churn when overlays update.
 - Provider-backed highlight helpers keep POI interactions reactive: hovering
   a stop toggles feature-state on the shared source without re-rendering the
   map, and new unit tests guard the store’s behaviour with mocked MapLibre
@@ -525,9 +526,10 @@ Mapping guidance:
 
 ### Stage 4 implementation notes (27 October 2025)
 
-- Ported the walk completion summary, offline manager, and safety & accessibility
-  routes using the shared shell. The completion view introduces a Radix toast
-  and share dialog to deliver the celebratory experience from the mockups.
+- Ported the walk completion summary, offline manager, and safety &
+  accessibility routes using the shared shell. The completion view introduces a
+  Radix toast and share dialog to deliver the celebratory experience from the
+  mockups.
 - Built offline storage fixtures and travel hints so the screen can surface
   download progress, dismissible suggestions, and future map actions.
 - Implemented the safety screen with Radix Accordion + Switch components, making
@@ -587,8 +589,9 @@ Mapping guidance:
 ## Open questions
 
 - Determine timeline and success criteria for evaluating alternative icon sets.
-- Define local developer ergonomics for token rebuilds (for example, `bun run
-tokens:build`) and ensure documentation reflects the expected workflow.
+- Define local developer ergonomics for token rebuilds (for example,
+  `bun run tokens:build`) and ensure documentation reflects the expected
+  workflow.
 
 ## Display mode toggle roadmap (29 October 2025)
 
@@ -616,8 +619,8 @@ tokens:build`) and ensure documentation reflects the expected workflow.
   than updating imports.
 - Audit feature screens for responsive gaps. Add max-width containers and
   flex/grid fallbacks so expanding beyond the handset width does not create
-  sparse or broken layouts. Prioritize the Discover screen, map, wizard, and offline
-  flows, which carry the densest UI.
+  sparse or broken layouts. Prioritize the Discover screen, map, wizard, and
+  offline flows, which carry the densest UI.
 - Implement a tabbed drawer component that tucks controls away in
   full-browser mode. The drawer should collapse to a discreet edge tab,
   re-expand on focus/hover, and respect reduced-motion preferences.

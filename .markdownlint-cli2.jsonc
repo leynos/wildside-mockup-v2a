@@ -1,0 +1,29 @@
+{
+  "config": {
+    "MD004": { "style": "dash" },
+    "MD010": { "code_blocks": false },
+    "MD013": {
+      "line_length": 80,
+      "code_block_line_length": 120,
+      "tables": false,
+      "headings": false
+    },
+    "MD029": { "style": "ordered" }
+  },
+  "ignores": [
+    "**/.venv/**",
+    ".node_modules/**",
+    "**/node_modules/**",
+    "**/target/**",
+    ".terraform/**",
+    ".uv-cache/**",
+    "CRUSH.md",
+    "docs/building-accessible-and-responsive-progressive-web-applications.md",
+    "docs/daisyui-v5-guide.md",
+    "docs/enforcing-semantic-tailwind-best-practice.md",
+    "docs/high-velocity-accessibility-first-component-testing.md",
+    "docs/semantic-tailwind-with-daisyui-best-practice.md",
+    "docs/tailwind-v3-v4-migration-guide.md",
+    "docs/tailwind-v4-guide.md"
+  ]
+}

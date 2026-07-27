@@ -31,6 +31,7 @@ check-fmt:
 
 fmt:
 	bun fmt
+	mdformat-all
 
 lint:
 	bun lint
