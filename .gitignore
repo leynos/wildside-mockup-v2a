@@ -23,3 +23,9 @@ test-results/
 __pycache__/
 *.py[cod]
 *$py.class
+.vtcode/
+.claude/
+.memdb/
+*.swp
+*.swo
+*~
