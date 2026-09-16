@@ -24,6 +24,8 @@
     "docs/high-velocity-accessibility-first-component-testing.md",
     "docs/semantic-tailwind-with-daisyui-best-practice.md",
     "docs/tailwind-v3-v4-migration-guide.md",
-    "docs/tailwind-v4-guide.md"
+    "docs/tailwind-v4-guide.md",
+    ".vtcode/**",
+    "memories/**"
   ]
 }
