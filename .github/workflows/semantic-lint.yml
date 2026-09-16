@@ -19,6 +19,15 @@ jobs:
       # astral-sh/setup-uv v8.2.0
       - uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
       - run: bun install --frozen-lockfile
+      - name: Install mdtablefix
+        uses: leynos/shared-actions/.github/actions/install-mdtablefix@c5a54701c8603a0fa756a6b34c49bc2af75a6c11
+        with:
+          version: "0.6.0"
+      - run: make check-fmt
+      - name: Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@4580e1612f6407034edd6c0e4e316d725920867b  # v24.2.0
+        with:
+          globs: '**/*.md'
       - run: bun semantic
       - name: Enforce en-GB-oxendict spelling
         run: make spelling
