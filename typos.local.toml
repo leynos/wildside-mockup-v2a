@@ -98,7 +98,7 @@ ignore = [
   "(?m)^\\ \\ iconColorClass:\\ string;$",
   "(?m)^\\ \\ readonly\\ iconColorClass:\\ string;$",
   "(?m)^\\ \\ type\\ LocalisedUnitValue,$",
-  "(?m)^\\-\\ _Deque\\ `axe\\-core`\\ documentation\\ –\\ notes\\ on\\ JSDOM\\ support\\ and\\ rules\\ like\\ color\\-contrast\\ being\\ inapplicable\\ in\\ headless\\ DOM\\._\\ ↩$",
+  "(?m)^\\ \\ color\\-contrast\\ being\\ inapplicable\\ in\\ headless\\ DOM\\._\\ ↩$",
   "(?m)^\\-\\ ❌\\ `border`\\ without\\ colour\\ \\(now\\ uses\\ currentColor,\\ not\\ gray\\-200\\)$",
   "(?m)^\\}:\\ OfflineLocalisationOptions\\):\\ OfflineLocalisations\\ =>\\ \\{$",
   "(?m)^export\\ const\\ normaliseBasePath\\ =\\ \\(rawBase:\\ string\\ \\|\\ undefined\\):\\ string\\ =>\\ \\{$",
