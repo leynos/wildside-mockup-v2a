@@ -17,7 +17,7 @@ jobs:
           bun-version: "latest"
       # uv provides uvx, which `bun semantic` uses to run semgrep.
       # astral-sh/setup-uv v8.2.0
-      - uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
       - run: bun install --frozen-lockfile
       - run: bun semantic
       - name: Enforce en-GB-oxendict spelling
