@@ -1,9 +1,35 @@
 /** @file Guards the semantic lint workflow wiring that CI executes. */
 import { describe, expect, it } from "bun:test";
+import { readFileSync } from "node:fs";
 
 const workflowPath = ".github/workflows/semantic-lint.yml";
-const setupUvPinnedAction = "astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39";
+// Dependabot moves the pin daily, so the contract holds its shape (a full
+// commit SHA with the release recorded on the line above), not one version.
+const setupUvPin =
+  /# astral-sh\/setup-uv v\d+\.\d+\.\d+\n\s*- uses: astral-sh\/setup-uv@[0-9a-f]{40}\n/;
 const makeVariableSigil = "$";
+const buildTestCommands = [
+  "bun install --frozen-lockfile",
+  "bun run tokens:build",
+  "bun run build",
+  "bun run test",
+];
+
+interface ParsedStep {
+  run?: string;
+  if?: unknown;
+}
+
+interface ParsedTriggers {
+  push?: { branches?: string[] } | null;
+  [trigger: string]: unknown;
+}
+
+interface ParsedWorkflow {
+  on?: ParsedTriggers;
+  true?: ParsedTriggers;
+  jobs: Record<string, { if?: unknown; strategy?: unknown; steps?: ParsedStep[] }>;
+}
 
 const readWorkflow = () => Bun.file(workflowPath).text();
 
@@ -11,7 +37,7 @@ describe("semantic lint workflow", () => {
   it("runs semantic, spelling, and diagram gates in dependency order", async () => {
     const workflow = await readWorkflow();
     const orderedSteps = [
-      setupUvPinnedAction,
+      "- uses: astral-sh/setup-uv@",
       "- run: bun semantic",
       "run: make spelling",
       "uv tool install --python 3.14 nixie-cli==1.1.0",
@@ -29,8 +55,24 @@ describe("semantic lint workflow", () => {
   it("pins setup-uv to a full commit SHA while recording the release tag", async () => {
     const workflow = await readWorkflow();
 
-    expect(workflow).toContain("# astral-sh/setup-uv v8.2.0");
-    expect(workflow).toContain(`- uses: ${setupUvPinnedAction}`);
-    expect(workflow).not.toContain("uses: astral-sh/setup-uv@v8.2.0");
+    expect(workflow).toMatch(setupUvPin);
+    expect(workflow).not.toMatch(/uses: astral-sh\/setup-uv@v\d/);
+  });
+
+  it("builds and tests on every pull request in a single unconditional build-test job", () => {
+    const workflow = Bun.YAML.parse(readFileSync(workflowPath, "utf8")) as ParsedWorkflow;
+    const triggers: ParsedTriggers = workflow.on ?? workflow.true ?? {};
+    const job = workflow.jobs["build-test"];
+
+    expect(Object.keys(triggers)).toContain("pull_request");
+    expect(triggers.push?.branches ?? []).toContain("main");
+    expect(job).toBeDefined();
+    // A matrix reports under suffixed names no required context matches, and
+    // an `if:` could skip the job or a step and still pass.
+    expect(job?.strategy).toBeUndefined();
+    expect(job?.if).toBeUndefined();
+    const runSteps = (job?.steps ?? []).filter((step) => step.run !== undefined);
+    expect(runSteps.map((step) => step.run?.trim())).toEqual(buildTestCommands);
+    expect(runSteps.every((step) => step.if === undefined)).toBe(true);
   });
 });

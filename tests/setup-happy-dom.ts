@@ -64,6 +64,10 @@ Object.assign(extendedGlobal, {
   location: happyWindow.location,
   history: happyWindow.history,
   customElements: happyWindow.customElements,
+  // Radix's slider tests `instanceof HTMLFormElement`, and route changes call
+  // `window.scrollTo`, so both must exist as globals, not only on `window`.
+  HTMLFormElement: happyWindow.HTMLFormElement,
+  scrollTo: happyWindow.scrollTo.bind(happyWindow),
 });
 
 Object.defineProperty(extendedGlobal, "self", {
