@@ -1,3 +1,5 @@
+/** @file Behavioural route tests for the first-stage Wildside experience. */
+
 import { afterAll, afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { screen, within } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";

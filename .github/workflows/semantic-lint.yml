@@ -8,10 +8,15 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
       MERMAN_CLI_VERSION: "0.7.0"
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Later steps run pull-request-controlled scripts that need no Git token.
+          persist-credentials: false
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "latest"
@@ -34,7 +39,7 @@ jobs:
       # Runs the workflow contract here as well as in `build-test`, so
       # deleting `build-test` still fails a check that runs.
       - name: Validate workflow contracts
-        run: bun test tests/semantic-lint-workflow.test.ts
+        run: bun test tests/semantic-lint-workflow.test.ts tests/build-test-workflow.test.ts
 
   # Builds the site and runs the test suite on every pull request, so a
   # change that breaks either (including a Dependabot bump that automerge
