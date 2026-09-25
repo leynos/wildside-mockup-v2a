@@ -310,7 +310,7 @@ describe("Stage 1 routed flows", () => {
       }),
     ).toBeTruthy();
 
-    const interestGroup = view.getByRole("group", { name: localizedRegex(interestsLabel) });
+    const interestGroup = view.getByRole("toolbar", { name: localizedRegex(interestsLabel) });
     const parksDescriptor = getInterestDescriptor("parks", i18n.language);
     if (!parksDescriptor) {
       throw new Error("Expected parks interest descriptor to exist");
@@ -534,7 +534,7 @@ describe("Stage 1 routed flows", () => {
     expect(safetySwitch.getAttribute("data-state")).toBe("checked");
 
     const surfaceLabel = translate("customize-surface-aria-label", "Surface type");
-    const surfacePicker = view.getByRole("group", {
+    const surfacePicker = view.getByRole("radiogroup", {
       name: localizedRegex(surfaceLabel),
     });
     expect(within(surfacePicker).getAllByRole("radio").length).toBeGreaterThan(0);
@@ -558,7 +558,7 @@ describe("Stage 1 routed flows", () => {
         }),
       ).toBeTruthy();
       const surfaceHeading = translate("customize-surface-aria-label", "Surface type");
-      expect(view.getByRole("group", { name: localizedRegex(surfaceHeading) })).toBeTruthy();
+      expect(view.getByRole("radiogroup", { name: localizedRegex(surfaceHeading) })).toBeTruthy();
       const safetyHeading = resolveAdvancedLabel("safety", "Safety Priority");
       expect(view.getByRole("switch", { name: localizedRegex(safetyHeading) })).toBeTruthy();
       const regenerateLabel = translate("customize-route-preview-regenerate", "Regenerate");
