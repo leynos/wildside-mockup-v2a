@@ -17,18 +17,28 @@ const buildTestCommands = [
 
 interface ParsedStep {
   run?: string;
+  uses?: string;
+  with?: Record<string, unknown>;
   if?: unknown;
+  "continue-on-error"?: unknown;
 }
+
+// Filters that would stop `build-test` running on an ordinary pull request.
+const pullRequestFilters = ["branches", "branches-ignore", "paths", "paths-ignore", "types"];
 
 interface ParsedTriggers {
   push?: { branches?: string[] } | null;
+  pull_request?: Record<string, unknown> | null;
   [trigger: string]: unknown;
 }
 
 interface ParsedWorkflow {
   on?: ParsedTriggers;
   true?: ParsedTriggers;
-  jobs: Record<string, { if?: unknown; strategy?: unknown; steps?: ParsedStep[] }>;
+  jobs: Record<
+    string,
+    { if?: unknown; "continue-on-error"?: unknown; strategy?: unknown; steps?: ParsedStep[] }
+  >;
 }
 
 const readWorkflow = () => Bun.file(workflowPath).text();
@@ -65,14 +75,24 @@ describe("semantic lint workflow", () => {
     const job = workflow.jobs["build-test"];
 
     expect(Object.keys(triggers)).toContain("pull_request");
+    // `pull_request: { types: [closed] }` would still name the trigger while
+    // never running the job on an opened or updated pull request.
+    const pullRequest = triggers.pull_request ?? {};
+    expect(pullRequestFilters.filter((filter) => filter in pullRequest)).toEqual([]);
     expect(triggers.push?.branches ?? []).toContain("main");
     expect(job).toBeDefined();
     // A matrix reports under suffixed names no required context matches, and
     // an `if:` could skip the job or a step and still pass.
     expect(job?.strategy).toBeUndefined();
     expect(job?.if).toBeUndefined();
+    // `continue-on-error` would let a failing command leave the job green.
+    expect(job?.["continue-on-error"]).toBeUndefined();
     const runSteps = (job?.steps ?? []).filter((step) => step.run !== undefined);
     expect(runSteps.map((step) => step.run?.trim())).toEqual(buildTestCommands);
     expect(runSteps.every((step) => step.if === undefined)).toBe(true);
+    expect(runSteps.every((step) => step["continue-on-error"] === undefined)).toBe(true);
+    const checkout = (job?.steps ?? []).find((step) => step.uses?.startsWith("actions/checkout@"));
+    // The build and tests run dependency code that needs no Git token.
+    expect(checkout?.with?.["persist-credentials"]).toBe(false);
   });
 });
