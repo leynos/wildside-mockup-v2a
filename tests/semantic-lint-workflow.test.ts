@@ -2,16 +2,18 @@
 import { describe, expect, it } from "bun:test";
 
 const workflowPath = ".github/workflows/semantic-lint.yml";
-const setupUvPinnedAction = "astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39";
+// Dependabot moves the pin daily, so the contract holds its shape (a full
+// commit SHA with the release recorded on the line above), not one version.
+const setupUvPin =
+  /# astral-sh\/setup-uv v\d+\.\d+\.\d+\n\s*- uses: astral-sh\/setup-uv@[0-9a-f]{40}\n/;
 const makeVariableSigil = "$";
-
 const readWorkflow = () => Bun.file(workflowPath).text();
 
 describe("semantic lint workflow", () => {
   it("runs semantic, spelling, and diagram gates in dependency order", async () => {
     const workflow = await readWorkflow();
     const orderedSteps = [
-      setupUvPinnedAction,
+      "- uses: astral-sh/setup-uv@",
       "- run: bun semantic",
       "run: make spelling",
       "uv tool install --python 3.14 nixie-cli==1.1.0",
@@ -29,8 +31,7 @@ describe("semantic lint workflow", () => {
   it("pins setup-uv to a full commit SHA while recording the release tag", async () => {
     const workflow = await readWorkflow();
 
-    expect(workflow).toContain("# astral-sh/setup-uv v8.2.0");
-    expect(workflow).toContain(`- uses: ${setupUvPinnedAction}`);
-    expect(workflow).not.toContain("uses: astral-sh/setup-uv@v8.2.0");
+    expect(workflow).toMatch(setupUvPin);
+    expect(workflow).not.toMatch(/uses: astral-sh\/setup-uv@v\d/);
   });
 });

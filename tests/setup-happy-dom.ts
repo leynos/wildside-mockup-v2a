@@ -1,3 +1,11 @@
+/**
+ * @file Preloaded test environment: happy-dom globals, asset stubs and i18n.
+ *
+ * Bun preloads this file for `bun run test`. It stubs image imports, exposes
+ * a happy-dom window's browser globals on `globalThis` for React, Radix and
+ * the router, supplies `NodeFilter` and `ResizeObserver` fallbacks, and starts
+ * the i18n test harness before the accessibility matchers load.
+ */
 import { Window } from "happy-dom";
 
 import { setupI18nTestHarness } from "./support/i18n-test-runtime";
@@ -64,6 +72,10 @@ Object.assign(extendedGlobal, {
   location: happyWindow.location,
   history: happyWindow.history,
   customElements: happyWindow.customElements,
+  // Radix's slider tests `instanceof HTMLFormElement`, and route changes call
+  // `window.scrollTo`, so both must exist as globals, not only on `window`.
+  HTMLFormElement: happyWindow.HTMLFormElement,
+  scrollTo: happyWindow.scrollTo.bind(happyWindow),
 });
 
 Object.defineProperty(extendedGlobal, "self", {

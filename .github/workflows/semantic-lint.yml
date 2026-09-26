@@ -8,15 +8,20 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
       MERMAN_CLI_VERSION: "0.7.0"
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Later steps run pull-request-controlled scripts that need no Git token.
+          persist-credentials: false
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "latest"
       # uv provides uvx, which `bun semantic` uses to run semgrep.
-      # astral-sh/setup-uv v8.2.0
+      # astral-sh/setup-uv v10.1.0
       - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
       - run: bun install --frozen-lockfile
       - run: bun semantic
@@ -31,3 +36,27 @@ jobs:
             --version "=${MERMAN_CLI_VERSION}" --locked
       - name: Validate diagrams
         run: make nixie
+      # Runs the workflow contract here as well as in `build-test`, so
+      # deleting `build-test` still fails a check that runs.
+      - name: Validate workflow contracts
+        run: bun test tests/semantic-lint-workflow.test.ts tests/build-test-workflow.test.ts
+
+  # Builds the site and runs the test suite on every pull request, so a
+  # change that breaks either (including a Dependabot bump that automerge
+  # would otherwise land) turns the required `build-test` check red.
+  build-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          # The build and tests run dependency code that needs no Git token.
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6  # v2.2.0
+        with:
+          bun-version: "latest"
+      - run: bun install --frozen-lockfile
+      - run: bun run tokens:build
+      - run: bun run build
+      - run: bun run test
