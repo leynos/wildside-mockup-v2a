@@ -5,6 +5,9 @@ schema = 1
 
 [patterns]
 ignore = [
+  # Inline code spans, which this repository's spelling check has always
+  # masked; preserved through the migration to the shared gate.
+  '`[^`\n]+`',
   "(?m)^\\ \\ \\ \\ \\ \\ <div\\ className=\"mb\\-3\\ flex\\ items\\-center\\ gap\\-3\">$",
   "(?m)^\\ \\ \\ \\ \\ \\ \\ \\ \"Cuairt\\ phearsanta\\ a\\ tha\\ a'\\ cothlamadh\\ sràidean\\ ealain,\\ càbaidean\\ neo\\-eisimeileach\\ agus\\ seallaidhean\\ sàmhach\\ air\\ an\\ oirthir\\.\",$",
   "(?m)^\\ \\ \\ \\ \\ \\ \\ \\ \"Ein\\ personalisierter\\ Spaziergang,\\ der\\ Street\\-Art\\-Gassen,\\ unabhängige\\ Cafés\\ und\\ ruhige\\ Aussichtspunkte\\ am\\ Wasser\\ verbindet\\.\",$",
