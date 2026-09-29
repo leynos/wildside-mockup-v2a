@@ -64,20 +64,16 @@ single-selection root.
 ## Spelling and diagram gates
 
 Run `make spelling` to enforce en-GB-oxendict spelling across tracked files.
-The gate pins Typos 1.48.0 and checks exact phrase corrections that Typos
-cannot represent, including the required `hand-written` to `handwritten`
+It runs `typos-config-builder gate --scope all`, pinned by
+`TYPOS_CONFIG_BUILDER_VERSION` in the `Makefile`, which checks with the
+builder's own Typos release and enforces the exact phrase corrections that
+Typos cannot represent, including the required `hand-written` to `handwritten`
 correction.
 
 The generated `typos.toml` combines the shared estate dictionary with the
 repository-specific `typos.local.toml` overlay. Do not edit the generated file
-directly. Use `make spelling-config-write` to refresh the untracked shared
-dictionary cache when its authority is newer and regenerate the tracked file.
-The quality gate uses `make spelling-config` to detect generated drift.
-
-The standalone checker tests pin Hypothesis 6.156.6 to exercise phrase
-boundaries over generated neighbouring characters. A subprocess test also
-protects the command-line boundary from argument parsing through diagnostic
-output.
+directly. `make spelling` refreshes the untracked shared dictionary cache when
+its authority is newer and regenerates the tracked file; commit the result.
 
 Run `make nixie` to validate Mermaid diagrams. The target installs the Merman
 CLI 0.7.0 dependency before invoking Nixie CLI 1.1.0. CI provisions the same
