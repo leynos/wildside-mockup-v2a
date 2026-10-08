@@ -226,8 +226,7 @@ better compatibility on Android. Avoid transparency.^17^
 Use `standalone` for an app-like feel that hides browser UI. `fullscreen` and
 `minimal-ui` are other options.^5^
 
- |
-| `scope` | Defines the navigation scope of the PWA. | `"/app/"` |
+ | `scope` | Defines the navigation scope of the PWA. | `"/app/"` |
 
 Restricts the PWA to a specific URL path. Navigating outside this scope opens a
 regular browser tab.^13^
@@ -239,13 +238,11 @@ regular browser tab.^13^
 
 Provides quick access to key features from the app's context menu.^3^
 
- |
-| `id` | A unique identifier for the PWA. | `"/app/"` |
+ | `id` | A unique identifier for the PWA. | `"/app/"` |
 
 Helps uniquely identify the PWA, preventing conflicts if multiple PWAs are
 hosted on the same origin. Often mirrors the `start_url`.^17^
 
- |
 
 ### 1.2 The Service Worker: An Introduction
 
@@ -885,21 +882,18 @@ opens menu and focuses last item.
 Menu Items: Up/Down Arrow navigates items. Escape closes menu and returns focus
 to the button. Tab moves out of the menu. Enter activates the item.59
 
- |
-| **Tabs** | A container (`<div>` or `<ul>`) for the tab buttons, and a container for the tab panels. | **Tab Container:** `role="tablist"` **Tab Buttons:** `role="tab"`, `aria-selected="true/false"`, `aria-controls="[panel-id]"` **Panel Container:** `role="tabpanel"`, `id="[panel-id]"` |
+ | **Tabs** | A container (`<div>` or `<ul>`) for the tab buttons, and a container for the tab panels. | **Tab Container:** `role="tablist"` **Tab Buttons:** `role="tab"`, `aria-selected="true/false"`, `aria-controls="[panel-id]"` **Panel Container:** `role="tabpanel"`, `id="[panel-id]"` |
 
 **Tab List:** `Left/Right Arrow` (or `Up/Down` for vertical) navigates between
 tabs. `Home`/`End` goes to first/last tab. `Enter`/`Space` activates a tab (if
 not auto-activated). `Tab` moves focus into the active panel.^64^
 
- |
-| **Accordion** | A series of heading elements (`<h3>`), each containing a `<button>`. Each is followed by a content panel (`<div>`). | **Heading:** Contains the button. **Button:** `aria-expanded="true/false"`, `aria-controls="[panel-id]"` **Panel:** `id="[panel-id]"` |
+ | **Accordion** | A series of heading elements (`<h3>`), each containing a `<button>`. Each is followed by a content panel (`<div>`). | **Heading:** Contains the button. **Button:** `aria-expanded="true/false"`, `aria-controls="[panel-id]"` **Panel:** `id="[panel-id]"` |
 
 **Header Button:** `Enter`/`Space` toggles the associated panel's visibility.
 `Tab` moves to the next focusable element. Optional: `Up/Down Arrow` can be
 used to navigate between accordion headers.^66^
 
- |
 
 Data synthesized from WAI-ARIA Authoring Practices Guide sources: ^59^
 
