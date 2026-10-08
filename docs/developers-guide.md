@@ -63,8 +63,8 @@ single-selection root.
 
 ## Spelling and diagram gates
 
-Run `make spelling` to enforce en-GB-oxendict spelling across tracked files.
-It runs `typos-config-builder gate --scope all`, pinned by
+Run `make spelling` to enforce en-GB-oxendict spelling across tracked files. It
+runs `typos-config-builder gate --scope all`, pinned by
 `TYPOS_CONFIG_BUILDER_VERSION` in the `Makefile`, which checks with the
 builder's own Typos release and enforces the exact phrase corrections that
 Typos cannot represent, including the required `hand-written` to `handwritten`

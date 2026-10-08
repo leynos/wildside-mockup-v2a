@@ -16,7 +16,7 @@ MDLINT ?= $(shell command -v markdownlint-cli2 2>/dev/null || printf '%s' "$$HOM
 # `make fmt` and `make check-fmt` call mdtablefix directly. `--git` selects the
 # Markdown files Git tracks and `--include-untracked` adds the untracked files
 # Git does not ignore, so a new document is formatted before it is staged.
-# Both modes need mdtablefix 0.6.0 or later; CI pins the version at the
+# Both modes need mdtablefix 0.6.1 or later; CI pins the version at the
 # install-mdtablefix step.
 MDTABLEFIX ?= mdtablefix
 MDTABLEFIX_SELECT = --git --include-untracked
