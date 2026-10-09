@@ -28,18 +28,18 @@ for common UI components
 4. daisyUI is suggested to be installed as a dependency but if you really want
    to use it from CDN, you can use Tailwind CSS and daisyUI CDN files:
 
-```html
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-```
+   ```html
+   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+   ```
 
-1. A CSS file with Tailwind CSS and daisyUI looks like this (if it's a node
+5. A CSS file with Tailwind CSS and daisyUI looks like this (if it's a node
    dependency)
 
-```css
-@import "tailwindcss";
-@plugin "daisyui";
-```
+   ```css
+   @import "tailwindcss";
+   @plugin "daisyui";
+   ```
 
 ## daisyUI 5 usage rules
 
