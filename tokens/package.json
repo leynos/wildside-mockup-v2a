@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/node": "^26",
     "color": "^5.0.0",
-    "markdownlint-cli": "^0.49.0",
+    "markdownlint-cli": "^0.50.0",
     "style-dictionary": "^5.0.4",
     "vite": "^8.1.0"
   },
