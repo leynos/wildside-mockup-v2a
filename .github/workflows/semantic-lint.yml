@@ -32,7 +32,7 @@ jobs:
       - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
       - run: bun install --frozen-lockfile
       - name: Install mdtablefix
-        uses: leynos/shared-actions/.github/actions/install-mdtablefix@bd052c68a4792e92c3272fb1b6ea3b594f3ab7f3
+        uses: leynos/shared-actions/.github/actions/install-mdtablefix@a108423efa7fb83565089449f2647d34286a48a4
         with:
           version: "0.6.1"
       - run: make check-fmt
